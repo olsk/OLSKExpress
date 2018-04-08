@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title><%= locals.ROCOPageTitle || 'ROSANO' %></title>
+
+	<% if (locals.ROCOPageDescription) { %>
+		<meta name="description" content="<%= ROCOPageDescription %>" />
+	<% } %>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" type="text/css" href="/shared-assets/vendor/normalize/normalize-3.0.0.css">
+
+	<link rel="stylesheet" type="text/css" href="/shared-assets/style.css">
+
+	<% if (locals.ROCOHeadCallback) { %>
+		<% ROCOHeadCallback() %>
+	<% } %>
+</head>
+
+<body id="ROCOSharedBody">
+
+<div id="ROCOSharedContainer">
+<!-- start #ROCOSharedContainer -->

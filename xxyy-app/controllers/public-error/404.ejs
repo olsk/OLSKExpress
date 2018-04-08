@@ -1,0 +1,15 @@
+<%
+locals.ROCOPageTitle = 'Not found'; // #localize
+locals.ROCOPageSlug = 'public-error';
+%>
+
+<%- include('../shared-views/header.ejs') %>
+
+<h1><%= locals.ROCOPageTitle %></h1>
+<p>
+	<span onclick="window.history.back()">Go back</span><!-- #localize -->
+	or 
+	<a href="/">Start over</a><!-- #localize -->
+</p>
+
+<%- include('../shared-views/footer.ejs') %>

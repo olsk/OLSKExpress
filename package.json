@@ -1,0 +1,23 @@
+{
+  "name": "rofo-sample-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./xxyy-system/index",
+    "test": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js')",
+    "dstart": "supervisor ./xxyy-system/index",
+    "dtest": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min",
+    "dtestdebug": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min -b"
+  },
+  "dependencies": {
+    "basic-auth": "latest",
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "debug": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "mkdirp": "latest",
+    "morgan": "latest"
+  }
+}

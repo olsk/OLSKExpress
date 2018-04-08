@@ -1,0 +1,9 @@
+# NODE
+node_modules
+package-lock.json
+
+# CACHING
+xxyy-cache
+
+# TESTING
+xxyy-workspace-testing
