@@ -70,10 +70,10 @@ serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObje
 
 //# ERROR HANDLING
 
-if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-	expressApp.use(function(req, res, next){
-		res.status(404);
+expressApp.use(function(req, res, next){
+	res.status(404);
 
+	if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
 		if (req.accepts('html')) {
 			return res.render('public-error/404', {
 				url: req.url,
@@ -85,13 +85,15 @@ if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_
 				error: 'Not found', // #localize
 			});
 		};
+	};
 
-		return res.type('txt').send('Not found'); // #localize
-	});
+	return res.type('txt').send('Not found'); // #localize
+});
 
-	expressApp.use(function(err, req, res, next){
-		res.status(err.status || 500);
+expressApp.use(function(err, req, res, next){
+	res.status(err.status || 500);
 
+	if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
 		if (req.accepts('html')) {
 			return res.render('public-error/500', {
 				url: req.url,
@@ -105,21 +107,12 @@ if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_
 		};
 
 		return res.type('txt').send('System error'); // #localize
-	});
-};
+	};
+
+	res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
+});
 
 if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-	expressApp.use(function(req, res, next) {
-		var err = new Error('Not Found');
-		err.status = 404;
-		next(err);
-	});
-
-	expressApp.use(function(err, req, res, next) {
-		res.status(err.status || 500);
-		res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
-	});
-
 	var loggingPackage = require('morgan');
 	expressApp.use(loggingPackage('dev'));
 };
