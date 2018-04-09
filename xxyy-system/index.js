@@ -38,12 +38,7 @@ expressApp.use(bodyParserPackage.urlencoded({
 
 //# PUBLIC DIRECTORY
 
-expressApp.use(expressPackage.static(pathPackage.join(__dirname, '../' + filesystemLibrary.ROCOFilesystemPublicDirectoryName())));
-
-//# STATIC HTML FILES
-
 expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
-	index: false,
 	extensions:['html'],
 }));
 
