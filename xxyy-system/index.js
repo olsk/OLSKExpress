@@ -36,11 +36,45 @@ expressApp.use(bodyParserPackage.urlencoded({
 	extended: true
 }));
 
+//# CONTROLLERS
+
+var fsPackage = require('fs');
+
+var controllersArray = [];
+var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
+fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
+
+	var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js')
+	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
+		return;
+	}
+
+	controllersArray.push(require('../' + itemPath));
+});
+
 //# PUBLIC DIRECTORY
 
 expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
 	extensions:['html'],
 }));
+
+//# ROUTES
+
+var expressRouter = require('express').Router();
+
+controllersArray.forEach(function (e) {
+	e.ROCOControllerRoutes().forEach(function (e) {
+		return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
+			return res.redirect(e.ROCORouteRedirect);
+		} : function (req, res, next) {
+			res.locals.ROCOSharedActiveRouteConstant = e.ROCORouteConstant;
+
+			return e.ROCORouteFunction(req, res, next);
+		});
+	});
+});
+
+expressApp.use('/', expressRouter);
 
 //# TEMPLATING ENGINE
 
