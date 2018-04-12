@@ -18,7 +18,7 @@ var testAppDirectory = pathPackage.join(
 
 describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemRootDirectoryAbsolutePath () {
 	
-	it('returns app directory fullPath', function () {
+	it.skip('returns app directory fullPath', function () {
 		var appDirectoryFullPath = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
 		var fullPathSegments = appDirectoryFullPath.split('/');
 		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
