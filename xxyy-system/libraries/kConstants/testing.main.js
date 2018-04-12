@@ -18,6 +18,12 @@ exports.ROCOTestingConstants = function () {
 			};
 		},
 
+		ROCOTestingRouteObjectValid: function () {
+			return {
+				ROCORoutePath: '/',
+			};
+		},
+
 		ROCOTestingTaskObjectValid: function (array) {
 			return {
 				ROCOTaskFireTimeInterval: 0.01,
