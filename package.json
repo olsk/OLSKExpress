@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./xxyy-system/index",
+    "start": "node ./xxyy-system/start",
     "test": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js')",
-    "dstart": "supervisor ./xxyy-system/index",
+    "dstart": "supervisor ./xxyy-system/start",
     "dtest": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min",
     "dtestdebug": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min -b"
   },
