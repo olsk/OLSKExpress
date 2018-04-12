@@ -11,14 +11,13 @@ var homeController = require('./controller');
 describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
 	
 	it('returns route objects', function () {
-		assert.deepEqual(homeController.ROCOControllerRoutes(), [
-			{
+		assert.deepEqual(homeController.ROCOControllerRoutes(), {
+			XXYYRouteHome: {
 				ROCORoutePath: '/',
 				ROCORouteMethods: 'get',
 				ROCORouteFunction: homeController.index,
-				ROCORouteConstant: 'XXYYRouteHome',
 			},
-		]);
+		});
 	});
 
 });

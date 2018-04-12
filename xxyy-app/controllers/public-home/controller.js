@@ -5,14 +5,13 @@
  */
 
 exports.ROCOControllerRoutes = function () {
-	return [
-		{
+	return {
+		XXYYRouteHome: {
 			ROCORoutePath: '/',
 			ROCORouteMethods: 'get',
 			ROCORouteFunction: exports.index,
-			ROCORouteConstant: 'XXYYRouteHome',
 		},
-	];
+	};
 }
 
 exports.index = function(req, res, next) {

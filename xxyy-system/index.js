@@ -63,11 +63,15 @@ expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFile
 var expressRouter = require('express').Router();
 
 controllersArray.forEach(function (e) {
-	e.ROCOControllerRoutes().forEach(function (e) {
+	controllerRoutes = e.ROCOControllerRoutes();
+	
+	Object.keys(controllerRoutes).forEach(function (key) {
+		var e = controllerRoutes[key];
+
 		return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
 			return res.redirect(e.ROCORouteRedirect);
 		} : function (req, res, next) {
-			res.locals.ROCOSharedActiveRouteConstant = e.ROCORouteConstant;
+			res.locals.ROCOSharedActiveRouteConstant = key;
 
 			return e.ROCORouteFunction(req, res, next);
 		});
