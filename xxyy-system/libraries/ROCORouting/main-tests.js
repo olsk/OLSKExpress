@@ -21,7 +21,33 @@ describe('ROCORoutingInputDataIsRouteObject', function testROCORoutingInputDataI
 		})), false);
 	});
 	
-	it('returns true if valid taskObject', function () {
+	describe('redirects', function () {
+
+		it('returns false if ROCORouteRedirect not string', function () {
+			assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(Object.assign(kConstants.ROCOTestingRouteObjectValidRedirect(), {
+				ROCORouteRedirect: null,
+			})), false);
+		});
+
+		it('returns true', function () {
+			assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(kConstants.ROCOTestingRouteObjectValidRedirect()), true);
+		});
+
+	});
+	
+	it('returns false if ROCORouteMethods not string', function () {
+		assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+			ROCORouteMethods: null,
+		})), false);
+	});
+	
+	it('returns false if ROCORouteFunction not function', function () {
+		assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+			ROCORouteFunction: null,
+		})), false);
+	});
+	
+	it('returns true if valid routeObject', function () {
 		assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(kConstants.ROCOTestingRouteObjectValid()), true);
 	});
 

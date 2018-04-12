@@ -15,6 +15,22 @@ exports.ROCORoutingInputDataIsRouteObject = function (inputData) {
 		return false;
 	};
 
+	if (inputData.ROCORouteRedirect !== undefined) {
+		if (typeof inputData.ROCORouteRedirect !== 'string') {
+			return false;
+		};
+
+		return true;
+	};
+
+	if (typeof inputData.ROCORouteMethods !== 'string') {
+		return false;
+	};
+
+	if (typeof inputData.ROCORouteFunction !== 'function') {
+		return false;
+	};
+
 	return true;
 };
 
@@ -32,7 +48,7 @@ exports.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams = function (rou
 		if (typeof optionalParams !== 'object' || optionalParams === null) {
 			throw new Error('ROCOErrorInputInvalid');
 		};
-		
+
 		matches.forEach(function (e) {
 			if (!optionalParams[e.split(':').pop()]) {
 				throw new Error('ROCOErrorInputInvalid');

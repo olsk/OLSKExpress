@@ -26,6 +26,13 @@ exports.ROCOTestingConstants = function () {
 			};
 		},
 
+		ROCOTestingRouteObjectValidRedirect: function () {
+			return {
+				ROCORoutePath: '/alpha',
+				ROCORouteRedirect: '/bravo',
+			};
+		},
+
 		ROCOTestingTaskObjectValid: function (array) {
 			return {
 				ROCOTaskFireTimeInterval: 0.01,
