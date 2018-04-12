@@ -58,13 +58,14 @@ expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFile
 	extensions:['html'],
 }));
 
-//# ROUTES
+//# ROUTING
 
+var routingLibrary = require('./libraries/ROCORouting/main');
 var expressRouter = require('express').Router();
 
 controllersArray.forEach(function (e) {
 	controllerRoutes = e.ROCOControllerRoutes();
-	
+
 	Object.keys(controllerRoutes).forEach(function (key) {
 		var e = controllerRoutes[key];
 
@@ -72,6 +73,10 @@ controllersArray.forEach(function (e) {
 			return res.redirect(e.ROCORouteRedirect);
 		} : function (req, res, next) {
 			res.locals.ROCOSharedActiveRouteConstant = key;
+			
+			res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
+				return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(controllerRoutes[routeConstant], optionalParams);
+			};
 
 			return e.ROCORouteFunction(req, res, next);
 		});
