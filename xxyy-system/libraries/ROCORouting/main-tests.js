@@ -26,3 +26,70 @@ describe('ROCORoutingInputDataIsRouteObject', function testROCORoutingInputDataI
 	});
 
 });
+
+describe('ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams', function testROCORoutingCanonicalPathWithRouteObjectAndOptionalParams () {
+
+	it('throws error if param1 not routeObject', function () {
+		assert.throws(function () {
+			routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(null);
+		}, /ROCOErrorInputInvalid/);
+	});
+
+	it('returns path', function () {
+		assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(kConstants.ROCOTestingRouteObjectValid()), '/alpha');
+	});
+
+	it('returns localized path with ROCORoutingLocale', function () {
+		assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(kConstants.ROCOTestingRouteObjectValid(), {
+			ROCORoutingLocale: 'en'
+		}), '/en/alpha');
+	});
+
+	describe('when route path has params', function () {
+
+		it('throws error if param2 not object', function () {
+			assert.throws(function () {
+				routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+					ROCORoutePath: '/alpha/:bravo',
+				}));
+			}, /ROCOErrorInputInvalid/);
+		});
+
+		it('throws error if param2 without matching single param', function () {
+			assert.throws(function () {
+				routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+					ROCORoutePath: '/alpha/:bravo',
+				}), {});
+			}, /ROCOErrorInputInvalid/);
+		});
+
+		it('returns path with single param substituted', function () {
+			assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+					ROCORoutePath: '/alpha/:bravo',
+				}), {
+				bravo: 'charlie',
+			}), '/alpha/charlie');
+		});
+
+		it('throws error if param2 without matching multiple params', function () {
+			assert.throws(function () {
+				routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+					ROCORoutePath: '/alpha/:bravo/:delta',
+				}), {
+				bravo: 'charlie',
+			});
+			}, /ROCOErrorInputInvalid/);
+		});
+
+		it('returns path with multiple params substituted', function () {
+			assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
+					ROCORoutePath: '/alpha/:bravo/:delta',
+				}), {
+				bravo: 'charlie',
+				delta: 'echo'
+			}), '/alpha/charlie/echo');
+		});
+
+	});
+
+});

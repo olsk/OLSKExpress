@@ -20,7 +20,9 @@ exports.ROCOTestingConstants = function () {
 
 		ROCOTestingRouteObjectValid: function () {
 			return {
-				ROCORoutePath: '/',
+				ROCORoutePath: '/alpha',
+				ROCORouteMethods: 'get',
+				ROCORouteFunction: function () {},
 			};
 		},
 
