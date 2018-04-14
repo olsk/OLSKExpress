@@ -92,6 +92,25 @@ var ROCOStartInternationalizationTranslations = {};
 		});
 	});
 
+	if (!allLocales.length) {
+		return;
+	};
+
+	expressApp.use(function(req, res, next) {
+		var pathSegments = req.url.split('/');
+		var firstElement = pathSegments.splice(1, 1).pop();
+		
+		if (i18nPackage.getLocales().indexOf(firstElement) === -1) {
+			next();
+			return;
+		};
+
+		res.locals.ROCOInternationalRequestLocale = firstElement;
+		req.ROCORoutingPath = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
+
+		next();
+	});
+
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
 		var itemPath = pathPackage.join(controllersPath, dirItem);
