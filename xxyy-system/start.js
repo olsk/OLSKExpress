@@ -129,51 +129,53 @@ var ROCOStartControllersArray = [];
 	serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObject, debugObject));
 })();
 
-//# ERROR HANDLING
+//# ROCOStartErrorHandling
 
-expressApp.use(function(req, res, next){
-	res.status(404);
+(function ROCOStartErrorHandling() {
+	expressApp.use(function(req, res, next){
+		res.status(404);
 
-	if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-		if (req.accepts('html')) {
-			return res.render('public-error/404', {
-				url: req.url,
-			});
+		if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
+			if (req.accepts('html')) {
+				return res.render('public-error/404', {
+					url: req.url,
+				});
+			};
+
+			if (req.accepts('json')) {
+				return res.send({
+					error: 'Not found', // #localize
+				});
+			};
 		};
 
-		if (req.accepts('json')) {
-			return res.send({
-				error: 'Not found', // #localize
-			});
+		return res.type('txt').send('Not found'); // #localize
+	});
+
+	expressApp.use(function(err, req, res, next){
+		res.status(err.status || 500);
+
+		if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
+			if (req.accepts('html')) {
+				return res.render('public-error/500', {
+					url: req.url,
+				});
+			};
+
+			if (req.accepts('json')) {
+				return res.send({
+					error: 'System error', // #localize
+				});
+			};
+
+			return res.type('txt').send('System error'); // #localize
 		};
+
+		res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
+	});
+
+	if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
+		var loggingPackage = require('morgan');
+		expressApp.use(loggingPackage('dev'));
 	};
-
-	return res.type('txt').send('Not found'); // #localize
-});
-
-expressApp.use(function(err, req, res, next){
-	res.status(err.status || 500);
-
-	if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-		if (req.accepts('html')) {
-			return res.render('public-error/500', {
-				url: req.url,
-			});
-		};
-
-		if (req.accepts('json')) {
-			return res.send({
-				error: 'System error', // #localize
-			});
-		};
-
-		return res.type('txt').send('System error'); // #localize
-	};
-
-	res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
-});
-
-if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-	var loggingPackage = require('morgan');
-	expressApp.use(loggingPackage('dev'));
-};
+})();
