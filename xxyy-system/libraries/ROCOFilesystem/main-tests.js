@@ -284,6 +284,14 @@ describe('ROCOFilesystemSharedFileExtensionJSON', function testROCOFilesystemSha
 
 });
 
+describe('ROCOFilesystemSharedFileExtensionYAML', function testROCOFilesystemSharedFileExtensionYAML () {
+	
+	it('returns yaml', function () {
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemSharedFileExtensionYAML(), 'yaml');
+	});
+
+});
+
 describe('ROCOFilesystemDefaultTextEncoding', function testROCOFilesystemDefaultTextEncoding () {
 	
 	it('returns system directory name', function () {

@@ -151,6 +151,12 @@ exports.ROCOFilesystemSharedFileExtensionJSON = function () {
 	return 'json';
 };
 
+//_ ROCOFilesystemSharedFileExtensionYAML
+
+exports.ROCOFilesystemSharedFileExtensionYAML = function () {
+	return 'yaml';
+};
+
 //_ ROCOFilesystemDefaultTextEncoding
 
 exports.ROCOFilesystemDefaultTextEncoding = function () {
