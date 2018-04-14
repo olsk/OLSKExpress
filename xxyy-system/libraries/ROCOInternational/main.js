@@ -54,3 +54,19 @@ exports._ROCOInternationalLanguageIDForInputData = function (inputData) {
 
 	return elements.pop();
 };
+
+//_ ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions
+
+exports.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions = function (translationKey, translationDictionary, options) {
+	if (typeof translationDictionary !== 'object' || translationDictionary === null) {
+		throw new Error('ROCOErrorInputInvalid');
+	};
+
+	var localizedString = translationDictionary[translationKey];
+
+	if (!localizedString) {
+		localizedString = 'TRANSLATION_MISSING';
+	};
+
+	return localizedString;
+};

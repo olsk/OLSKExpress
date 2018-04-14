@@ -53,3 +53,25 @@ describe('ROCOInternationalLanguageIDForTranslationFilename', function testROCOI
 	});
 
 });
+
+describe('ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions', function testROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions () {
+
+	it('throws error if param2 not object', function () {
+		assert.throws(function () {
+			internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', null);
+		}, /ROCOErrorInputInvalid/);
+	});
+	
+	it('returns localizedString', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', {
+			alpha: 'bravo',
+		}), 'bravo');
+	});
+	
+	it('returns alternate string if translation not available', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', {
+			charlie: 'bravo',
+		}), 'TRANSLATION_MISSING');
+	});
+
+});
