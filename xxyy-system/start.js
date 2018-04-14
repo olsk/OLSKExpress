@@ -196,7 +196,7 @@ var ROCOStartInternationalizationTranslations = {};
 	Object.keys(allRoutes).forEach(function (key) {
 		var e = allRoutes[key];
 
-		return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
+		return expressRouter[e.ROCORouteMethod](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
 			return res.redirect(e.ROCORouteRedirect);
 		} : function (req, res, next) {
 			res.locals.ROCOSharedActiveRouteConstant = key;

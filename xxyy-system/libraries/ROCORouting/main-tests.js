@@ -35,9 +35,9 @@ describe('ROCORoutingInputDataIsRouteObject', function testROCORoutingInputDataI
 
 	});
 	
-	it('returns false if ROCORouteMethods not string', function () {
+	it('returns false if ROCORouteMethod not string', function () {
 		assert.strictEqual(routingLibrary.ROCORoutingInputDataIsRouteObject(Object.assign(kConstants.ROCOTestingRouteObjectValid(), {
-			ROCORouteMethods: null,
+			ROCORouteMethod: null,
 		})), false);
 	});
 	

@@ -23,7 +23,7 @@ exports.ROCORoutingInputDataIsRouteObject = function (inputData) {
 		return true;
 	};
 
-	if (typeof inputData.ROCORouteMethods !== 'string') {
+	if (typeof inputData.ROCORouteMethod !== 'string') {
 		return false;
 	};
 

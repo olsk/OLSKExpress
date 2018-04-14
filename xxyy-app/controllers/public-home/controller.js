@@ -10,7 +10,7 @@ exports.ROCOControllerRoutes = function () {
 	return {
 		XXYYRouteHome: {
 			ROCORoutePath: '/',
-			ROCORouteMethods: 'get',
+			ROCORouteMethod: 'get',
 			ROCORouteFunction: exports.index,
 			ROCORouteLocales: ['en', 'fr'],
 		},

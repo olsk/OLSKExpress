@@ -14,7 +14,7 @@ describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
 		assert.deepEqual(homeController.ROCOControllerRoutes(), {
 			XXYYRouteHome: {
 				ROCORoutePath: '/',
-				ROCORouteMethods: 'get',
+				ROCORouteMethod: 'get',
 				ROCORouteFunction: homeController.index,
 				ROCORouteLocales: ['en', 'fr'],
 			},
