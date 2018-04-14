@@ -19,15 +19,17 @@ var expressApp = expressPackage();
 	expressApp.use(cookieParserPackage());
 })();
 
-//# SESSIONS
+//# ROCOStartSessions
 
-var expressSessionPackage = require('express-session');
+(function ROCOStartSessions() {
+	var expressSessionPackage = require('express-session');
 
-expressApp.use(expressSessionPackage({
-	secret: 'clarinet-gulf-clencher',
-	resave: false,
-	saveUninitialized: true
-}));
+	expressApp.use(expressSessionPackage({
+		secret: 'clarinet-gulf-clencher',
+		resave: false,
+		saveUninitialized: true
+	}));
+})();
 
 //# BODY PARSING
 
