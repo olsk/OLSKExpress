@@ -16,3 +16,26 @@ describe('ROCOInternationalDefaultIdentifier', function testROCOInternationalDef
 
 });
 
+describe('ROCOInternationalInputDataIsTranslationFilename', function testROCOInternationalInputDataIsTranslationFilename () {
+	
+	it('returns false if not string', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename(null), false);
+	});
+	
+	it('returns false if without yaml extension', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('i18n.en.yml'), false);
+	});
+	
+	it('returns false if without i18n', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('en.yaml'), false);
+	});
+	
+	it('returns false if without locale', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('i18n.yaml'), false);
+	});
+	
+	it('returns true', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('en.i18n.yaml'), true);
+	});
+
+});
