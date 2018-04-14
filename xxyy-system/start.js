@@ -101,11 +101,11 @@ var ROCOStartInternationalizationTranslations = {};
 	expressApp.use(function(req, res, next) {
 		if (allLocales.indexOf(kDefaultLocale) !== -1) {
 			req.ROCOInternationalRequestLocale = kDefaultLocale;
-		}
+		};
 
 		if (!req.ROCOInternationalRequestLocale) {
 			req.ROCOInternationalRequestLocale = allLocales[0];
-		}
+		};
 
 		next();
 	});
@@ -173,6 +173,14 @@ var ROCOStartInternationalizationTranslations = {};
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
 			return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
+		};
+
+		if (req.ROCOInternationalRequestLocale) {
+			res.locals.ROCOCanonicalLocalizedFor = function (routeConstant, optionalParams) {
+				return res.locals.ROCOCanonicalFor(routeConstant, Object.assign({
+					ROCORoutingLocale: req.ROCOInternationalRequestLocale,
+				}, optionalParams));
+			};
 		};
 
 		next();
