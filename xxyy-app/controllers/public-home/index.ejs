@@ -1,16 +1,19 @@
 <%
-locals.ROCOPageTitle = 'Welcome'; // #localize
+ROCOPageTitle = ROCOTranslate('XXYYHomeTitle');
 %>
 
 <%- include('../shared-views/header.ejs') %>
 
 <h1><%= locals.ROCOPageTitle %></h1>
 
-<p><%= XXYYPageContent %></p>
+<p><%= XXYYPageData1 %> - <%= XXYYPageData2 %></p>
 
-<ul>
-	<li>ROCOSharedActiveRouteConstant: <%= ROCOSharedActiveRouteConstant %></li>
-	<li>ROCOCanonicalFor: <%= ROCOCanonicalFor(ROCOSharedActiveRouteConstant) %></li>
-</ul>
+<p><%= ROCOTranslate('XXYYHomeContent') %></p>
+
+<pre><%= JSON.stringify({
+	ROCOSharedActiveRouteConstant: ROCOSharedActiveRouteConstant,
+	ROCOCanonicalFor: ROCOCanonicalFor(ROCOSharedActiveRouteConstant),
+	}, 0, "  ") %>
+</pre>
 
 <%- include('../shared-views/footer.ejs') %>

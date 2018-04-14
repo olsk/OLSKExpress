@@ -17,8 +17,9 @@ exports.ROCOControllerRoutes = function () {
 	};
 };
 
-exports.index = function(req, res, next) {
+exports.index = function(req, res, next) {	
 	res.render('public-home/index', {
-		XXYYPageContent: 'Hello world', // #localize
+		XXYYPageData1: (new Date()).valueOf(),
+		XXYYPageData2: (new Date()).toLocaleString(req.ROCOInternationalCurrentLanguage),
 	});
 };
