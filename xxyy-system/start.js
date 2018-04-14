@@ -76,8 +76,6 @@ var ROCOStartInternationalizationTranslations = {};
 	var underscorePackage = require('underscore');
 	var jsYAMLPackage = require('js-yaml');
 
-	var kDefaultLocale = 'en';
-
 	// Aggregate unique locales specified in controller routes
 
 	underscorePackage.uniq(underscorePackage.flatten(ROCOStartControllersArray.map(function (e) {
@@ -95,13 +93,7 @@ var ROCOStartInternationalizationTranslations = {};
 	// Set ROCOInternationalCurrentLocale to default value
 
 	expressApp.use(function(req, res, next) {
-		if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(kDefaultLocale) !== -1) {
-			req.ROCOInternationalCurrentLocale = kDefaultLocale;
-		};
-
-		if (!req.ROCOInternationalCurrentLocale) {
-			req.ROCOInternationalCurrentLocale = Object.keys(ROCOStartInternationalizationTranslations)[0];
-		};
+		req.ROCOInternationalCurrentLocale = Object.keys(ROCOStartInternationalizationTranslations).unshift();
 
 		next();
 	});

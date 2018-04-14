@@ -12,7 +12,7 @@ exports.ROCOControllerRoutes = function () {
 			ROCORoutePath: '/',
 			ROCORouteMethod: 'get',
 			ROCORouteFunction: exports.index,
-			ROCORouteLocales: ['en', 'fr'],
+			ROCORouteLocales: ['fr', 'en'],
 		},
 	};
 };
