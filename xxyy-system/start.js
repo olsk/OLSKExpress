@@ -150,7 +150,13 @@ var ROCOStartInternationalizationTranslations = {};
 
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOTranslate = function (translationConstant, optionalParams) {
-			return ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLanguage][translationConstant];
+			var localizedString = ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLanguage][translationConstant];
+
+			if (!localizedString) {
+				localizedString = 'TRANSLATION_MISSING';
+			};
+
+			return localizedString;
 		};
 
 		next();
