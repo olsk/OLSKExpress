@@ -69,40 +69,40 @@ var ROCOStartControllersArray = [];
 	}));
 })();
 
-//# ROUTING
+//# ROCOStartRouting
 
-var routingLibrary = require('./libraries/ROCORouting/main');
-var expressRouter = require('express').Router();
+(function ROCOStartRouting() {
+	var routingLibrary = require('./libraries/ROCORouting/main');
+	var expressRouter = require('express').Router();
 
-var allRoutes = {};
+	var allRoutes = {};
 
-ROCOStartControllersArray.forEach(function (e) {
-	controllerRoutes = e.ROCOControllerRoutes();
-
-	allRoutes = Object.assign(allRoutes, controllerRoutes);
-});
-
-expressApp.use(function(req, res, next) {
-	res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
-		return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
-	};
-
-	next();
-});
-
-Object.keys(allRoutes).forEach(function (key) {
-	var e = allRoutes[key];
-
-	return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
-		return res.redirect(e.ROCORouteRedirect);
-	} : function (req, res, next) {
-		res.locals.ROCOSharedActiveRouteConstant = key;
-
-		return e.ROCORouteFunction(req, res, next);
+	ROCOStartControllersArray.forEach(function (e) {
+		allRoutes = Object.assign(allRoutes, e.ROCOControllerRoutes());
 	});
-});
 
-expressApp.use('/', expressRouter);
+	expressApp.use(function(req, res, next) {
+		res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
+			return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
+		};
+
+		next();
+	});
+
+	Object.keys(allRoutes).forEach(function (key) {
+		var e = allRoutes[key];
+
+		return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
+			return res.redirect(e.ROCORouteRedirect);
+		} : function (req, res, next) {
+			res.locals.ROCOSharedActiveRouteConstant = key;
+
+			return e.ROCORouteFunction(req, res, next);
+		});
+	});
+
+	expressApp.use('/', expressRouter);
+})();
 
 //# TEMPLATING ENGINE
 
