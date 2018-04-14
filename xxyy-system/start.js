@@ -61,11 +61,13 @@ var ROCOStartControllersArray = [];
 	});
 })();
 
-//# PUBLIC DIRECTORY
+//# ROCOStartPublicDirectory
 
-expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
-	extensions:['html'],
-}));
+(function ROCOStartPublicDirectory() {
+	expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
+		extensions:['html'],
+	}));
+})();
 
 //# ROUTING
 
