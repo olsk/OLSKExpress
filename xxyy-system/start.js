@@ -76,7 +76,7 @@ var ROCOStartInternationalizationTranslations = {};
 	var underscorePackage = require('underscore');
 	var jsYAMLPackage = require('js-yaml');
 
-	// Aggregate unique locales specified in controller routes
+	// Aggregate unique languages specified in controller routes
 
 	underscorePackage.chain(ROCOStartControllersArray)
 		.map(function (e) {
@@ -91,7 +91,7 @@ var ROCOStartInternationalizationTranslations = {};
 			ROCOStartInternationalizationTranslations[e] = {};
 		});
 
-	// Skip internationalization code if there are no locales
+	// Skip internationalization code if there are no languages
 
 	if (!Object.keys(ROCOStartInternationalizationTranslations).length) {
 		return;
@@ -185,7 +185,7 @@ var ROCOStartInternationalizationTranslations = {};
 		if (req.ROCOInternationalCurrentLanguage) {
 			res.locals.ROCOCanonicalLocalizedFor = function (routeConstant, optionalParams) {
 				return res.locals.ROCOCanonicalFor(routeConstant, Object.assign({
-					ROCORoutingLocale: req.ROCOInternationalCurrentLanguage,
+					ROCORoutingLanguage: req.ROCOInternationalCurrentLanguage,
 				}, optionalParams));
 			};
 		};
@@ -284,7 +284,7 @@ var ROCOStartInternationalizationTranslations = {};
 		};
 	});
 
-	expressApp.use(function(err, req, res, next){
+	expressApp.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 
 		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {

@@ -59,8 +59,8 @@ exports.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams = function (rou
 	}
 
 	if (optionalParams) {
-		if (optionalParams.ROCORoutingLocale) {
-			canonicalPath = ['/', optionalParams.ROCORoutingLocale, canonicalPath].join('');
+		if (optionalParams.ROCORoutingLanguage) {
+			canonicalPath = ['/', optionalParams.ROCORoutingLanguage, canonicalPath].join('');
 		}
 	}
 

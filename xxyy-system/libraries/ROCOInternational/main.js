@@ -27,7 +27,7 @@ exports.ROCOInternationalInputDataIsTranslationFilename = function (inputData) {
 		return false;
 	};
 
-	if (!exports._ROCOInternationalLocaleForInputData(inputData)) {
+	if (!exports._ROCOInternationalLanguageIDForInputData(inputData)) {
 		return false;
 	};
 
@@ -41,12 +41,12 @@ exports.ROCOInternationalLanguageIDForTranslationFilename = function (inputData)
 		throw new Error('ROCOErrorInputInvalid');
 	};
 
-	return exports._ROCOInternationalLocaleForInputData(inputData);
+	return exports._ROCOInternationalLanguageIDForInputData(inputData);
 };
 
-//_ _ROCOInternationalLocaleForInputData
+//_ _ROCOInternationalLanguageIDForInputData
 
-exports._ROCOInternationalLocaleForInputData = function (inputData) {
+exports._ROCOInternationalLanguageIDForInputData = function (inputData) {
 	var elements = inputData.split('.');
 
 	elements.pop();

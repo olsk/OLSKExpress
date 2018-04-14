@@ -65,9 +65,9 @@ describe('ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams', function te
 		assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(kConstants.ROCOTestingRouteObjectValid()), '/alpha');
 	});
 
-	it('returns localized path with ROCORoutingLocale', function () {
+	it('returns localized path with ROCORoutingLanguage', function () {
 		assert.strictEqual(routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(kConstants.ROCOTestingRouteObjectValid(), {
-			ROCORoutingLocale: 'en'
+			ROCORoutingLanguage: 'en'
 		}), '/en/alpha');
 	});
 
