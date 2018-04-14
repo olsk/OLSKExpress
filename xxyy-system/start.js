@@ -51,8 +51,7 @@ var ROCOStartControllersArray = [];
 
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
-
-		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js')
+		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		}
@@ -72,6 +71,8 @@ var ROCOStartControllersArray = [];
 //# ROCOStartInternationalization
 
 (function ROCOStartInternationalization() {
+	var internationalLibrary = require('./libraries/ROCOInternational/main');
+
 	var allLocales = [];
 
 	ROCOStartControllersArray.forEach(function (e) {
@@ -82,7 +83,7 @@ var ROCOStartControllersArray = [];
 		e.ROCOControllerLocales().forEach(function (e) {
 			if (allLocales.indexOf(e) !== -1) {
 				return;
-			}
+			};
 
 			allLocales.push(e);
 		});

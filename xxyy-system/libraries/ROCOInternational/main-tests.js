@@ -26,7 +26,7 @@ describe('ROCOInternationalInputDataIsTranslationFilename', function testROCOInt
 		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('i18n.en.yml'), false);
 	});
 	
-	it('returns false if without i18n', function () {
+	it('returns false if without ROCOInternationalDefaultIdentifier', function () {
 		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('en.yaml'), false);
 	});
 	
