@@ -16,6 +16,12 @@ exports.ROCOControllerRoutes = function () {
 	};
 };
 
+//_ ROCOControllerLocales
+
+exports.ROCOControllerLocales = function () {
+	return ['en', 'fr'];
+};
+
 exports.index = function(req, res, next) {
 	res.render('public-home/index', {
 		XXYYPageContent: 'Hello world', // #localize

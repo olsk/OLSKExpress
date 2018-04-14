@@ -21,3 +21,11 @@ describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
 	});
 
 });
+
+describe('ROCOControllerLocales', function testROCOControllerLocales () {
+	
+	it('returns route objects', function () {
+		assert.deepEqual(homeController.ROCOControllerLocales(), ['en', 'fr']);
+	});
+
+});
