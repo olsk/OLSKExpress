@@ -34,9 +34,9 @@ exports.ROCOInternationalInputDataIsTranslationFilename = function (inputData) {
 	return true;
 };
 
-//_ ROCOInternationalLocaleForTranslationFilename
+//_ ROCOInternationalLanguageIDForTranslationFilename
 
-exports.ROCOInternationalLocaleForTranslationFilename = function (inputData) {
+exports.ROCOInternationalLanguageIDForTranslationFilename = function (inputData) {
 	if (!exports.ROCOInternationalInputDataIsTranslationFilename(inputData)) {
 		throw new Error('ROCOErrorInputInvalid');
 	};

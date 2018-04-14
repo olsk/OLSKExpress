@@ -136,11 +136,11 @@ var ROCOStartInternationalizationTranslations = {};
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), dirPath)))
 				.filter(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename)
 				.reject(function(e) {
-					return Object.keys(ROCOStartInternationalizationTranslations).indexOf(internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)) === -1;
+					return Object.keys(ROCOStartInternationalizationTranslations).indexOf(internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)) === -1;
 				})
 				.each(function(e) {
-					ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)] = Object.assign(
-						ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)],
+					ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
+						ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)],
 						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
 						);
 				});
@@ -264,7 +264,7 @@ var ROCOStartInternationalizationTranslations = {};
 //# ROCOStartErrorHandling
 
 (function ROCOStartErrorHandling() {
-	expressApp.use(function(req, res, next){
+	expressApp.use(function(req, res, next) {
 		res.status(404);
 
 		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {

@@ -30,7 +30,7 @@ describe('ROCOInternationalInputDataIsTranslationFilename', function testROCOInt
 		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('en.yaml'), false);
 	});
 	
-	it('returns false if without localeId', function () {
+	it('returns false if without languageID', function () {
 		assert.strictEqual(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename('i18n.yaml'), false);
 	});
 	
@@ -40,16 +40,16 @@ describe('ROCOInternationalInputDataIsTranslationFilename', function testROCOInt
 
 });
 
-describe('ROCOInternationalLocaleForTranslationFilename', function testROCOInternationalLocaleForTranslationFilename () {
+describe('ROCOInternationalLanguageIDForTranslationFilename', function testROCOInternationalLanguageIDForTranslationFilename () {
 
 	it('throws error if not translationFilename', function () {
 		assert.throws(function () {
-			internationalLibrary.ROCOInternationalLocaleForTranslationFilename(null);
+			internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(null);
 		}, /ROCOErrorInputInvalid/);
 	});
 	
-	it('returns localeId', function () {
-		assert.strictEqual(internationalLibrary.ROCOInternationalLocaleForTranslationFilename('i18n.en.yaml'), 'en');
+	it('returns languageID', function () {
+		assert.strictEqual(internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename('i18n.en.yaml'), 'en');
 	});
 
 });
