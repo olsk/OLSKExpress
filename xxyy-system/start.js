@@ -63,23 +63,31 @@ expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFile
 var routingLibrary = require('./libraries/ROCORouting/main');
 var expressRouter = require('express').Router();
 
+var allRoutes = {};
+
 controllersArray.forEach(function (e) {
 	controllerRoutes = e.ROCOControllerRoutes();
 
-	Object.keys(controllerRoutes).forEach(function (key) {
-		var e = controllerRoutes[key];
+	allRoutes = Object.assign(allRoutes, controllerRoutes);
+});
 
-		return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
-			return res.redirect(e.ROCORouteRedirect);
-		} : function (req, res, next) {
-			res.locals.ROCOSharedActiveRouteConstant = key;
-			
-			res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
-				return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(controllerRoutes[routeConstant], optionalParams);
-			};
+expressApp.use(function(req, res, next) {
+	res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
+		return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
+	};
 
-			return e.ROCORouteFunction(req, res, next);
-		});
+	next();
+});
+
+Object.keys(allRoutes).forEach(function (key) {
+	var e = allRoutes[key];
+
+	return expressRouter[e.ROCORouteMethods](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
+		return res.redirect(e.ROCORouteRedirect);
+	} : function (req, res, next) {
+		res.locals.ROCOSharedActiveRouteConstant = key;
+
+		return e.ROCORouteFunction(req, res, next);
 	});
 });
 
