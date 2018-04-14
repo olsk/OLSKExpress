@@ -69,6 +69,26 @@ var ROCOStartControllersArray = [];
 	}));
 })();
 
+//# ROCOStartInternationalization
+
+(function ROCOStartInternationalization() {
+	var allLocales = [];
+
+	ROCOStartControllersArray.forEach(function (e) {
+		if (typeof e.ROCOControllerLocales !== 'function') {
+			return;
+		};
+		
+		e.ROCOControllerLocales().forEach(function (e) {
+			if (allLocales.indexOf(e) !== -1) {
+				return;
+			}
+
+			allLocales.push(e);
+		});
+	});
+})();
+
 //# ROCOStartRouting
 
 (function ROCOStartRouting() {
