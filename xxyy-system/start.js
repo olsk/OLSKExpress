@@ -78,11 +78,18 @@ var ROCOStartInternationalizationTranslations = {};
 
 	// Aggregate unique locales specified in controller routes
 
-	underscorePackage.uniq(underscorePackage.flatten(ROCOStartControllersArray.map(function (e) {
-		return underscorePackage.pluck(Object.values(e.ROCOControllerRoutes()), 'ROCORouteLocales');
-	}))).forEach(function (e) {
-		ROCOStartInternationalizationTranslations[e] = {};
-	});
+	underscorePackage.chain(ROCOStartControllersArray)
+		.map(function (e) {
+			return underscorePackage.pluck(Object.values(e.ROCOControllerRoutes()), 'ROCORouteLanguages');
+		})
+		.flatten()
+		.uniq()
+		.reject(function (e) {
+			return !e;
+		})
+		.each(function (e) {
+			ROCOStartInternationalizationTranslations[e] = {};
+		});
 
 	// Skip internationalization code if there are no locales
 
@@ -90,15 +97,15 @@ var ROCOStartInternationalizationTranslations = {};
 		return;
 	};
 
-	// Set ROCOInternationalCurrentLocale to default value
+	// Set ROCOInternationalCurrentLanguage to default value
 
 	expressApp.use(function(req, res, next) {
-		req.ROCOInternationalCurrentLocale = Object.keys(ROCOStartInternationalizationTranslations).unshift();
+		req.ROCOInternationalCurrentLanguage = Object.keys(ROCOStartInternationalizationTranslations).shift();
 
 		next();
 	});
 
-	// Set ROCOInternationalRequestLocale if possible
+	// Set ROCOInternationalRequestLanguage if possible
 
 	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
@@ -109,7 +116,7 @@ var ROCOStartInternationalizationTranslations = {};
 			return;
 		};
 
-		req.ROCOInternationalRequestLocale = firstElement;
+		req.ROCOInternationalRequestLanguage = firstElement;
 		req.url = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
 
 		next();
@@ -128,6 +135,9 @@ var ROCOStartInternationalizationTranslations = {};
 		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), dirPath)))
 				.filter(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename)
+				.reject(function(e) {
+					return Object.keys(ROCOStartInternationalizationTranslations).indexOf(internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)) === -1;
+				})
 				.each(function(e) {
 					ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)] = Object.assign(
 						ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(e)],
@@ -140,7 +150,7 @@ var ROCOStartInternationalizationTranslations = {};
 
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOTranslate = function (translationConstant, optionalParams) {
-			return ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLocale][translationConstant];
+			return ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLanguage][translationConstant];
 		};
 
 		next();
@@ -172,10 +182,10 @@ var ROCOStartInternationalizationTranslations = {};
 			return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 		};
 
-		if (req.ROCOInternationalCurrentLocale) {
+		if (req.ROCOInternationalCurrentLanguage) {
 			res.locals.ROCOCanonicalLocalizedFor = function (routeConstant, optionalParams) {
 				return res.locals.ROCOCanonicalFor(routeConstant, Object.assign({
-					ROCORoutingLocale: req.ROCOInternationalCurrentLocale,
+					ROCORoutingLocale: req.ROCOInternationalCurrentLanguage,
 				}, optionalParams));
 			};
 		};
@@ -192,6 +202,32 @@ var ROCOStartInternationalizationTranslations = {};
 			return res.redirect(e.ROCORouteRedirect);
 		} : function (req, res, next) {
 			res.locals.ROCOSharedActiveRouteConstant = key;
+
+			// If the request language not available, pass
+
+			if (req.ROCOInternationalRequestLanguage && (e.ROCORouteLanguages.indexOf(req.ROCOInternationalRequestLanguage) === -1)) {
+				return next();
+			};
+
+			// If the request language available, set current language
+
+			if (req.ROCOInternationalRequestLanguage && (e.ROCORouteLanguages.indexOf(req.ROCOInternationalRequestLanguage) !== -1)) {
+				req.ROCOInternationalCurrentLanguage = req.ROCOInternationalRequestLanguage;
+			};
+
+			// If no request language and preferred language available and not current, redirect
+
+			var preferredLanguage = req.acceptsLanguages(e.ROCORouteLanguages);
+			if (!req.ROCOInternationalRequestLanguage && preferredLanguage && e.ROCORouteLanguages && (e.ROCORouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.ROCOInternationalCurrentLanguage)) {
+				var pathSegments = req.url.split('/');
+				pathSegments.splice(1, 0, preferredLanguage);
+
+				if (pathSegments.slice(-1).pop() === '') {
+					pathSegments.pop();
+				};
+				
+				return res.redirect(pathSegments.join('/'));
+			};
 
 			return e.ROCORouteFunction(req, res, next);
 		});

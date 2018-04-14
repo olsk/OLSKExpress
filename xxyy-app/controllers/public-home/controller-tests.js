@@ -16,7 +16,7 @@ describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
 				ROCORoutePath: '/',
 				ROCORouteMethod: 'get',
 				ROCORouteFunction: homeController.index,
-				ROCORouteLocales: ['en', 'fr'],
+				ROCORouteLanguages: ['en', 'fr'],
 			},
 		});
 	});
