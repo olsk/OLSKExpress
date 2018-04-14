@@ -31,14 +31,16 @@ var expressApp = expressPackage();
 	}));
 })();
 
-//# BODY PARSING
+//# ROCOStartBodyParsing
 
-var bodyParserPackage = require('body-parser');
+(function ROCOStartBodyParsing() {
+	var bodyParserPackage = require('body-parser');
 
-expressApp.use(bodyParserPackage.json());
-expressApp.use(bodyParserPackage.urlencoded({
-	extended: true
-}));
+	expressApp.use(bodyParserPackage.json());
+	expressApp.use(bodyParserPackage.urlencoded({
+		extended: true
+	}));
+})();
 
 //# CONTROLLERS
 
