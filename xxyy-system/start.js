@@ -99,21 +99,21 @@ var ROCOStartInternationalizationTranslations = {};
 		return;
 	};
 
-	// Set ROCOInternationalRequestLocale to default value
+	// Set ROCOInternationalCurrentLocale to default value
 
 	expressApp.use(function(req, res, next) {
 		if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(kDefaultLocale) !== -1) {
-			req.ROCOInternationalRequestLocale = kDefaultLocale;
+			req.ROCOInternationalCurrentLocale = kDefaultLocale;
 		};
 
-		if (!req.ROCOInternationalRequestLocale) {
-			req.ROCOInternationalRequestLocale = Object.keys(ROCOStartInternationalizationTranslations)[0];
+		if (!req.ROCOInternationalCurrentLocale) {
+			req.ROCOInternationalCurrentLocale = Object.keys(ROCOStartInternationalizationTranslations)[0];
 		};
 
 		next();
 	});
 
-	// Set ROCOInternationalRequestLocale to request value if possible
+	// Set ROCOInternationalRequestLocale if possible
 
 	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
@@ -156,7 +156,7 @@ var ROCOStartInternationalizationTranslations = {};
 
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOTranslate = function (translationConstant, optionalParams) {
-			return ROCOStartInternationalizationTranslations[req.ROCOInternationalRequestLocale][translationConstant];
+			return ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLocale][translationConstant];
 		};
 
 		next();
@@ -188,10 +188,10 @@ var ROCOStartInternationalizationTranslations = {};
 			return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 		};
 
-		if (req.ROCOInternationalRequestLocale) {
+		if (req.ROCOInternationalCurrentLocale) {
 			res.locals.ROCOCanonicalLocalizedFor = function (routeConstant, optionalParams) {
 				return res.locals.ROCOCanonicalFor(routeConstant, Object.assign({
-					ROCORoutingLocale: req.ROCOInternationalRequestLocale,
+					ROCORoutingLocale: req.ROCOInternationalCurrentLocale,
 				}, optionalParams));
 			};
 		};
