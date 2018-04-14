@@ -4,6 +4,8 @@
  * MIT Licensed
  */
 
+//_ ROCOControllerRoutes
+
 exports.ROCOControllerRoutes = function () {
 	return {
 		XXYYRouteHome: {
@@ -12,7 +14,7 @@ exports.ROCOControllerRoutes = function () {
 			ROCORouteFunction: exports.index,
 		},
 	};
-}
+};
 
 exports.index = function(req, res, next) {
 	res.render('public-home/index', {
