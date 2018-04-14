@@ -100,13 +100,13 @@ var ROCOStartInternationalizationTranslations = {};
 		var pathSegments = req.url.split('/');
 		var firstElement = pathSegments.splice(1, 1).pop();
 		
-		if (i18nPackage.getLocales().indexOf(firstElement) === -1) {
+		if (allLocales.indexOf(firstElement) === -1) {
 			next();
 			return;
 		};
 
-		res.locals.ROCOInternationalRequestLocale = firstElement;
-		req.ROCORoutingPath = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
+		req.ROCOInternationalRequestLocale = firstElement;
+		req.url = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
 
 		next();
 	});
@@ -205,7 +205,7 @@ var ROCOStartInternationalizationTranslations = {};
 		if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
 			if (req.accepts('html')) {
 				return res.render('public-error/404', {
-					url: req.url,
+					// url: req.url,
 				});
 			};
 
@@ -225,7 +225,7 @@ var ROCOStartInternationalizationTranslations = {};
 		if (environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
 			if (req.accepts('html')) {
 				return res.render('public-error/500', {
-					url: req.url,
+					// url: req.url,
 				});
 			};
 
