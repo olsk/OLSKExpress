@@ -75,6 +75,8 @@ var ROCOStartInternationalizationTranslations = {};
 	var internationalLibrary = require('./libraries/ROCOInternational/main');
 	var jsYAMLPackage = require('js-yaml');
 
+	var kDefaultLocale = 'en';
+
 	var allLocales = [];
 
 	ROCOStartControllersArray.forEach(function (e) {
@@ -95,6 +97,18 @@ var ROCOStartInternationalizationTranslations = {};
 	if (!allLocales.length) {
 		return;
 	};
+
+	expressApp.use(function(req, res, next) {
+		if (allLocales.indexOf(kDefaultLocale) !== -1) {
+			req.ROCOInternationalRequestLocale = kDefaultLocale;
+		}
+
+		if (!req.ROCOInternationalRequestLocale) {
+			req.ROCOInternationalRequestLocale = allLocales[0];
+		}
+
+		next();
+	});
 
 	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
@@ -129,6 +143,14 @@ var ROCOStartInternationalizationTranslations = {};
 				jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(itemPath, dirItem)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
 				);
 		});
+	});
+
+	expressApp.use(function(req, res, next) {
+		res.locals.ROCOTranslate = function (translationConstant, optionalParams) {
+			return ROCOStartInternationalizationTranslations[req.ROCOInternationalRequestLocale][translationConstant];
+		};
+
+		next();
 	});
 })();
 
