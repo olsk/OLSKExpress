@@ -104,12 +104,14 @@ var ROCOStartControllersArray = [];
 	expressApp.use('/', expressRouter);
 })();
 
-//# TEMPLATING ENGINE
+//# ROCOStartTemplatingEngine
 
-expressApp.set('view engine', 'ejs');
-expressApp.set('views', [
-	pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
-	]);
+(function ROCOStartTemplatingEngine() {
+	expressApp.set('view engine', 'ejs');
+	expressApp.set('views', [
+		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
+		]);
+})();
 
 //# SERVER
 
