@@ -11,11 +11,13 @@ var environmentLibrary = require('./libraries/ROCOEnvironment/main');
 
 var expressApp = expressPackage();
 
-//# COOKIES
+//# ROCOStartCookies
 
-var cookieParserPackage = require('cookie-parser');
+(function ROCOStartCookies() {
+	var cookieParserPackage = require('cookie-parser');
 
-expressApp.use(cookieParserPackage());
+	expressApp.use(cookieParserPackage());
+})();
 
 //# SESSIONS
 
