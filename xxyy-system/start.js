@@ -78,6 +78,10 @@ var ROCOStartControllersArray = [];
 	var allRoutes = {};
 
 	ROCOStartControllersArray.forEach(function (e) {
+		if (typeof e.ROCOControllerRoutes !== 'function') {
+			return;
+		};
+
 		allRoutes = Object.assign(allRoutes, e.ROCOControllerRoutes());
 	});
 
