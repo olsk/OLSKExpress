@@ -6,6 +6,7 @@
 
 var expressPackage = require('express');
 var pathPackage = require('path');
+var fsPackage = require('fs');
 var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 var environmentLibrary = require('./libraries/ROCOEnvironment/main');
 
@@ -47,8 +48,6 @@ var expressApp = expressPackage();
 var ROCOStartControllersArray = [];
 
 (function ROCOStartControllers() {
-	var fsPackage = require('fs');
-
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
 		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js');
@@ -70,8 +69,11 @@ var ROCOStartControllersArray = [];
 
 //# ROCOStartInternationalization
 
+var ROCOStartInternationalizationTranslations = {};
+
 (function ROCOStartInternationalization() {
 	var internationalLibrary = require('./libraries/ROCOInternational/main');
+	var jsYAMLPackage = require('js-yaml');
 
 	var allLocales = [];
 
@@ -86,6 +88,27 @@ var ROCOStartControllersArray = [];
 			};
 
 			allLocales.push(e);
+			ROCOStartInternationalizationTranslations[e] = {};
+		});
+	});
+
+	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
+	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
+		var itemPath = pathPackage.join(controllersPath, dirItem);
+
+		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
+			return;
+		};
+
+		fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath)).forEach(function(dirItem, index) {
+			if (!internationalLibrary.ROCOInternationalInputDataIsTranslationFilename(dirItem)) {
+				return;
+			};
+
+			ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(dirItem)] = Object.assign(
+				ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLocaleForTranslationFilename(dirItem)],
+				jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(itemPath, dirItem)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
+				);
 		});
 	});
 })();
