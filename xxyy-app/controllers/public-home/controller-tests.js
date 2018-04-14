@@ -16,16 +16,9 @@ describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
 				ROCORoutePath: '/',
 				ROCORouteMethods: 'get',
 				ROCORouteFunction: homeController.index,
+				ROCORouteLocales: ['en', 'fr'],
 			},
 		});
-	});
-
-});
-
-describe('ROCOControllerLocales', function testROCOControllerLocales () {
-	
-	it('returns route objects', function () {
-		assert.deepEqual(homeController.ROCOControllerLocales(), ['en', 'fr']);
 	});
 
 });

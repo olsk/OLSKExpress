@@ -12,14 +12,9 @@ exports.ROCOControllerRoutes = function () {
 			ROCORoutePath: '/',
 			ROCORouteMethods: 'get',
 			ROCORouteFunction: exports.index,
+			ROCORouteLocales: ['en', 'fr'],
 		},
 	};
-};
-
-//_ ROCOControllerLocales
-
-exports.ROCOControllerLocales = function () {
-	return ['en', 'fr'];
 };
 
 exports.index = function(req, res, next) {
