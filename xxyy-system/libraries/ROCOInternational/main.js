@@ -21,15 +21,36 @@ exports.ROCOInternationalInputDataIsTranslationFilename = function (inputData) {
 
 	if (inputData.split('.').pop() !== filesystemLibrary.ROCOFilesystemSharedFileExtensionYAML()) {
 		return false;
-	}
+	};
 
-	if (inputData.indexOf(exports.ROCOInternationalDefaultIdentifier()) === -1) {
+	if (inputData.split('.').shift() !== exports.ROCOInternationalDefaultIdentifier()) {
 		return false;
-	}
+	};
 
-	if (inputData.split('.').splice(1).length !== 2) {
+	if (!exports._ROCOInternationalLocaleForInputData(inputData)) {
 		return false;
-	}
+	};
 
 	return true;
+};
+
+//_ ROCOInternationalLocaleForTranslationFilename
+
+exports.ROCOInternationalLocaleForTranslationFilename = function (inputData) {
+	if (!exports.ROCOInternationalInputDataIsTranslationFilename(inputData)) {
+		throw new Error('ROCOErrorInputInvalid');
+	};
+
+	return exports._ROCOInternationalLocaleForInputData(inputData);
+};
+
+//_ _ROCOInternationalLocaleForInputData
+
+exports._ROCOInternationalLocaleForInputData = function (inputData) {
+	var elements = inputData.split('.');
+
+	elements.pop();
+	elements.shift();
+
+	return elements.pop();
 };
