@@ -77,7 +77,7 @@ var ROCOStartInternationalizationTranslations = {};
 
 	var kDefaultLocale = 'en';
 
-	var allLocales = [];
+	// Aggregate unique locales specified in controllers
 
 	ROCOStartControllersArray.forEach(function (e) {
 		if (typeof e.ROCOControllerLocales !== 'function') {
@@ -85,36 +85,41 @@ var ROCOStartInternationalizationTranslations = {};
 		};
 		
 		e.ROCOControllerLocales().forEach(function (e) {
-			if (allLocales.indexOf(e) !== -1) {
+			if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(e) !== -1) {
 				return;
 			};
 
-			allLocales.push(e);
 			ROCOStartInternationalizationTranslations[e] = {};
 		});
 	});
 
-	if (!allLocales.length) {
+	// Skip internationalization code if there are no locales
+
+	if (!Object.keys(ROCOStartInternationalizationTranslations).length) {
 		return;
 	};
 
+	// Set ROCOInternationalRequestLocale to default value
+
 	expressApp.use(function(req, res, next) {
-		if (allLocales.indexOf(kDefaultLocale) !== -1) {
+		if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(kDefaultLocale) !== -1) {
 			req.ROCOInternationalRequestLocale = kDefaultLocale;
 		};
 
 		if (!req.ROCOInternationalRequestLocale) {
-			req.ROCOInternationalRequestLocale = allLocales[0];
+			req.ROCOInternationalRequestLocale = Object.keys(ROCOStartInternationalizationTranslations)[0];
 		};
 
 		next();
 	});
 
+	// Set ROCOInternationalRequestLocale to request value if possible
+
 	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
 		var firstElement = pathSegments.splice(1, 1).pop();
 		
-		if (allLocales.indexOf(firstElement) === -1) {
+		if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(firstElement) === -1) {
 			next();
 			return;
 		};
@@ -124,6 +129,8 @@ var ROCOStartInternationalizationTranslations = {};
 
 		next();
 	});
+
+	// Load translation strings into ROCOStartInternationalizationTranslations
 
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
@@ -145,6 +152,8 @@ var ROCOStartInternationalizationTranslations = {};
 		});
 	});
 
+	// Create translation string macro
+
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOTranslate = function (translationConstant, optionalParams) {
 			return ROCOStartInternationalizationTranslations[req.ROCOInternationalRequestLocale][translationConstant];
@@ -162,6 +171,8 @@ var ROCOStartInternationalizationTranslations = {};
 
 	var allRoutes = {};
 
+	// Aggregate all routes specified in controllers
+
 	ROCOStartControllersArray.forEach(function (e) {
 		if (typeof e.ROCOControllerRoutes !== 'function') {
 			return;
@@ -169,6 +180,8 @@ var ROCOStartInternationalizationTranslations = {};
 
 		allRoutes = Object.assign(allRoutes, e.ROCOControllerRoutes());
 	});
+
+	// Create canonical link macros
 
 	expressApp.use(function(req, res, next) {
 		res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
@@ -185,6 +198,8 @@ var ROCOStartInternationalizationTranslations = {};
 
 		next();
 	});
+
+	// Create routing middleware
 
 	Object.keys(allRoutes).forEach(function (key) {
 		var e = allRoutes[key];
