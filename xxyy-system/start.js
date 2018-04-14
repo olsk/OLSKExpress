@@ -110,22 +110,24 @@ var ROCOStartControllersArray = [];
 	expressApp.set('view engine', 'ejs');
 	expressApp.set('views', [
 		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
-		]);
+	]);
 })();
 
-//# SERVER
+//# ROCOStartServer
 
-var serverLibrary = require('./libraries/ROCOServer/main');
-var httpPackage = require('http');
-var serverModule = require('./modules/server');
-var debugObject = require('debug')('rofo-sample-app:server');
+(function ROCOStartServer() {
+	var serverLibrary = require('./libraries/ROCOServer/main');
+	var httpPackage = require('http');
+	var serverModule = require('./modules/server');
+	var debugObject = require('debug')('rofo-sample-app:server');
 
-var portValue = serverLibrary.ROCOServerNormalizePort(process.env.PORT || '3000');
-var serverObject = httpPackage.createServer(expressApp);
-expressApp.set('port', portValue);
-serverObject.listen(portValue);
-serverObject.on('error', serverModule.ROCOServerErrorCallback());
-serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObject, debugObject));
+	var portValue = serverLibrary.ROCOServerNormalizePort(process.env.PORT || '3000');
+	var serverObject = httpPackage.createServer(expressApp);
+	expressApp.set('port', portValue);
+	serverObject.listen(portValue);
+	serverObject.on('error', serverModule.ROCOServerErrorCallback());
+	serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObject, debugObject));
+})();
 
 //# ERROR HANDLING
 
