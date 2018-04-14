@@ -42,21 +42,24 @@ var expressApp = expressPackage();
 	}));
 })();
 
-//# CONTROLLERS
+//# ROCOStartControllers
 
-var fsPackage = require('fs');
+var ROCOStartControllersArray = [];
 
-var controllersArray = [];
-var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
-fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
+(function ROCOStartControllers() {
+	var fsPackage = require('fs');
 
-	var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js')
-	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
-		return;
-	}
+	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
+	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
 
-	controllersArray.push(require('../' + itemPath));
-});
+		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js')
+		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
+			return;
+		}
+
+		ROCOStartControllersArray.push(require('../' + itemPath));
+	});
+})();
 
 //# PUBLIC DIRECTORY
 
@@ -71,7 +74,7 @@ var expressRouter = require('express').Router();
 
 var allRoutes = {};
 
-controllersArray.forEach(function (e) {
+ROCOStartControllersArray.forEach(function (e) {
 	controllerRoutes = e.ROCOControllerRoutes();
 
 	allRoutes = Object.assign(allRoutes, controllerRoutes);
