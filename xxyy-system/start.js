@@ -149,7 +149,7 @@ var ROCOStartInternationalizationTranslations = {};
 	// Create translation string macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.ROCOTranslate = function (translationConstant, substitutions) {
+		res.locals.ROCOTranslate = function (translationConstant) {
 			return internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, ROCOStartInternationalizationTranslations[req.ROCOInternationalCurrentLanguage]);
 		};
 
