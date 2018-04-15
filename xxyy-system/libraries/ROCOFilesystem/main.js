@@ -111,25 +111,25 @@ exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inpu
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
 
-//_ _ROCOFilesystemRootDirectoryAbsolutePath
+//_ _ROCOFilesystemAbsolutePathRootDirectory
 
-exports._ROCOFilesystemRootDirectoryAbsolutePath = function () {
+exports._ROCOFilesystemAbsolutePathRootDirectory = function () {
 	return pathPackage.join(
 		__dirname,
 		'/../../../'
 		);
 };
 
-//_ _ROCOFilesystemSystemDirectoryAbsolutePath
+//_ _ROCOFilesystemAbsolutePathSystemDirectory
 
-exports._ROCOFilesystemSystemDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports._ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
+exports._ROCOFilesystemAbsolutePathSystemDirectory = function () {
+	return pathPackage.join(exports._ROCOFilesystemAbsolutePathRootDirectory(), exports.ROCOFilesystemSystemDirectoryName());
 };
 
-//_ _ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
+//_ _ROCOFilesystemAbsolutePathWorkspaceTestingDirectory
 
-exports._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports._ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
+exports._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory = function () {
+	return pathPackage.join(exports._ROCOFilesystemAbsolutePathRootDirectory(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 
 //_ ROCOFilesystemSharedFileExtensionJSON
