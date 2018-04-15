@@ -1,5 +1,5 @@
 /*!
- * rofo-sample
+ * xxyy-sample
  * Copyright(c) 2016-2018 Rosano Coutinho
  * MIT Licensed
  */
@@ -262,7 +262,7 @@ var ROCOStartInternationalizationTranslations = {};
 	var serverLibrary = require('./libraries/ROCOServer/main');
 	var httpPackage = require('http');
 	var serverModule = require('./modules/server');
-	var debugObject = require('debug')('rofo-sample-app:server');
+	var debugObject = require('debug')('xxyy-sample-app:server');
 
 	var portValue = serverLibrary.ROCOServerNormalizePort(process.env.PORT || '3000');
 	var serverObject = httpPackage.createServer(expressApp);

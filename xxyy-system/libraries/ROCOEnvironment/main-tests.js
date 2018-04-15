@@ -1,5 +1,5 @@
 /*!
- * rofo-sample
+ * xxyy-sample
  * Copyright(c) 2016-2018 Rosano Coutinho
  * MIT Licensed
  */
