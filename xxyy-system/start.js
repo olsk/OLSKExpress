@@ -246,6 +246,9 @@ var ROCOStartInternationalizationTranslations = {};
 				return res.redirect(pathSegments.join('/'));
 			};
 
+			res.locals.ROCOSharedPageLanguagesAvailable = e.ROCORouteLanguages;
+			res.locals.ROCOSharedPageCurrentLanguage = req.ROCOSharedCurrentLanguage
+
 			return e.ROCORouteFunction(req, res, next);
 		});
 	});

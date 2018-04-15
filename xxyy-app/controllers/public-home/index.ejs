@@ -8,12 +8,19 @@ locals.ROCOPageTitle = ROCOTranslate('XXYYHomeTitle');
 
 <p><%= ROCOTranslate('XXYYHomeContent') %></p>
 
-<small><%= XXYYPageData1 %> - <%= XXYYPageData2 %></small>
-
 <pre><%= JSON.stringify({
 	ROCOSharedActiveRouteConstant: ROCOSharedActiveRouteConstant,
 	ROCOCanonicalFor: ROCOCanonicalFor(ROCOSharedActiveRouteConstant),
+	ROCOCanonicalLocalizedFor: ROCOCanonicalLocalizedFor(ROCOSharedActiveRouteConstant),
+	ROCOSharedPageLanguagesAvailable: ROCOSharedPageLanguagesAvailable,
+	ROCOSharedPageCurrentLanguage: ROCOSharedPageCurrentLanguage,
 	}, 0, '  ') %>
 </pre>
+
+<%- include('../shared-views/language-switcher.ejs') %>
+
+<hr>
+
+<p><small><%= XXYYPageData1 %> - <%= XXYYPageData2 %></small></p>
 
 <%- include('../shared-views/footer.ejs') %>

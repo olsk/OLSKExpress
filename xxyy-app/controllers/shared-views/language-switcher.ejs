@@ -1,0 +1,11 @@
+<section id="XXYYSharedLanguageSelector">
+	<% ROCOSharedPageLanguagesAvailable.forEach(function (e) { %>
+		<% if (e === ROCOSharedPageCurrentLanguage) { %>
+			<span><%= e %></span>
+		<% } %>
+
+		<% if (e !== ROCOSharedPageCurrentLanguage) { %>
+			<a href="<%= ROCOCanonicalLocalizedFor(ROCOSharedActiveRouteConstant, { ROCORoutingLanguage: e }) %>"><%= e %></a>
+		<% } %>
+	<% }) %>
+</section>
