@@ -15,7 +15,7 @@ var mkdirpPackage = require('mkdirp');
 
 var testAppDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
-	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.cache'));
+	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.cache'));
 
 describe('ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject', function testROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject () {
 
