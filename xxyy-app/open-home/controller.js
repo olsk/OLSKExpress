@@ -18,7 +18,7 @@ exports.OLSKControllerRoutes = function () {
 };
 
 exports.index = function(req, res, next) {	
-	res.render('public-home/index', {
+	res.render('open-home/index', {
 		XXYYPageData1: (new Date()).valueOf(),
 		XXYYPageData2: (new Date()).toLocaleString(req.OLSKInternationalCurrentLanguage),
 	});

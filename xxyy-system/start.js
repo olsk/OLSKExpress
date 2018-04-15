@@ -281,7 +281,7 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 
 		if (req.accepts('html')) {
-			return res.render('public-error/404', {
+			return res.render('open-error/404', {
 				// url: req.url,
 			});
 		};
@@ -301,7 +301,7 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 
 		if (req.accepts('html')) {
-			return res.render('public-error/500', {
+			return res.render('open-error/500', {
 				// url: req.url,
 			});
 		};
