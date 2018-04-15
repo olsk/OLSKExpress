@@ -120,9 +120,9 @@ exports.ROCOFilesystemRootDirectoryAbsolutePath = function () {
 		);
 };
 
-//_ ROCOFilesystemSystemDirectoryAbsolutePath
+//_ _ROCOFilesystemSystemDirectoryAbsolutePath
 
-exports.ROCOFilesystemSystemDirectoryAbsolutePath = function () {
+exports._ROCOFilesystemSystemDirectoryAbsolutePath = function () {
 	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
 };
 

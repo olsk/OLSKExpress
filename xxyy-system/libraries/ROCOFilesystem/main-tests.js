@@ -243,10 +243,10 @@ describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemR
 
 });
 
-describe('ROCOFilesystemSystemDirectoryAbsolutePath', function testROCOFilesystemSystemDirectoryAbsolutePath () {
+describe('_ROCOFilesystemSystemDirectoryAbsolutePath', function test_ROCOFilesystemSystemDirectoryAbsolutePath () {
 	
 	it('returns system directory absolutePath', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
+		assert.strictEqual(filesystemLibrary._ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
 	});
 
 });
