@@ -55,9 +55,9 @@ exports._ROCOInternationalLanguageIDForInputData = function (inputData) {
 	return elements.pop();
 };
 
-//_ ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions
+//_ ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary
 
-exports.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions = function (translationKey, translationDictionary, options) {
+exports.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary = function (translationKey, translationDictionary) {
 	if (typeof translationDictionary !== 'object' || translationDictionary === null) {
 		throw new Error('ROCOErrorInputInvalid');
 	};

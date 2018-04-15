@@ -54,22 +54,22 @@ describe('ROCOInternationalLanguageIDForTranslationFilename', function testROCOI
 
 });
 
-describe('ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions', function testROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions () {
+describe('ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary', function testROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary () {
 
 	it('throws error if param2 not object', function () {
 		assert.throws(function () {
-			internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', null);
+			internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', null);
 		}, /ROCOErrorInputInvalid/);
 	});
 	
 	it('returns localizedString', function () {
-		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', {
+		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
 			alpha: 'bravo',
 		}), 'bravo');
 	});
 	
 	it('returns alternate string if translation not available', function () {
-		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyTranslationDictionaryAndOptions('alpha', {
+		assert.strictEqual(internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
 			charlie: 'bravo',
 		}), 'TRANSLATION_MISSING');
 	});
