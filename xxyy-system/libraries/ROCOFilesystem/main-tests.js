@@ -233,10 +233,10 @@ describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 
 });
 
-describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemRootDirectoryAbsolutePath () {
+describe('_ROCOFilesystemRootDirectoryAbsolutePath', function test_ROCOFilesystemRootDirectoryAbsolutePath () {
 	
 	it.skip('returns app directory fullPath', function () {
-		var appDirectoryFullPath = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
+		var appDirectoryFullPath = filesystemLibrary._ROCOFilesystemRootDirectoryAbsolutePath();
 		var fullPathSegments = appDirectoryFullPath.split('/');
 		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
 	});
@@ -246,7 +246,7 @@ describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemR
 describe('_ROCOFilesystemSystemDirectoryAbsolutePath', function test_ROCOFilesystemSystemDirectoryAbsolutePath () {
 	
 	it('returns system directory absolutePath', function () {
-		assert.strictEqual(filesystemLibrary._ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
+		assert.strictEqual(filesystemLibrary._ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary._ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
 	});
 
 });
@@ -254,7 +254,7 @@ describe('_ROCOFilesystemSystemDirectoryAbsolutePath', function test_ROCOFilesys
 describe('_ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath', function test_ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath () {
 	
 	it('returns workspace testing absolutePath', function () {
-		assert.strictEqual(filesystemLibrary._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
+		assert.strictEqual(filesystemLibrary._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary._ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });

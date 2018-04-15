@@ -111,9 +111,9 @@ exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inpu
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
 
-//_ ROCOFilesystemRootDirectoryAbsolutePath
+//_ _ROCOFilesystemRootDirectoryAbsolutePath
 
-exports.ROCOFilesystemRootDirectoryAbsolutePath = function () {
+exports._ROCOFilesystemRootDirectoryAbsolutePath = function () {
 	return pathPackage.join(
 		__dirname,
 		'/../../../'
@@ -123,13 +123,13 @@ exports.ROCOFilesystemRootDirectoryAbsolutePath = function () {
 //_ _ROCOFilesystemSystemDirectoryAbsolutePath
 
 exports._ROCOFilesystemSystemDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
+	return pathPackage.join(exports._ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
 };
 
 //_ _ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
 
 exports._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
+	return pathPackage.join(exports._ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 
 //_ ROCOFilesystemSharedFileExtensionJSON
