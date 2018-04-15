@@ -36,6 +36,28 @@ var OLSKLive = {};
 	OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function () {
 		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKLive.OLSKLiveAppDirectoryName());
 	};
+
+	OLSKLive.OLSKLivePublicDirectoryName = function () {
+		return [
+			kOLSKLiveSettings.OLSKDirectoryPrefix,
+			filesystemLibrary.ROCOFilesystemPublicDirectoryName()
+			].join('-');
+	};
+
+	OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function () {
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKLive.OLSKLivePublicDirectoryName());
+	};
+
+	OLSKLive.OLSKLiveSystemDirectoryName = function () {
+		return [
+			kOLSKLiveSettings.OLSKDirectoryPrefix,
+			filesystemLibrary.ROCOFilesystemSystemDirectoryName()
+			].join('-');
+	};
+
+	OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function () {
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKLive.OLSKLiveSystemDirectoryName());
+	};
 })();
 
 //# OLSKStartCookies
@@ -91,8 +113,8 @@ var OLSKLive = {};
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())).forEach(function(dirItem, index) {
-		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
+	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem, index) {
+		var itemPath = pathPackage.join(OLSKLive.OLSKLiveAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		}
@@ -108,7 +130,7 @@ var OLSKStartControllersArray = [];
 //# OLSKStartPublicDirectory
 
 (function OLSKStartPublicDirectory() {
-	expressApp.use(expressPackage.static(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
+	expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
 		extensions:['html'],
 	}));
 })();
@@ -173,9 +195,9 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Load translation strings into OLSKStartInternationalizationTranslations
 
-	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())))
+	underscorePackage.chain(fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()))
 		.map(function(e) {
-			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
+			return pathPackage.join(OLSKLive.OLSKLiveAppDirectoryName(), e);
 		})
 		.filter(function(e) {
 			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e))
