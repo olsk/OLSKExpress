@@ -6,14 +6,14 @@ locals.ROCOPageTitle = ROCOTranslate('XXYYHomeTitle');
 
 <h1><%= locals.ROCOPageTitle %></h1>
 
-<p><%= XXYYPageData1 %> - <%= XXYYPageData2 %></p>
-
 <p><%= ROCOTranslate('XXYYHomeContent') %></p>
+
+<small><%= XXYYPageData1 %> - <%= XXYYPageData2 %></small>
 
 <pre><%= JSON.stringify({
 	ROCOSharedActiveRouteConstant: ROCOSharedActiveRouteConstant,
 	ROCOCanonicalFor: ROCOCanonicalFor(ROCOSharedActiveRouteConstant),
-	}, 0, "  ") %>
+	}, 0, '  ') %>
 </pre>
 
 <%- include('../shared-views/footer.ejs') %>
