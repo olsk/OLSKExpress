@@ -8,7 +8,6 @@ var expressPackage = require('express');
 var pathPackage = require('path');
 var fsPackage = require('fs');
 var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
-var environmentLibrary = require('./libraries/ROCOEnvironment/main');
 
 var expressApp = expressPackage();
 
@@ -273,6 +272,8 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartErrorHandling
 
 (function OLSKStartErrorHandling() {
+	var environmentLibrary = require('./libraries/ROCOEnvironment/main');
+	
 	expressApp.use(function(req, res, next) {
 		res.status(404);
 
