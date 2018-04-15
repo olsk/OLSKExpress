@@ -15,16 +15,6 @@ var testAppDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.filesystem'));
 
-describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemRootDirectoryAbsolutePath () {
-	
-	it.skip('returns app directory fullPath', function () {
-		var appDirectoryFullPath = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
-		var fullPathSegments = appDirectoryFullPath.split('/');
-		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
-	});
-
-});
-
 describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath () {
 
 	beforeEach(function() {
@@ -206,14 +196,6 @@ describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicD
 
 });
 
-describe('ROCOFilesystemPublicDirectoryAbsolutePath', function testROCOFilesystemPublicDirectoryAbsolutePath () {
-	
-	it('returns public directory absolutePath', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()));
-	});
-
-});
-
 describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemDirectoryName () {
 	
 	it('returns system directory name', function () {
@@ -222,26 +204,10 @@ describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemD
 
 });
 
-describe('ROCOFilesystemSystemDirectoryAbsolutePath', function testROCOFilesystemSystemDirectoryAbsolutePath () {
-	
-	it('returns system directory absolutePath', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
-	});
-
-});
-
 describe('ROCOFilesystemWorkspaceTestingDirectoryName', function testROCOFilesystemWorkspaceTestingDirectoryName () {
 	
 	it('returns workspace testing directory name', function () {
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'xxyy-workspace-testing');
-	});
-
-});
-
-describe('ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath', function testROCOFilesystemWorkspaceTestingDirectoryAbsolutePath () {
-	
-	it('returns workspace testing absolutePath', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });
@@ -263,6 +229,32 @@ describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 	it('returns subfolderName', function () {
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.alpha'), 'test-xxyy-alpha');
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.bravo.charlie'), 'test-xxyy-bravo-charlie');
+	});
+
+});
+
+describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemRootDirectoryAbsolutePath () {
+	
+	it.skip('returns app directory fullPath', function () {
+		var appDirectoryFullPath = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
+		var fullPathSegments = appDirectoryFullPath.split('/');
+		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
+	});
+
+});
+
+describe('ROCOFilesystemSystemDirectoryAbsolutePath', function testROCOFilesystemSystemDirectoryAbsolutePath () {
+	
+	it('returns system directory absolutePath', function () {
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
+	});
+
+});
+
+describe('ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath', function testROCOFilesystemWorkspaceTestingDirectoryAbsolutePath () {
+	
+	it('returns workspace testing absolutePath', function () {
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });

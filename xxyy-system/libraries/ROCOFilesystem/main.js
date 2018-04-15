@@ -7,15 +7,6 @@ var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-//_ ROCOFilesystemRootDirectoryAbsolutePath
-
-exports.ROCOFilesystemRootDirectoryAbsolutePath = function () {
-	return pathPackage.join(
-		__dirname,
-		'/../../../'
-		);
-};
-
 //_ ROCOFilesystemInputDataIsRealDirectoryPath
 
 exports.ROCOFilesystemInputDataIsRealDirectoryPath = function (inputData) {
@@ -94,34 +85,16 @@ exports.ROCOFilesystemPublicDirectoryName = function () {
 	return 'xxyy-public';
 };
 
-//_ ROCOFilesystemPublicDirectoryAbsolutePath
-
-exports.ROCOFilesystemPublicDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemPublicDirectoryName());
-};
-
 //_ ROCOFilesystemSystemDirectoryName
 
 exports.ROCOFilesystemSystemDirectoryName = function () {
 	return 'xxyy-system';
 };
 
-//_ ROCOFilesystemSystemDirectoryAbsolutePath
-
-exports.ROCOFilesystemSystemDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
-};
-
 //_ ROCOFilesystemWorkspaceTestingDirectoryName
 
 exports.ROCOFilesystemWorkspaceTestingDirectoryName = function () {
 	return 'xxyy-workspace-testing';
-};
-
-//_ ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
-
-exports.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
-	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor
@@ -136,6 +109,27 @@ exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inpu
 	};
 
 	return ['test', inputData].join('.').replace(/\./g, '-');
+};
+
+//_ ROCOFilesystemRootDirectoryAbsolutePath
+
+exports.ROCOFilesystemRootDirectoryAbsolutePath = function () {
+	return pathPackage.join(
+		__dirname,
+		'/../../../'
+		);
+};
+
+//_ ROCOFilesystemSystemDirectoryAbsolutePath
+
+exports.ROCOFilesystemSystemDirectoryAbsolutePath = function () {
+	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
+};
+
+//_ ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
+
+exports.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
+	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 
 //_ ROCOFilesystemSharedFileExtensionJSON
