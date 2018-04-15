@@ -64,37 +64,37 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 //_ ROCOFilesystemAppDirectoryName
 
 exports.ROCOFilesystemAppDirectoryName = function () {
-	return 'xxyy-app';
+	return 'app';
 };
 
 //_ ROCOFilesystemCacheDirectoryName
 
 exports.ROCOFilesystemCacheDirectoryName = function () {
-	return 'xxyy-cache';
+	return 'cache';
 };
 
 //_ ROCOFilesystemDataDirectoryName
 
 exports.ROCOFilesystemDataDirectoryName = function () {
-	return 'xxyy-data';
+	return 'data';
 };
 
 //_ ROCOFilesystemPublicDirectoryName
 
 exports.ROCOFilesystemPublicDirectoryName = function () {
-	return 'xxyy-public';
+	return 'public';
 };
 
 //_ ROCOFilesystemSystemDirectoryName
 
 exports.ROCOFilesystemSystemDirectoryName = function () {
-	return 'xxyy-system';
+	return 'system';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectoryName
 
 exports.ROCOFilesystemWorkspaceTestingDirectoryName = function () {
-	return 'xxyy-workspace-testing';
+	return 'workspace-testing';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor
@@ -118,12 +118,6 @@ exports._ROCOFilesystemAbsolutePathRootDirectory = function () {
 		__dirname,
 		'/../../../'
 		);
-};
-
-//_ _ROCOFilesystemAbsolutePathSystemDirectory
-
-exports._ROCOFilesystemAbsolutePathSystemDirectory = function () {
-	return pathPackage.join(exports._ROCOFilesystemAbsolutePathRootDirectory(), exports.ROCOFilesystemSystemDirectoryName());
 };
 
 //_ _ROCOFilesystemAbsolutePathWorkspaceTestingDirectory

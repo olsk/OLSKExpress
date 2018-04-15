@@ -167,7 +167,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirectoryName () {
 	
 	it('returns app directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'xxyy-app');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'app');
 	});
 
 });
@@ -175,7 +175,7 @@ describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirecto
 describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDirectoryName () {
 	
 	it('returns cache directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'xxyy-cache');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'cache');
 	});
 
 });
@@ -183,7 +183,7 @@ describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDir
 describe('ROCOFilesystemDataDirectoryName', function testROCOFilesystemDataDirectoryName () {
 	
 	it('returns data directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemDataDirectoryName(), 'xxyy-data');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemDataDirectoryName(), 'data');
 	});
 
 });
@@ -191,7 +191,7 @@ describe('ROCOFilesystemDataDirectoryName', function testROCOFilesystemDataDirec
 describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicDirectoryName () {
 	
 	it('returns public directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryName(), 'xxyy-public');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryName(), 'public');
 	});
 
 });
@@ -199,7 +199,7 @@ describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicD
 describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemDirectoryName () {
 	
 	it('returns system directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryName(), 'xxyy-system');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryName(), 'system');
 	});
 
 });
@@ -207,7 +207,7 @@ describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemD
 describe('ROCOFilesystemWorkspaceTestingDirectoryName', function testROCOFilesystemWorkspaceTestingDirectoryName () {
 	
 	it('returns workspace testing directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'xxyy-workspace-testing');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'workspace-testing');
 	});
 
 });
@@ -227,8 +227,8 @@ describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 	});
 
 	it('returns subfolderName', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.alpha'), 'test-xxyy-alpha');
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.bravo.charlie'), 'test-xxyy-bravo-charlie');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha'), 'test-alpha');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('bravo.charlie'), 'test-bravo-charlie');
 	});
 
 });
@@ -239,14 +239,6 @@ describe('_ROCOFilesystemAbsolutePathRootDirectory', function test_ROCOFilesyste
 		var appDirectoryFullPath = filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory();
 		var fullPathSegments = appDirectoryFullPath.split('/');
 		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
-	});
-
-});
-
-describe('_ROCOFilesystemAbsolutePathSystemDirectory', function test_ROCOFilesystemAbsolutePathSystemDirectory () {
-	
-	it('returns system directory absolutePath', function () {
-		assert.strictEqual(filesystemLibrary._ROCOFilesystemAbsolutePathSystemDirectory(), pathPackage.join(filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory(), filesystemLibrary.ROCOFilesystemSystemDirectoryName()));
 	});
 
 });

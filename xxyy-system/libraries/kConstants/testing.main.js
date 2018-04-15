@@ -8,7 +8,6 @@ var filesystemLibrary = require('../ROCOFilesystem/main');
 
 exports.ROCOTestingConstants = function () {
 	return {
-		ROCOTestingSystemDirectoryAbsolutePath: filesystemLibrary._ROCOFilesystemAbsolutePathSystemDirectory(),
 		ROCOTestingLiveDirectoryAbsolutePath: filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 
 		ROCOTestingCacheObjectValid: function () {

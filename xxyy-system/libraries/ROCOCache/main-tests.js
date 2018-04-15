@@ -7,7 +7,7 @@ var assert = require('assert');
 var kConstants = require('../kConstants/testing.main').ROCOTestingConstants();
 
 var cacheLibrary = require('./main');
-var filesystemLibrary = require(kConstants.ROCOTestingSystemDirectoryAbsolutePath + '/libraries/ROCOFilesystem/main');
+var filesystemLibrary = require('../ROCOFilesystem/main');
 
 var fsPackage = require('fs');
 var pathPackage = require('path');
