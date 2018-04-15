@@ -1,5 +1,4 @@
 /*!
- * xxyy-sample
  * Copyright(c) 2018 Rosano Coutinho
  * MIT Licensed
  */
@@ -14,7 +13,7 @@ var mkdirpPackage = require('mkdirp');
 
 var testAppDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
-	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('xxyy.filesystem'));
+	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.filesystem'));
 
 describe('ROCOFilesystemRootDirectoryAbsolutePath', function testROCOFilesystemRootDirectoryAbsolutePath () {
 	
