@@ -183,14 +183,6 @@ describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirecto
 
 });
 
-describe('ROCOFilesystemAppControllersDirectoryName', function testROCOFilesystemAppControllersDirectoryName () {
-	
-	it('returns app controllers directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppControllersDirectoryName(), 'controllers');
-	});
-
-});
-
 describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDirectoryName () {
 	
 	it('returns cache directory name', function () {

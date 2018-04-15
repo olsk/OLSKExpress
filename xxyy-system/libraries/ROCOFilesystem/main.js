@@ -77,12 +77,6 @@ exports.ROCOFilesystemAppDirectoryName = function () {
 	return 'xxyy-app';
 };
 
-//_ ROCOFilesystemAppControllersDirectoryName
-
-exports.ROCOFilesystemAppControllersDirectoryName = function () {
-	return 'controllers';
-};
-
 //_ ROCOFilesystemCacheDirectoryName
 
 exports.ROCOFilesystemCacheDirectoryName = function () {

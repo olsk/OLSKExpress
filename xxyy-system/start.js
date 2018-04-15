@@ -48,7 +48,7 @@ var expressApp = expressPackage();
 (function OLSKStartTemplatingEngine() {
 	expressApp.set('view engine', 'ejs');
 	expressApp.set('views', [
-		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
+		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())),
 	]);
 
 	// Create string format macro
@@ -65,9 +65,8 @@ var expressApp = expressPackage();
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
-	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
-		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js');
+	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())).forEach(function(dirItem, index) {
+		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		}
@@ -141,10 +140,9 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Load translation strings into OLSKStartInternationalizationTranslations
 
-	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
-	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)))
+	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())))
 		.map(function(e) {
-			return pathPackage.join(controllersPath, e);
+			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
 		})
 		.filter(function(e) {
 			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), e))
