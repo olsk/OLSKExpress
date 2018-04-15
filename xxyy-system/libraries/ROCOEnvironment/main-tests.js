@@ -1,6 +1,6 @@
 /*!
  * xxyy-sample
- * Copyright(c) 2016-2018 Rosano Coutinho
+ * Copyright(c) 2018 Rosano Coutinho
  * MIT Licensed
  */
 
