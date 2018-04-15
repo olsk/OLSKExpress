@@ -12,6 +12,22 @@ var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 
 var expressApp = expressPackage();
 
+//# OLSKStartLive
+
+var OLSKLive = {};
+
+(function OLSKStartLive() {
+	var kOLSKLiveRootDirectory = pathPackage.join(__dirname, '/../');
+
+	OLSKLive.OLSKLiveRootDirectory = function () {
+		return kOLSKLiveRootDirectory;
+	};
+
+	OLSKLive.OLSKLiveSystemPath = function () {
+		return pathPackage.join(kOLSKLiveRootDirectory, filesystemLibrary.ROCOFilesystemSystemDirectoryName());
+	};
+})();
+
 //# OLSKStartCookies
 
 (function OLSKStartCookies() {
@@ -48,7 +64,7 @@ var expressApp = expressPackage();
 (function OLSKStartTemplatingEngine() {
 	expressApp.set('view engine', 'ejs');
 	expressApp.set('views', [
-		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())),
+		pathPackage.join(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), filesystemLibrary.ROCOFilesystemAppDirectoryName())),
 	]);
 
 	// Create string format macro
@@ -65,9 +81,9 @@ var expressApp = expressPackage();
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())).forEach(function(dirItem, index) {
+	fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), filesystemLibrary.ROCOFilesystemAppDirectoryName())).forEach(function(dirItem, index) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
-		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), itemPath))) {
+		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), itemPath))) {
 			return;
 		}
 
@@ -78,7 +94,7 @@ var OLSKStartControllersArray = [];
 //# OLSKStartPublicDirectory
 
 (function OLSKStartPublicDirectory() {
-	expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
+	expressApp.use(expressPackage.static(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
 		extensions:['html'],
 	}));
 })();
@@ -143,15 +159,15 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Load translation strings into OLSKStartInternationalizationTranslations
 
-	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName())))
+	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), filesystemLibrary.ROCOFilesystemAppDirectoryName())))
 		.map(function(e) {
 			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
 		})
 		.filter(function(e) {
-			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), e))
+			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), e))
 		})
 		.each(function(dirPath) {
-			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), dirPath)))
+			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), dirPath)))
 				.filter(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename)
 				.reject(function(e) {
 					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)) === -1;
@@ -159,7 +175,7 @@ var OLSKStartInternationalizationTranslations = {};
 				.each(function(e) {
 					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
 						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
-						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
+						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectory(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
 						);
 				});
 		});
