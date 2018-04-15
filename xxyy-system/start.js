@@ -17,15 +17,24 @@ var expressApp = expressPackage();
 var OLSKLive = {};
 
 (function OLSKStartLive() {
+	var jsYAMLPackage = require('js-yaml');
+
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
-	var kOLSKLiveSettings;
+	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()));
 
 	OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function () {
 		return kOLSKLiveRootDirectoryAbsolutePath;
 	};
 
+	OLSKLive.OLSKLiveAppDirectoryName = function () {
+		return [
+			kOLSKLiveSettings.OLSKDirectoryPrefix,
+			filesystemLibrary.ROCOFilesystemAppDirectoryName()
+			].join('-');
+	};
+
 	OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function () {
-		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName());
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKLive.OLSKLiveAppDirectoryName());
 	};
 })();
 
