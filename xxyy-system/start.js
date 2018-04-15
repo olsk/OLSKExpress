@@ -7,6 +7,7 @@
 var expressPackage = require('express');
 var pathPackage = require('path');
 var fsPackage = require('fs');
+var underscorePackage = require('underscore');
 var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 
 var expressApp = expressPackage();
@@ -88,13 +89,16 @@ var OLSKStartInternationalizationTranslations = {};
 
 (function OLSKStartInternationalization() {
 	var internationalLibrary = require('./libraries/OLSKInternational/main');
-	var underscorePackage = require('underscore');
 	var jsYAMLPackage = require('js-yaml');
 
 	// Aggregate unique languages specified in controller routes
 
 	underscorePackage.chain(OLSKStartControllersArray)
 		.map(function (e) {
+			if (typeof e.OLSKControllerRoutes !== 'function') {
+				return null;
+			};
+
 			return underscorePackage.pluck(Object.values(e.OLSKControllerRoutes()), 'OLSKRouteLanguages');
 		})
 		.flatten()
@@ -320,4 +324,16 @@ var OLSKStartInternationalizationTranslations = {};
 		var loggingPackage = require('morgan');
 		expressApp.use(loggingPackage('dev'));
 	};
+})();
+
+//# OLSKStartLaunchers
+
+(function OLSKStartLaunchers() {
+	underscorePackage.chain(OLSKStartControllersArray)
+		.filter(function (e) {
+			return typeof e.OLSKControllerLauncher === 'function';
+		})
+		.each(function (e) {
+			return e.OLSKControllerLauncher();
+		})
 })();
