@@ -6,26 +6,24 @@
 
 //_ ROCOStringWithFormat
 
-exports.ROCOStringWithFormat = function (inputString, substitutions) {
-	if (typeof inputString !== 'string') {
+exports.ROCOStringWithFormat = function (inputData) {
+	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
 	}
 
-	if (!Array.isArray(substitutions)) {
-		throw new Error('ROCOErrorInputInvalid');
-	}
+	var substitutions = Object.values(arguments).slice(1);
 
 	if (!substitutions.length) {
-		return inputString;
+		return inputData;
 	}
 
-	var formattedString = inputString;
+	var formattedString = inputData;
 
-	(inputString.match(/\%\@/g) || []).forEach(function (e, i) {
+	(inputData.match(/\%\@/g) || []).forEach(function (e, i) {
 		formattedString = formattedString.replace(e, substitutions[i]);
 	});
 
-	exports._ROCOStringAllMatchesWithRegexAndString(/\%\$(\d*)\@/g, inputString).forEach(function (e) {
+	exports._ROCOStringAllMatchesWithRegexAndString(/\%\$(\d*)\@/g, inputData).forEach(function (e) {
 		formattedString = formattedString.replace(e[0], substitutions[e[1] - 1]);
 	});
 

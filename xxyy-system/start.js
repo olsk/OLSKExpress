@@ -43,6 +43,23 @@ var expressApp = expressPackage();
 	}));
 })();
 
+//# ROCOStartTemplatingEngine
+
+(function ROCOStartTemplatingEngine() {
+	expressApp.set('view engine', 'ejs');
+	expressApp.set('views', [
+		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
+	]);
+
+	// Create string format macro
+
+	expressApp.use(function(req, res, next) {
+		res.locals.ROCOFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
+
+		next();
+	});
+})();
+
 //# ROCOStartControllers
 
 var ROCOStartControllersArray = [];
@@ -234,15 +251,6 @@ var ROCOStartInternationalizationTranslations = {};
 	});
 
 	expressApp.use('/', expressRouter);
-})();
-
-//# ROCOStartTemplatingEngine
-
-(function ROCOStartTemplatingEngine() {
-	expressApp.set('view engine', 'ejs');
-	expressApp.set('views', [
-		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
-	]);
 })();
 
 //# ROCOStartServer
