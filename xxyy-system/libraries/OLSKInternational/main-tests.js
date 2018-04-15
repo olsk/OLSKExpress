@@ -8,68 +8,68 @@ var assert = require('assert');
 
 var internationalLibrary = require('./main');
 
-describe('OLSKIternationalDefaultIdentifier', function testOLSKIternationalDefaultIdentifier () {
+describe('OLSKInternationalDefaultIdentifier', function testOLSKInternationalDefaultIdentifier () {
 	
 	it('returns i18n', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalDefaultIdentifier(), 'i18n');
+		assert.strictEqual(internationalLibrary.OLSKInternationalDefaultIdentifier(), 'i18n');
 	});
 
 });
 
-describe('OLSKIternationalInputDataIsTranslationFilename', function testOLSKIternationalInputDataIsTranslationFilename () {
+describe('OLSKInternationalInputDataIsTranslationFilename', function testOLSKInternationalInputDataIsTranslationFilename () {
 	
 	it('returns false if not string', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename(null), false);
+		assert.strictEqual(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename(null), false);
 	});
 	
 	it('returns false if without yaml extension', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename('i18n.en.yml'), false);
+		assert.strictEqual(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename('i18n.en.yml'), false);
 	});
 	
-	it('returns false if without OLSKIternationalDefaultIdentifier', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename('en.yaml'), false);
+	it('returns false if without OLSKInternationalDefaultIdentifier', function () {
+		assert.strictEqual(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename('en.yaml'), false);
 	});
 	
 	it('returns false if without languageID', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename('i18n.yaml'), false);
+		assert.strictEqual(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename('i18n.yaml'), false);
 	});
 	
 	it('returns true if valid translationFilename', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename('i18n.en.yaml'), true);
+		assert.strictEqual(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename('i18n.en.yaml'), true);
 	});
 
 });
 
-describe('OLSKIternationalLanguageIDForTranslationFilename', function testOLSKIternationalLanguageIDForTranslationFilename () {
+describe('OLSKInternationalLanguageIDForTranslationFilename', function testOLSKInternationalLanguageIDForTranslationFilename () {
 
 	it('throws error if not translationFilename', function () {
 		assert.throws(function () {
-			internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(null);
+			internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(null);
 		}, /OLSKErrorInputInvalid/);
 	});
 	
 	it('returns languageID', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename('i18n.en.yaml'), 'en');
+		assert.strictEqual(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename('i18n.en.yaml'), 'en');
 	});
 
 });
 
-describe('OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary', function testOLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary () {
+describe('OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary', function testOLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary () {
 
 	it('throws error if param2 not object', function () {
 		assert.throws(function () {
-			internationalLibrary.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', null);
+			internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', null);
 		}, /OLSKErrorInputInvalid/);
 	});
 	
 	it('returns localizedString', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
+		assert.strictEqual(internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
 			alpha: 'bravo',
 		}), 'bravo');
 	});
 	
 	it('returns alternate string if translation not available', function () {
-		assert.strictEqual(internationalLibrary.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
+		assert.strictEqual(internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary('alpha', {
 			charlie: 'bravo',
 		}), 'TRANSLATION_MISSING');
 	});

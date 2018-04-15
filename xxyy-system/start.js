@@ -88,7 +88,7 @@ var OLSKStartControllersArray = [];
 var OLSKStartInternationalizationTranslations = {};
 
 (function OLSKStartInternationalization() {
-	var internationalLibrary = require('./libraries/OLSKIternational/main');
+	var internationalLibrary = require('./libraries/OLSKInternational/main');
 	var underscorePackage = require('underscore');
 	var jsYAMLPackage = require('js-yaml');
 
@@ -149,13 +149,13 @@ var OLSKStartInternationalizationTranslations = {};
 		})
 		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), dirPath)))
-				.filter(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename)
+				.filter(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename)
 				.reject(function(e) {
-					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)) === -1;
+					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)) === -1;
 				})
 				.each(function(e) {
-					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)] = Object.assign(
-						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)],
+					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
+						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
 						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
 						);
 				});
@@ -165,7 +165,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	expressApp.use(function(req, res, next) {
 		res.locals.OLSKTranslate = function (translationConstant) {
-			return internationalLibrary.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
+			return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 		};
 
 		next();

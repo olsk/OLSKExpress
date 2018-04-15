@@ -6,15 +6,15 @@
 
 var filesystemLibrary = require('../ROCOFilesystem/main');
 
-//_ OLSKIternationalDefaultIdentifier
+//_ OLSKInternationalDefaultIdentifier
 
-exports.OLSKIternationalDefaultIdentifier = function () {
+exports.OLSKInternationalDefaultIdentifier = function () {
 	return 'i18n';
 };
 
-//_ OLSKIternationalInputDataIsTranslationFilename
+//_ OLSKInternationalInputDataIsTranslationFilename
 
-exports.OLSKIternationalInputDataIsTranslationFilename = function (inputData) {
+exports.OLSKInternationalInputDataIsTranslationFilename = function (inputData) {
 	if (typeof inputData !== 'string') {
 		return false;
 	};
@@ -23,30 +23,30 @@ exports.OLSKIternationalInputDataIsTranslationFilename = function (inputData) {
 		return false;
 	};
 
-	if (inputData.split('.').shift() !== exports.OLSKIternationalDefaultIdentifier()) {
+	if (inputData.split('.').shift() !== exports.OLSKInternationalDefaultIdentifier()) {
 		return false;
 	};
 
-	if (!exports._OLSKIternationalLanguageIDForInputData(inputData)) {
+	if (!exports._OLSKInternationalLanguageIDForInputData(inputData)) {
 		return false;
 	};
 
 	return true;
 };
 
-//_ OLSKIternationalLanguageIDForTranslationFilename
+//_ OLSKInternationalLanguageIDForTranslationFilename
 
-exports.OLSKIternationalLanguageIDForTranslationFilename = function (inputData) {
-	if (!exports.OLSKIternationalInputDataIsTranslationFilename(inputData)) {
+exports.OLSKInternationalLanguageIDForTranslationFilename = function (inputData) {
+	if (!exports.OLSKInternationalInputDataIsTranslationFilename(inputData)) {
 		throw new Error('OLSKErrorInputInvalid');
 	};
 
-	return exports._OLSKIternationalLanguageIDForInputData(inputData);
+	return exports._OLSKInternationalLanguageIDForInputData(inputData);
 };
 
-//_ _OLSKIternationalLanguageIDForInputData
+//_ _OLSKInternationalLanguageIDForInputData
 
-exports._OLSKIternationalLanguageIDForInputData = function (inputData) {
+exports._OLSKInternationalLanguageIDForInputData = function (inputData) {
 	var elements = inputData.split('.');
 
 	elements.pop();
@@ -55,9 +55,9 @@ exports._OLSKIternationalLanguageIDForInputData = function (inputData) {
 	return elements.pop();
 };
 
-//_ OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary
+//_ OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary
 
-exports.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary = function (translationKey, translationDictionary) {
+exports.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary = function (translationKey, translationDictionary) {
 	if (typeof translationDictionary !== 'object' || translationDictionary === null) {
 		throw new Error('OLSKErrorInputInvalid');
 	};
