@@ -126,9 +126,9 @@ exports.ROCOFilesystemSystemDirectoryAbsolutePath = function () {
 	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemSystemDirectoryName());
 };
 
-//_ ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
+//_ _ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath
 
-exports.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
+exports._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath = function () {
 	return pathPackage.join(exports.ROCOFilesystemRootDirectoryAbsolutePath(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 

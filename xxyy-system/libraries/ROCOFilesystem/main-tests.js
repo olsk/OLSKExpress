@@ -251,10 +251,10 @@ describe('ROCOFilesystemSystemDirectoryAbsolutePath', function testROCOFilesyste
 
 });
 
-describe('ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath', function testROCOFilesystemWorkspaceTestingDirectoryAbsolutePath () {
+describe('_ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath', function test_ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath () {
 	
 	it('returns workspace testing absolutePath', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
+		assert.strictEqual(filesystemLibrary._ROCOFilesystemWorkspaceTestingDirectoryAbsolutePath(), pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });
