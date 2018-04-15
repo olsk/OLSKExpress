@@ -1,19 +1,19 @@
 <%
-locals.ROCOPageTitle = ROCOTranslate('XXYYHomeTitle');
+locals.OLSKPageTitle = OLSKTranslate('XXYYHomeTitle');
 %>
 
 <%- include('../shared-views/header.ejs') %>
 
-<h1><%= locals.ROCOPageTitle %></h1>
+<h1><%= locals.OLSKPageTitle %></h1>
 
-<p><%= ROCOTranslate('XXYYHomeContent') %></p>
+<p><%= OLSKTranslate('XXYYHomeContent') %></p>
 
 <pre><%= JSON.stringify({
-	ROCOSharedActiveRouteConstant: ROCOSharedActiveRouteConstant,
-	ROCOCanonicalFor: ROCOCanonicalFor(ROCOSharedActiveRouteConstant),
-	ROCOCanonicalLocalizedFor: ROCOCanonicalLocalizedFor(ROCOSharedActiveRouteConstant),
-	ROCOSharedPageLanguagesAvailable: ROCOSharedPageLanguagesAvailable,
-	ROCOSharedPageCurrentLanguage: ROCOSharedPageCurrentLanguage,
+	OLSKSharedActiveRouteConstant: OLSKSharedActiveRouteConstant,
+	OLSKCanonicalFor: OLSKCanonicalFor(OLSKSharedActiveRouteConstant),
+	OLSKCanonicalLocalizedFor: OLSKCanonicalLocalizedFor(OLSKSharedActiveRouteConstant),
+	OLSKSharedPageLanguagesAvailable: OLSKSharedPageLanguagesAvailable,
+	OLSKSharedPageCurrentLanguage: OLSKSharedPageCurrentLanguage,
 	}, 0, '  ') %>
 </pre>
 

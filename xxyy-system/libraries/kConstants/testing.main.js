@@ -18,18 +18,18 @@ exports.ROCOTestingConstants = function () {
 			};
 		},
 
-		ROCOTestingRouteObjectValid: function () {
+		OLSKTestingRouteObjectValid: function () {
 			return {
-				ROCORoutePath: '/alpha',
-				ROCORouteMethod: 'get',
-				ROCORouteFunction: function () {},
+				OLSKRoutePath: '/alpha',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: function () {},
 			};
 		},
 
-		ROCOTestingRouteObjectValidRedirect: function () {
+		OLSKTestingRouteObjectValidRedirect: function () {
 			return {
-				ROCORoutePath: '/alpha',
-				ROCORouteRedirect: '/bravo',
+				OLSKRoutePath: '/alpha',
+				OLSKRouteRedirect: '/bravo',
 			};
 		},
 

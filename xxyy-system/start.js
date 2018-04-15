@@ -12,17 +12,17 @@ var environmentLibrary = require('./libraries/ROCOEnvironment/main');
 
 var expressApp = expressPackage();
 
-//# ROCOStartCookies
+//# OLSKStartCookies
 
-(function ROCOStartCookies() {
+(function OLSKStartCookies() {
 	var cookieParserPackage = require('cookie-parser');
 
 	expressApp.use(cookieParserPackage());
 })();
 
-//# ROCOStartSessions
+//# OLSKStartSessions
 
-(function ROCOStartSessions() {
+(function OLSKStartSessions() {
 	var expressSessionPackage = require('express-session');
 
 	expressApp.use(expressSessionPackage({
@@ -32,9 +32,9 @@ var expressApp = expressPackage();
 	}));
 })();
 
-//# ROCOStartBodyParsing
+//# OLSKStartBodyParsing
 
-(function ROCOStartBodyParsing() {
+(function OLSKStartBodyParsing() {
 	var bodyParserPackage = require('body-parser');
 
 	expressApp.use(bodyParserPackage.json());
@@ -43,9 +43,9 @@ var expressApp = expressPackage();
 	}));
 })();
 
-//# ROCOStartTemplatingEngine
+//# OLSKStartTemplatingEngine
 
-(function ROCOStartTemplatingEngine() {
+(function OLSKStartTemplatingEngine() {
 	expressApp.set('view engine', 'ejs');
 	expressApp.set('views', [
 		pathPackage.join(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName())),
@@ -54,17 +54,17 @@ var expressApp = expressPackage();
 	// Create string format macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.ROCOFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
+		res.locals.OLSKFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
 
 		next();
 	});
 })();
 
-//# ROCOStartControllers
+//# OLSKStartControllers
 
-var ROCOStartControllersArray = [];
+var OLSKStartControllersArray = [];
 
-(function ROCOStartControllers() {
+(function OLSKStartControllers() {
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)).forEach(function(dirItem, index) {
 		var itemPath = pathPackage.join(controllersPath, dirItem, 'controller.js');
@@ -72,32 +72,32 @@ var ROCOStartControllersArray = [];
 			return;
 		}
 
-		ROCOStartControllersArray.push(require('../' + itemPath));
+		OLSKStartControllersArray.push(require('../' + itemPath));
 	});
 })();
 
-//# ROCOStartPublicDirectory
+//# OLSKStartPublicDirectory
 
-(function ROCOStartPublicDirectory() {
+(function OLSKStartPublicDirectory() {
 	expressApp.use(expressPackage.static(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName()), {
 		extensions:['html'],
 	}));
 })();
 
-//# ROCOStartInternationalization
+//# OLSKStartInternationalization
 
-var ROCOStartInternationalizationTranslations = {};
+var OLSKStartInternationalizationTranslations = {};
 
-(function ROCOStartInternationalization() {
-	var internationalLibrary = require('./libraries/ROCOInternational/main');
+(function OLSKStartInternationalization() {
+	var internationalLibrary = require('./libraries/OLSKIternational/main');
 	var underscorePackage = require('underscore');
 	var jsYAMLPackage = require('js-yaml');
 
 	// Aggregate unique languages specified in controller routes
 
-	underscorePackage.chain(ROCOStartControllersArray)
+	underscorePackage.chain(OLSKStartControllersArray)
 		.map(function (e) {
-			return underscorePackage.pluck(Object.values(e.ROCOControllerRoutes()), 'ROCORouteLanguages');
+			return underscorePackage.pluck(Object.values(e.OLSKControllerRoutes()), 'OLSKRouteLanguages');
 		})
 		.flatten()
 		.uniq()
@@ -105,41 +105,41 @@ var ROCOStartInternationalizationTranslations = {};
 			return !e;
 		})
 		.each(function (e) {
-			ROCOStartInternationalizationTranslations[e] = {};
+			OLSKStartInternationalizationTranslations[e] = {};
 		});
 
 	// Skip internationalization code if there are no languages
 
-	if (!Object.keys(ROCOStartInternationalizationTranslations).length) {
+	if (!Object.keys(OLSKStartInternationalizationTranslations).length) {
 		return;
 	};
 
-	// Set ROCOSharedCurrentLanguage to default value
+	// Set OLSKSharedCurrentLanguage to default value
 
 	expressApp.use(function(req, res, next) {
-		req.ROCOSharedCurrentLanguage = Object.keys(ROCOStartInternationalizationTranslations).shift();
+		req.OLSKSharedCurrentLanguage = Object.keys(OLSKStartInternationalizationTranslations).shift();
 
 		next();
 	});
 
-	// Set ROCOSharedRequestLanguage if possible
+	// Set OLSKSharedRequestLanguage if possible
 
 	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
 		var firstElement = pathSegments.splice(1, 1).pop();
 		
-		if (Object.keys(ROCOStartInternationalizationTranslations).indexOf(firstElement) === -1) {
+		if (Object.keys(OLSKStartInternationalizationTranslations).indexOf(firstElement) === -1) {
 			next();
 			return;
 		};
 
-		req.ROCOSharedRequestLanguage = firstElement;
+		req.OLSKSharedRequestLanguage = firstElement;
 		req.url = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
 
 		next();
 	});
 
-	// Load translation strings into ROCOStartInternationalizationTranslations
+	// Load translation strings into OLSKStartInternationalizationTranslations
 
 	var controllersPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), filesystemLibrary.ROCOFilesystemAppControllersDirectoryName());
 	underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), controllersPath)))
@@ -151,13 +151,13 @@ var ROCOStartInternationalizationTranslations = {};
 		})
 		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), dirPath)))
-				.filter(internationalLibrary.ROCOInternationalInputDataIsTranslationFilename)
+				.filter(internationalLibrary.OLSKIternationalInputDataIsTranslationFilename)
 				.reject(function(e) {
-					return Object.keys(ROCOStartInternationalizationTranslations).indexOf(internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)) === -1;
+					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)) === -1;
 				})
 				.each(function(e) {
-					ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
-						ROCOStartInternationalizationTranslations[internationalLibrary.ROCOInternationalLanguageIDForTranslationFilename(e)],
+					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)] = Object.assign(
+						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKIternationalLanguageIDForTranslationFilename(e)],
 						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
 						);
 				});
@@ -166,43 +166,43 @@ var ROCOStartInternationalizationTranslations = {};
 	// Create translation string macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.ROCOTranslate = function (translationConstant) {
-			return internationalLibrary.ROCOInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, ROCOStartInternationalizationTranslations[req.ROCOSharedCurrentLanguage]);
+		res.locals.OLSKTranslate = function (translationConstant) {
+			return internationalLibrary.OLSKIternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 		};
 
 		next();
 	});
 })();
 
-//# ROCOStartRouting
+//# OLSKStartRouting
 
-(function ROCOStartRouting() {
-	var routingLibrary = require('./libraries/ROCORouting/main');
+(function OLSKStartRouting() {
+	var routingLibrary = require('./libraries/OLSKRouting/main');
 	var expressRouter = require('express').Router();
 
 	var allRoutes = {};
 
 	// Aggregate all routes specified in controllers
 
-	ROCOStartControllersArray.forEach(function (e) {
-		if (typeof e.ROCOControllerRoutes !== 'function') {
+	OLSKStartControllersArray.forEach(function (e) {
+		if (typeof e.OLSKControllerRoutes !== 'function') {
 			return;
 		};
 
-		allRoutes = Object.assign(allRoutes, e.ROCOControllerRoutes());
+		allRoutes = Object.assign(allRoutes, e.OLSKControllerRoutes());
 	});
 
 	// Create canonical link macros
 
 	expressApp.use(function(req, res, next) {
-		res.locals.ROCOCanonicalFor = function (routeConstant, optionalParams) {
-			return routingLibrary.ROCORoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
+		res.locals.OLSKCanonicalFor = function (routeConstant, optionalParams) {
+			return routingLibrary.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 		};
 
-		if (req.ROCOSharedCurrentLanguage) {
-			res.locals.ROCOCanonicalLocalizedFor = function (routeConstant, optionalParams) {
-				return res.locals.ROCOCanonicalFor(routeConstant, Object.assign({
-					ROCORoutingLanguage: req.ROCOSharedCurrentLanguage,
+		if (req.OLSKSharedCurrentLanguage) {
+			res.locals.OLSKCanonicalLocalizedFor = function (routeConstant, optionalParams) {
+				return res.locals.OLSKCanonicalFor(routeConstant, Object.assign({
+					OLSKRoutingLanguage: req.OLSKSharedCurrentLanguage,
 				}, optionalParams));
 			};
 		};
@@ -215,27 +215,27 @@ var ROCOStartInternationalizationTranslations = {};
 	Object.keys(allRoutes).forEach(function (key) {
 		var e = allRoutes[key];
 
-		return expressRouter[e.ROCORouteMethod](e.ROCORoutePath, e.ROCORouteRedirect ? function (req, res) {
-			return res.redirect(e.ROCORouteRedirect);
+		return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function (req, res) {
+			return res.redirect(e.OLSKRouteRedirect);
 		} : function (req, res, next) {
-			res.locals.ROCOSharedActiveRouteConstant = key;
+			res.locals.OLSKSharedActiveRouteConstant = key;
 
 			// If the request language not available, pass
 
-			if (req.ROCOSharedRequestLanguage && (e.ROCORouteLanguages.indexOf(req.ROCOSharedRequestLanguage) === -1)) {
+			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
 				return next();
 			};
 
 			// If the request language available, set current language
 
-			if (req.ROCOSharedRequestLanguage && (e.ROCORouteLanguages.indexOf(req.ROCOSharedRequestLanguage) !== -1)) {
-				req.ROCOSharedCurrentLanguage = req.ROCOSharedRequestLanguage;
+			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 			};
 
 			// If no request language and preferred language available and not current, redirect
 
-			var preferredLanguage = req.acceptsLanguages(e.ROCORouteLanguages);
-			if (!req.ROCOSharedRequestLanguage && preferredLanguage && e.ROCORouteLanguages && (e.ROCORouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.ROCOSharedCurrentLanguage)) {
+			var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
+			if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
 				var pathSegments = req.url.split('/');
 				pathSegments.splice(1, 0, preferredLanguage);
 
@@ -246,19 +246,19 @@ var ROCOStartInternationalizationTranslations = {};
 				return res.redirect(pathSegments.join('/'));
 			};
 
-			res.locals.ROCOSharedPageLanguagesAvailable = e.ROCORouteLanguages;
-			res.locals.ROCOSharedPageCurrentLanguage = req.ROCOSharedCurrentLanguage
+			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage
 
-			return e.ROCORouteFunction(req, res, next);
+			return e.OLSKRouteFunction(req, res, next);
 		});
 	});
 
 	expressApp.use('/', expressRouter);
 })();
 
-//# ROCOStartServer
+//# OLSKStartServer
 
-(function ROCOStartServer() {
+(function OLSKStartServer() {
 	var serverLibrary = require('./libraries/ROCOServer/main');
 	var httpPackage = require('http');
 	var serverModule = require('./modules/server');
@@ -272,9 +272,9 @@ var ROCOStartInternationalizationTranslations = {};
 	serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObject, debugObject));
 })();
 
-//# ROCOStartErrorHandling
+//# OLSKStartErrorHandling
 
-(function ROCOStartErrorHandling() {
+(function OLSKStartErrorHandling() {
 	expressApp.use(function(req, res, next) {
 		res.status(404);
 

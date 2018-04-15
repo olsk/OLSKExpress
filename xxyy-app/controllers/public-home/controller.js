@@ -4,15 +4,15 @@
  * MIT Licensed
  */
 
-//_ ROCOControllerRoutes
+//_ OLSKControllerRoutes
 
-exports.ROCOControllerRoutes = function () {
+exports.OLSKControllerRoutes = function () {
 	return {
 		XXYYRouteHome: {
-			ROCORoutePath: '/',
-			ROCORouteMethod: 'get',
-			ROCORouteFunction: exports.index,
-			ROCORouteLanguages: ['en', 'fr'],
+			OLSKRoutePath: '/',
+			OLSKRouteMethod: 'get',
+			OLSKRouteFunction: exports.index,
+			OLSKRouteLanguages: ['en', 'fr'],
 		},
 	};
 };
@@ -20,6 +20,6 @@ exports.ROCOControllerRoutes = function () {
 exports.index = function(req, res, next) {	
 	res.render('public-home/index', {
 		XXYYPageData1: (new Date()).valueOf(),
-		XXYYPageData2: (new Date()).toLocaleString(req.ROCOInternationalCurrentLanguage),
+		XXYYPageData2: (new Date()).toLocaleString(req.OLSKIternationalCurrentLanguage),
 	});
 };

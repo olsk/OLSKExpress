@@ -8,15 +8,15 @@ var assert = require('assert');
 
 var homeController = require('./controller');
 
-describe('ROCOControllerRoutes', function testROCOControllerRoutes () {
+describe('OLSKControllerRoutes', function testOLSKControllerRoutes () {
 	
 	it('returns route objects', function () {
-		assert.deepEqual(homeController.ROCOControllerRoutes(), {
+		assert.deepEqual(homeController.OLSKControllerRoutes(), {
 			XXYYRouteHome: {
-				ROCORoutePath: '/',
-				ROCORouteMethod: 'get',
-				ROCORouteFunction: homeController.index,
-				ROCORouteLanguages: ['en', 'fr'],
+				OLSKRoutePath: '/',
+				OLSKRouteMethod: 'get',
+				OLSKRouteFunction: homeController.index,
+				OLSKRouteLanguages: ['en', 'fr'],
 			},
 		});
 	});

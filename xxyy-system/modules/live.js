@@ -8,12 +8,12 @@ var filesystemLibrary = require('../libraries/ROCOFilesystem/main');
 
 var pathPackage = require('path');
 
-var kROCOLiveAppDirectory = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
+var kOLSKLiveAppDirectory = filesystemLibrary.ROCOFilesystemRootDirectoryAbsolutePath();
 
-exports.ROCOLiveAppDirectory = function () {
-	return kROCOLiveAppDirectory;
+exports.OLSKLiveAppDirectory = function () {
+	return kOLSKLiveAppDirectory;
 };
 
-exports.ROCOLiveSystemPath = function () {
-	return pathPackage.join(kROCOLiveAppDirectory, filesystemLibrary.ROCOFilesystemSystemDirectoryName());
+exports.OLSKLiveSystemPath = function () {
+	return pathPackage.join(kOLSKLiveAppDirectory, filesystemLibrary.ROCOFilesystemSystemDirectoryName());
 };
