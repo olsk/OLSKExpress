@@ -233,6 +233,14 @@ describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 
 });
 
+describe('ROCOFilesystemLaunchFileName', function testROCOFilesystemLaunchFileName () {
+	
+	it('returns launch file name', function () {
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemLaunchFileName(), 'os-launch.js');
+	});
+
+});
+
 describe('_ROCOFilesystemAbsolutePathRootDirectory', function test_ROCOFilesystemAbsolutePathRootDirectory () {
 	
 	it.skip('returns app directory fullPath', function () {

@@ -111,6 +111,12 @@ exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inpu
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
 
+//_ ROCOFilesystemLaunchFileName
+
+exports.ROCOFilesystemLaunchFileName = function () {
+	return 'os-launch.js';
+};
+
 //_ _ROCOFilesystemAbsolutePathRootDirectory
 
 exports._ROCOFilesystemAbsolutePathRootDirectory = function () {
