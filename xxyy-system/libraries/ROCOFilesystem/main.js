@@ -64,37 +64,37 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 //_ ROCOFilesystemAppDirectoryName
 
 exports.ROCOFilesystemAppDirectoryName = function () {
-	return 'app';
+	return 'os-app';
 };
 
 //_ ROCOFilesystemCacheDirectoryName
 
 exports.ROCOFilesystemCacheDirectoryName = function () {
-	return 'cache';
+	return 'os-cache';
 };
 
 //_ ROCOFilesystemDataDirectoryName
 
 exports.ROCOFilesystemDataDirectoryName = function () {
-	return 'data';
+	return 'os-data';
 };
 
 //_ ROCOFilesystemPublicDirectoryName
 
 exports.ROCOFilesystemPublicDirectoryName = function () {
-	return 'public';
+	return 'os-public';
 };
 
 //_ ROCOFilesystemSystemDirectoryName
 
 exports.ROCOFilesystemSystemDirectoryName = function () {
-	return 'system';
+	return 'os-system';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectoryName
 
 exports.ROCOFilesystemWorkspaceTestingDirectoryName = function () {
-	return 'workspace-testing';
+	return 'os-workspace-testing';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor

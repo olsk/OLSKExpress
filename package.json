@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./launch",
-    "test": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js')",
-    "dstart": "supervisor ./launch",
-    "dtest": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min",
-    "dtestdebug": "mocha $(find $PWD -path '*xxyy-*' -name '*-tests.js') -w --reporter min -b"
+    "start": "node ./os-launch",
+    "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
+    "dstart": "supervisor ./os-launch",
+    "dtest": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min",
+    "dtestdebug": "mocha $(find $PWD -path '*os-*' -name '*-tests.js') -w --reporter min -b"
   },
   "dependencies": {
     "basic-auth": "latest",

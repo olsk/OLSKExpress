@@ -13,7 +13,7 @@ var mkdirpPackage = require('mkdirp');
 
 var testAppDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
-	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.filesystem'));
+	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath () {
 
@@ -167,7 +167,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirectoryName () {
 	
 	it('returns app directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'app');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'os-app');
 	});
 
 });
@@ -175,7 +175,7 @@ describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirecto
 describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDirectoryName () {
 	
 	it('returns cache directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'cache');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'os-cache');
 	});
 
 });
@@ -183,7 +183,7 @@ describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDir
 describe('ROCOFilesystemDataDirectoryName', function testROCOFilesystemDataDirectoryName () {
 	
 	it('returns data directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemDataDirectoryName(), 'data');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemDataDirectoryName(), 'os-data');
 	});
 
 });
@@ -191,7 +191,7 @@ describe('ROCOFilesystemDataDirectoryName', function testROCOFilesystemDataDirec
 describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicDirectoryName () {
 	
 	it('returns public directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryName(), 'public');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryName(), 'os-public');
 	});
 
 });
@@ -199,7 +199,7 @@ describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicD
 describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemDirectoryName () {
 	
 	it('returns system directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryName(), 'system');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryName(), 'os-system');
 	});
 
 });
@@ -207,7 +207,7 @@ describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemD
 describe('ROCOFilesystemWorkspaceTestingDirectoryName', function testROCOFilesystemWorkspaceTestingDirectoryName () {
 	
 	it('returns workspace testing directory name', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'workspace-testing');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'os-workspace-testing');
 	});
 
 });
@@ -227,8 +227,8 @@ describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 	});
 
 	it('returns subfolderName', function () {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha'), 'test-alpha');
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('bravo.charlie'), 'test-bravo-charlie');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
 	});
 
 });

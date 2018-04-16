@@ -3,7 +3,7 @@ node_modules
 package-lock.json
 
 # CACHING
-xxyy-cache
+os-cache
 
 # TESTING
-workspace-testing
+os-workspace-testing

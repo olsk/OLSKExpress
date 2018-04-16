@@ -4,4 +4,4 @@
  * MIT Licensed
  */
 
-require('./xxyy-system/start');
+require('./os-system/start');
