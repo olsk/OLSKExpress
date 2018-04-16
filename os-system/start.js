@@ -368,3 +368,20 @@ var OLSKStartInternationalizationTranslations = {};
 			return e.OLSKControllerWorker();
 		})
 })();
+
+//# OLSKStartTasks
+
+(function OLSKStartTasks() {
+	var tasksLibrary = require('./libraries/ROCOTasks/main');
+
+	underscorePackage.chain(OLSKStartControllersArray)
+		.filter(function (e) {
+			return typeof e.OLSKControllerTasks === 'function';
+		})
+		.map(function (e) {
+			return e.OLSKControllerTasks();
+		})
+		.flatten()
+		.filter(tasksLibrary.ROCOTasksInputDataIsTaskObject)
+		.map(tasksLibrary.ROCOTasksTimeoutForTaskObject)
+})();
