@@ -300,8 +300,34 @@ var OLSKStartInternationalizationTranslations = {};
 	var serverObject = httpPackage.createServer(expressApp);
 	expressApp.set('port', portValue);
 	serverObject.listen(portValue);
-	serverObject.on('error', serverModule.ROCOServerErrorCallback());
-	serverObject.on('listening', serverModule.ROCOServerListeningCallback(serverObject, debugObject));
+	serverObject.on('error', function (error) {
+		if (error.syscall !== 'listen') {
+			throw error;
+		};
+
+		var bind = typeof error.port === 'string'
+			? 'Pipe ' + error.port
+			: 'Port ' + error.port;
+
+		if (error.code === 'EACCES') {
+			console.error(bind + ' requires elevated privileges');
+			return process.exit(1);
+		};
+
+		if (error.code === 'EADDRINUSE') {
+			console.error(bind + ' is already in use');
+			return process.exit(1);
+		};
+
+		throw error;
+	});
+	serverObject.on('listening', function () {
+		var serverAddress = serverObject.address();
+		var bind = typeof serverAddress === 'string'
+			? 'pipe ' + serverAddress
+			: 'port ' + serverAddress.port;
+		debugObject('Listening on ' + bind);
+	});
 })();
 
 //# OLSKStartErrorHandling
