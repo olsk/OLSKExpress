@@ -48,7 +48,7 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 		return 0;
 	};
 
-	fsPackage.readdirSync(directoryPath).forEach(function(fileName, index) {
+	fsPackage.readdirSync(directoryPath).forEach(function (fileName, index) {
 		var currentPath = directoryPath + '/' + fileName;
 		if (fsPackage.lstatSync(currentPath).isDirectory()) {
 			exports.ROCOFilesystemHelpDeleteDirectoryRecursive(currentPath);

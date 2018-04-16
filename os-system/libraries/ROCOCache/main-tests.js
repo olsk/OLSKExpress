@@ -59,7 +59,7 @@ describe('ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject', function te
 
 describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', function testROCOCacheWriteCacheObjectFileWithCacheObjectAndAppDirectory () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
 		};
@@ -99,7 +99,7 @@ describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', 
 
 describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory', function testROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
 		};

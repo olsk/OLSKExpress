@@ -80,7 +80,7 @@ var OLSKLive = {};
 
 	// Create string format macro
 
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		res.locals.OLSKFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
 
 		next();
@@ -92,7 +92,7 @@ var OLSKLive = {};
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem, index) {
+	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function (dirItem, index) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
@@ -149,7 +149,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Set OLSKSharedCurrentLanguage to default value
 
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		req.OLSKSharedCurrentLanguage = Object.keys(OLSKStartInternationalizationTranslations).shift();
 
 		next();
@@ -157,7 +157,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Set OLSKSharedRequestLanguage if possible
 
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		var pathSegments = req.url.split('/');
 		var firstElement = pathSegments.splice(1, 1).pop();
 		
@@ -175,19 +175,19 @@ var OLSKStartInternationalizationTranslations = {};
 	// Load translation strings into OLSKStartInternationalizationTranslations
 
 	underscorePackage.chain(fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()))
-		.map(function(e) {
+		.map(function (e) {
 			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
 		})
-		.filter(function(e) {
+		.filter(function (e) {
 			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e))
 		})
-		.each(function(dirPath) {
+		.each(function (dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), dirPath)))
 				.filter(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename)
-				.reject(function(e) {
+				.reject(function (e) {
 					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)) === -1;
 				})
-				.each(function(e) {
+				.each(function (e) {
 					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
 						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
 						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
@@ -197,7 +197,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Create translation string macro
 
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		res.locals.OLSKTranslate = function (translationConstant) {
 			return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 		};
@@ -226,7 +226,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Create canonical link macros
 
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		res.locals.OLSKCanonicalFor = function (routeConstant, optionalParams) {
 			return routingLibrary.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 		};
@@ -309,7 +309,7 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartErrorHandling() {
 	var environmentLibrary = require('./libraries/ROCOEnvironment/main');
 	
-	expressApp.use(function(req, res, next) {
+	expressApp.use(function (req, res, next) {
 		res.status(404);
 
 		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
@@ -329,7 +329,7 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 	});
 
-	expressApp.use(function(err, req, res, next) {
+	expressApp.use(function (err, req, res, next) {
 		res.status(err.status || 500);
 
 		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {

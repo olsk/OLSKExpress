@@ -17,7 +17,7 @@ var testAppDirectory = pathPackage.join(
 
 describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
 		};
@@ -50,7 +50,7 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 
 describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInputDataIsRealFilePath () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
 		};
@@ -84,7 +84,7 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 
 describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFilesystemHelpCreateDirectoryIfDoesNotExist () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
@@ -114,7 +114,7 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 
 describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesystemHelpDeleteDirectoryRecursive () {
 
-	beforeEach(function() {
+	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
