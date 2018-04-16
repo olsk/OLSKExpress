@@ -54,15 +54,13 @@ exports.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams = function (rou
 				throw new Error('OLSKErrorInputInvalid');
 			};
 
-			canonicalPath = canonicalPath.replace(e, optionalParams[e.split(':').pop()])
+			canonicalPath = canonicalPath.replace(e, optionalParams[e.split(':').pop()]);
 		});
-	}
+	};
 
-	if (optionalParams) {
-		if (optionalParams.OLSKRoutingLanguage) {
-			canonicalPath = ['/', optionalParams.OLSKRoutingLanguage, canonicalPath].join('');
-		}
-	}
+	if (optionalParams && optionalParams.OLSKRoutingLanguage) {
+		canonicalPath = ['/', optionalParams.OLSKRoutingLanguage, canonicalPath].join('');
+	};
 
 	return canonicalPath;
 };

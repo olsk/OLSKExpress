@@ -9,7 +9,7 @@ exports.ROCOServerErrorCallback = function () {
 	return function (error) {
 		if (error.syscall !== 'listen') {
 			throw error;
-		}
+		};
 
 		var bind = typeof error.port === 'string'
 			? 'Pipe ' + error.port
@@ -26,7 +26,7 @@ exports.ROCOServerErrorCallback = function () {
 		};
 
 		throw error;
-	}
+	};
 };
 
 //_ ROCOServerListeningCallback
@@ -38,5 +38,5 @@ exports.ROCOServerListeningCallback = function (serverObject, debugObject) {
 			? 'pipe ' + serverAddress
 			: 'port ' + serverAddress.port;
 		debugObject('Listening on ' + bind);
-	}
+	};
 };

@@ -35,7 +35,7 @@ exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function (directoryPat
 	};
 
 	return null;
-}
+};
 
 //_ ROCOFilesystemHelpDeleteDirectoryRecursive
 
@@ -54,12 +54,12 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 			exports.ROCOFilesystemHelpDeleteDirectoryRecursive(currentPath);
 		} else {
 			fsPackage.unlinkSync(currentPath);
-		}
+		};
 	});
 	
 	fsPackage.rmdirSync(directoryPath);
 	return 1;
-}
+};
 
 //_ ROCOFilesystemAppDirectoryName
 

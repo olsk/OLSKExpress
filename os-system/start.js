@@ -96,7 +96,7 @@ var OLSKStartControllersArray = [];
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
-		}
+		};
 
 		OLSKStartControllersArray.push(require('../' + itemPath));
 

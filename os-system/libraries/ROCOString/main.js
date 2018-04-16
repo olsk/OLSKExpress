@@ -8,13 +8,13 @@
 exports.ROCOStringWithFormat = function (inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
-	}
+	};
 
 	var substitutions = Object.values(arguments).slice(1);
 
 	if (!substitutions.length) {
 		return inputData;
-	}
+	};
 
 	var formattedString = inputData;
 

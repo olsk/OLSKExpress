@@ -10,11 +10,11 @@ exports.ROCOServerNormalizePort = function (inputData) {
 
 	if (isNaN(outputInteger)) { // named pipe
 		return inputData;
-	}
+	};
 
 	if (outputInteger >= 0) { // port number
 		return outputInteger;
-	}
+	};
 
 	return false;
 };
