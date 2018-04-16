@@ -243,7 +243,7 @@ describe('ROCOFilesystemLaunchFileName', function testROCOFilesystemLaunchFileNa
 
 describe('_ROCOFilesystemAbsolutePathRootDirectory', function test_ROCOFilesystemAbsolutePathRootDirectory () {
 	
-	it('returns app directory fullPath', function () {
+	it('returns app directory absolutePath', function () {
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory(), filesystemLibrary.ROCOFilesystemLaunchFileName())), true);
 	});
 
