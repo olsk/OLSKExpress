@@ -293,8 +293,6 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartServer() {
 	var serverLibrary = require('./libraries/ROCOServer/main');
 	var httpPackage = require('http');
-	var serverModule = require('./modules/server');
-	var debugObject = require('debug')('xxyy-sample-app:server');
 
 	var portValue = serverLibrary.ROCOServerNormalizePort(process.env.PORT || '3000');
 	var serverObject = httpPackage.createServer(expressApp);
@@ -326,7 +324,7 @@ var OLSKStartInternationalizationTranslations = {};
 		var bind = typeof serverAddress === 'string'
 			? 'pipe ' + serverAddress
 			: 'port ' + serverAddress.port;
-		debugObject('Listening on ' + bind);
+		console.log('Listening on ' + bind);
 	});
 })();
 
