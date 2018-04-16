@@ -243,10 +243,8 @@ describe('ROCOFilesystemLaunchFileName', function testROCOFilesystemLaunchFileNa
 
 describe('_ROCOFilesystemAbsolutePathRootDirectory', function test_ROCOFilesystemAbsolutePathRootDirectory () {
 	
-	it.skip('returns app directory fullPath', function () {
-		var appDirectoryFullPath = filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory();
-		var fullPathSegments = appDirectoryFullPath.split('/');
-		assert.strictEqual(fullPathSegments[fullPathSegments.length - 2], 'xxxx.yyyy.node');
+	it('returns app directory fullPath', function () {
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory(), filesystemLibrary.ROCOFilesystemLaunchFileName())), true);
 	});
 
 });
