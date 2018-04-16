@@ -357,14 +357,14 @@ var OLSKStartInternationalizationTranslations = {};
 	};
 })();
 
-//# OLSKStartLaunchers
+//# OLSKStartWorkers
 
-(function OLSKStartLaunchers() {
+(function OLSKStartWorkers() {
 	underscorePackage.chain(OLSKStartControllersArray)
 		.filter(function (e) {
-			return typeof e.OLSKControllerLauncher === 'function';
+			return typeof e.OLSKControllerWorker === 'function';
 		})
 		.each(function (e) {
-			return e.OLSKControllerLauncher();
+			return e.OLSKControllerWorker();
 		})
 })();
