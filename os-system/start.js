@@ -279,7 +279,7 @@ var OLSKStartInternationalizationTranslations = {};
 			};
 
 			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
-			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage
+			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
 			return e.OLSKRouteFunction(req, res, next);
 		});
@@ -332,6 +332,16 @@ var OLSKStartInternationalizationTranslations = {};
 
 (function OLSKStartErrorHandling() {
 	var environmentLibrary = require('./libraries/ROCOEnvironment/main');
+
+	expressApp.use(function (req, res, next) {
+		// If the request language available, set current language
+
+		if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+			req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
+		};
+
+		next();
+	});
 	
 	expressApp.use(function (req, res, next) {
 		res.status(404);
