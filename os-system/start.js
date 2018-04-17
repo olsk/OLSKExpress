@@ -41,6 +41,12 @@ var OLSKLive = {};
 	OLSKLive.OLSKLiveSettings = function () {
 		return kOLSKLiveSettings;
 	};
+
+	expressApp.use(function (req, res, next) {
+		res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle'];
+
+		next();
+	});
 })();
 
 //# OLSKStartCookies
