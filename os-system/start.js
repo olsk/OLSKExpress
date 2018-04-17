@@ -98,7 +98,11 @@ var OLSKStartControllersArray = [];
 			return;
 		};
 
-		OLSKStartControllersArray.push(require('../' + itemPath));
+		OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
+			OLSKControllerSlug: function () {
+				return dirItem;
+			},
+		}));
 	});
 })();
 
@@ -217,7 +221,11 @@ var OLSKStartInternationalizationTranslations = {};
 			return;
 		};
 
-		allRoutes = Object.assign(allRoutes, e.OLSKControllerRoutes());
+		allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(e.OLSKControllerRoutes(), function(value, key) {
+			return Object.assign(value, {
+				_OLSKRouteControllerSlug: e.OLSKControllerSlug(),
+			});
+		}));
 	});
 
 	// Create canonical link macros
