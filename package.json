@@ -17,7 +17,6 @@
     "express": "latest",
     "express-session": "latest",
     "mkdirp": "latest",
-    "morgan": "latest",
     "js-yaml": "latest",
     "underscore": "latest"
   }

@@ -374,11 +374,6 @@ var OLSKStartInternationalizationTranslations = {};
 
 		return res.type('txt').send('System error'); // #localize
 	});
-
-	if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
-		var loggingPackage = require('morgan');
-		expressApp.use(loggingPackage('dev'));
-	};
 })();
 
 //# OLSKStartWorkers
