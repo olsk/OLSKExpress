@@ -405,18 +405,6 @@ var OLSKStartInternationalizationTranslations = {};
 	});
 })();
 
-//# OLSKStartWorkers
-
-(function OLSKStartWorkers() {
-	underscorePackage.chain(OLSKStartControllersArray)
-		.filter(function (e) {
-			return typeof e.OLSKControllerWorker === 'function';
-		})
-		.each(function (e) {
-			return e.OLSKControllerWorker();
-		})
-})();
-
 //# OLSKStartTasks
 
 (function OLSKStartTasks() {
