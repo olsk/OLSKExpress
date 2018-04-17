@@ -99,10 +99,6 @@ var OLSKStartControllersArray = [];
 		};
 
 		OLSKStartControllersArray.push(require('../' + itemPath));
-
-		if (typeof OLSKStartControllersArray.slice(-1).pop() === 'function') {
-			OLSKStartControllersArray.slice(-1).pop()(OLSKLive)
-		};
 	});
 })();
 
