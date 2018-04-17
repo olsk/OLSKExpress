@@ -284,6 +284,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+			res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
 
 			return e.OLSKRouteFunction(req, res, next);
 		});
