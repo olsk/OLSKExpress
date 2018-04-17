@@ -20,19 +20,3 @@ describe('ROCOEnvironmentIsProductionForNODE_ENV', function testROCOEnvironmentI
 	});
 
 });
-
-describe('ROCOEnvironmentIsWorkerFor', function testROCOEnvironmentIsWorkerFor () {
-	
-	it('returns false if param1 not object', function () {
-		assert.strictEqual(environmentLibrary.ROCOEnvironmentIsWorkerFor(null), false);
-	});
-	
-	it('returns false if ROCO_SERVER_TYPE not string', function () {
-		assert.strictEqual(environmentLibrary.ROCOEnvironmentIsWorkerFor({ROCO_SERVER_TYPE: null}), false);
-	});
-	
-	it('returns true if ROCO_SERVER_TYPE ROCOServerTypeWorker', function () {
-		assert.strictEqual(environmentLibrary.ROCOEnvironmentIsWorkerFor({ROCO_SERVER_TYPE: 'ROCOServerTypeWorker'}), true);
-	});
-
-});
