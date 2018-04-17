@@ -37,6 +37,10 @@ var OLSKLive = {};
 	OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function () {
 		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName());
 	};
+
+	OLSKLive.OLSKLiveSettings = function () {
+		return kOLSKLiveSettings;
+	};
 })();
 
 //# OLSKStartCookies
@@ -345,6 +349,10 @@ var OLSKStartInternationalizationTranslations = {};
 			req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 		};
 
+		// Set OLSKSharedPageControllerSlug
+
+		res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'];
+
 		next();
 	});
 	
@@ -356,7 +364,7 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 
 		if (req.accepts('html')) {
-			return res.render('open-error/404', {
+			return res.render(OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'] + '/404', {
 				// url: req.url,
 			});
 		};
@@ -376,7 +384,7 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 
 		if (req.accepts('html')) {
-			return res.render('open-error/500', {
+			return res.render(OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'] + '/500', {
 				// url: req.url,
 			});
 		};
