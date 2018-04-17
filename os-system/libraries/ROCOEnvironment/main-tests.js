@@ -8,14 +8,6 @@ var kConstants = require('../kConstants/testing.main').ROCOTestingConstants();
 
 var environmentLibrary = require('./main');
 
-describe('ROCOEnvironmentIDTesting', function testROCOEnvironmentIDTesting () {
-	
-	it('returns kROCOEnvironmentIDTesting', function () {
-		assert.strictEqual(environmentLibrary.ROCOEnvironmentIDTesting(), 'kROCOEnvironmentIDTesting');
-	});
-
-});
-
 describe('ROCOEnvironmentIsProductionForNODE_ENV', function testROCOEnvironmentIsProductionForNODE_ENV () {
 	
 	it('returns false if param1 not production', function () {

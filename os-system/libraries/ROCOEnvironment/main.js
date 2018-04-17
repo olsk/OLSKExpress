@@ -3,12 +3,6 @@
  * MIT Licensed
  */
 
-//_ ROCOEnvironmentIDTesting
-
-exports.ROCOEnvironmentIDTesting = function () {
-	return 'kROCOEnvironmentIDTesting';
-};
-
 //_ ROCOEnvironmentIsProductionForNODE_ENV
 
 exports.ROCOEnvironmentIsProductionForNODE_ENV = function (inputData) {
