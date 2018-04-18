@@ -116,9 +116,35 @@ var OLSKStartControllersArray = [];
 	});
 })();
 
-//# OLSKStartConstants
+//# OLSKStartSharedLocals
 
-(function OLSKStartConstants() {
+(function OLSKStartSharedLocals() {
+	OLSKLive.OLSKSharedLocals = {};
+
+	underscorePackage.chain(OLSKStartControllersArray)
+		.filter(function (e) {
+			return typeof e.OLSKControllerSharedLocals === 'function';
+		})
+		.map(function (e) {
+			return e.OLSKControllerSharedLocals();
+		})
+		.filter(function (e) {
+			return typeof e === 'object';
+		})
+		.each(function (e) {
+			Object.assign(OLSKLive.OLSKSharedLocals, e);
+		});
+
+	expressApp.use(function (req, res, next) {
+		res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals)
+
+		next();
+	});
+})();
+
+//# OLSKStartSharedConstants
+
+(function OLSKStartSharedConstants() {
 	OLSKLive.OLSKSharedConstants = {};
 
 	underscorePackage.chain(OLSKStartControllersArray)
