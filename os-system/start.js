@@ -136,7 +136,7 @@ var OLSKStartControllersArray = [];
 		});
 
 	expressApp.use(function (req, res, next) {
-		res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals)
+		res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals);
 
 		next();
 	});
@@ -165,6 +165,18 @@ var OLSKStartControllersArray = [];
 		res.locals.kConstants = function (constantString) {
 			return OLSKLive.OLSKSharedConstants[constantString];
 		};
+
+		next();
+	});
+})();
+
+//# OLSKStartSharedPrivateConstants
+
+(function OLSKStartSharedPrivateConstants() {
+	OLSKLive.OLSKSharedPrivateConstants = OLSKLive.OLSKLiveSettings().OLSKSharedPrivateConstants;
+
+	expressApp.use(function (req, res, next) {
+		req.OLSKSharedPrivateConstants = OLSKLive.OLSKSharedPrivateConstants;
 
 		next();
 	});
