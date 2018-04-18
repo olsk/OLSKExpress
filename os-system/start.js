@@ -116,6 +116,34 @@ var OLSKStartControllersArray = [];
 	});
 })();
 
+//# OLSKStartConstants
+
+(function OLSKStartConstants() {
+	OLSKLive.OLSKSharedConstants = {};
+
+	underscorePackage.chain(OLSKStartControllersArray)
+		.filter(function (e) {
+			return typeof e.OLSKControllerSharedConstants === 'function';
+		})
+		.map(function (e) {
+			return e.OLSKControllerSharedConstants();
+		})
+		.filter(function (e) {
+			return typeof e === 'object';
+		})
+		.each(function (e) {
+			Object.assign(OLSKLive.OLSKSharedConstants, e);
+		});
+
+	expressApp.use(function (req, res, next) {
+		res.locals.kConstants = function (constantString) {
+			return OLSKLive.OLSKSharedConstants[constantString];
+		};
+
+		next();
+	});
+})();
+
 //# OLSKStartPublicDirectory
 
 (function OLSKStartPublicDirectory() {
@@ -419,5 +447,5 @@ var OLSKStartInternationalizationTranslations = {};
 		})
 		.flatten()
 		.filter(tasksLibrary.ROCOTasksInputDataIsTaskObject)
-		.map(tasksLibrary.ROCOTasksTimeoutForTaskObject)
+		.each(tasksLibrary.ROCOTasksTimeoutForTaskObject)
 })();
