@@ -43,7 +43,23 @@ var OLSKLive = {};
 	};
 
 	expressApp.use(function (req, res, next) {
+		req.OLSKLive = OLSKLive;
+
 		res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle'];
+
+		next();
+	});
+})();
+
+//# OLSKStartFilesystem
+
+(function OLSKStartFilesystem() {
+	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+
+	expressApp.use(function (req, res, next) {
+		req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist;
+		req.OLSKFilesystemIsRealFilePath = filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath;
+		req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath;
 
 		next();
 	});
