@@ -20,7 +20,7 @@ var OLSKLive = {};
 	var jsYAMLPackage = require('js-yaml');
 
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
-	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()));
+	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding())) || {};
 
 	OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function () {
 		return kOLSKLiveRootDirectoryAbsolutePath;
