@@ -361,6 +361,10 @@ var OLSKStartInternationalizationTranslations = {};
 	Object.keys(allRoutes).forEach(function (key) {
 		var e = allRoutes[key];
 
+		if (e.OLSKRouteIsHidden) {
+			return;
+		};
+
 		return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function (req, res) {
 			return res.redirect(e.OLSKRouteRedirect);
 		} : function (req, res, next) {

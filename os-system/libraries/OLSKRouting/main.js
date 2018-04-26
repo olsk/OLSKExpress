@@ -31,6 +31,12 @@ exports.OLSKRoutingInputDataIsRouteObject = function (inputData) {
 		return false;
 	};
 
+	if (inputData.OLSKRouteIsHidden) {
+		if (typeof inputData.OLSKRouteIsHidden !== 'boolean') {
+			return false;
+		};
+	}
+
 	return true;
 };
 

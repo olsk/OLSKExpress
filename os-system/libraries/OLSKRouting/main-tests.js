@@ -21,9 +21,9 @@ describe('OLSKRoutingInputDataIsRouteObject', function testOLSKRoutingInputDataI
 		})), false);
 	});
 	
-	describe('redirects', function () {
+	describe('OLSKRouteRedirect', function () {
 
-		it('returns false if OLSKRouteRedirect not string', function () {
+		it('returns false if not string', function () {
 			assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(Object.assign(kConstants.OLSKTestingRouteObjectValidRedirect(), {
 				OLSKRouteRedirect: null,
 			})), false);
@@ -47,8 +47,24 @@ describe('OLSKRoutingInputDataIsRouteObject', function testOLSKRoutingInputDataI
 		})), false);
 	});
 	
-	it('returns true if valid routeObject', function () {
+	it('returns true', function () {
 		assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(kConstants.OLSKTestingRouteObjectValid()), true);
+	});
+	
+	describe('OLSKRouteIsHidden', function () {
+
+		it('returns false if not boolean', function () {
+			assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(Object.assign(kConstants.OLSKTestingRouteObjectValid(), {
+				OLSKRouteIsHidden: 'true',
+			})), false);
+		});
+
+		it('returns true', function () {
+			assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(Object.assign(kConstants.OLSKTestingRouteObjectValid(), {
+				OLSKRouteIsHidden: true,
+			})), true);
+		});
+
 	});
 
 });
