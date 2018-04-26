@@ -393,7 +393,7 @@ var OLSKStartInternationalizationTranslations = {};
 					pathSegments.pop();
 				};
 				
-				return res.redirect(pathSegments.join('/'));
+				return res.redirect(307, pathSegments.join('/'));
 			};
 
 			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
