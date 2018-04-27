@@ -19,7 +19,7 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 
 	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
 	});
 	
@@ -52,7 +52,7 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 
 	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
 	});
 

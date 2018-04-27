@@ -61,7 +61,7 @@ describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', 
 
 	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
 	});
 
@@ -101,7 +101,7 @@ describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory', function tes
 
 	beforeEach(function () {
 		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory)
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
 		};
 	});
 
