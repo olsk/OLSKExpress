@@ -92,9 +92,18 @@ var OLSKLive = {};
 //# OLSKStartCookies
 
 (function OLSKStartCookies() {
-	var cookieParserPackage = require('cookie-parser');
+	var cookieSessionPackage = require('cookie-session');
 
-	expressApp.use(cookieParserPackage());
+	expressApp.set('trust proxy', OLSKLive.OLSKLiveSettings().OLSKCookieSessionTrustProxy);
+	expressApp.use(cookieSessionPackage({
+		name: OLSKLive.OLSKLiveSettings().OLSKCookieSessionName,
+		keys: OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys,
+		cookie: {
+			secure: true,
+			httpOnly: true,
+			domain: OLSKLive.OLSKLiveSettings().OLSKCookieSessionDomain,
+		},
+	}));
 })();
 
 //# OLSKStartSessions
