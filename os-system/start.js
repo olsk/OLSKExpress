@@ -92,6 +92,9 @@ var OLSKLive = {};
 //# OLSKStartCookies
 
 (function OLSKStartCookies() {
+	if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
+		return console.log('- Skipping setup for cookies (OLSKCookieSessionKeys not found)');
+	}
 	var cookieSessionPackage = require('cookie-session');
 
 	expressApp.set('trust proxy', OLSKLive.OLSKLiveSettings().OLSKCookieSessionTrustProxy);
