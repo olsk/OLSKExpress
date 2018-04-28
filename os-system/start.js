@@ -45,12 +45,12 @@ var OLSKLive = {};
 	expressApp.use(function (req, res, next) {
 		req.OLSKLive = OLSKLive;
 
-		if (OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle']) {
-			res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle'];
+		if (OLSKLive.OLSKLiveSettings().OLSKDefaultPageTitle) {
+			res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings().OLSKDefaultPageTitle;
 		}
 
-		if (OLSKLive.OLSKLiveSettings()['OLSKDefaultPageDescription']) {
-			res.locals.OLSKSharedDefaultPageDescription = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageDescription'];
+		if (OLSKLive.OLSKLiveSettings().OLSKDefaultPageDescription) {
+			res.locals.OLSKSharedDefaultPageDescription = OLSKLive.OLSKLiveSettings().OLSKDefaultPageDescription;
 		}
 
 		next();
@@ -454,8 +454,6 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartErrorHandling
 
 (function OLSKStartErrorHandling() {
-	var environmentLibrary = require('./libraries/ROCOEnvironment/main');
-
 	expressApp.use(function (req, res, next) {
 		// If the request language available, set current language
 
@@ -465,7 +463,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 		// Set OLSKSharedPageControllerSlug
 
-		res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'];
+		res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug;
 
 		next();
 	});
@@ -473,12 +471,12 @@ var OLSKStartInternationalizationTranslations = {};
 	expressApp.use(function (req, res, next) {
 		res.status(404);
 
-		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
+		if (process.env.NODE_ENV !== 'production') {
 			return res.type('txt').send('Not found'); // #localize
 		};
 
 		if (req.accepts('html')) {
-			return res.render(OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'] + '/404', {
+			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/404', {
 				// url: req.url,
 			});
 		};
@@ -493,12 +491,12 @@ var OLSKStartInternationalizationTranslations = {};
 	expressApp.use(function (err, req, res, next) {
 		res.status(err.status || 500);
 
-		if (!environmentLibrary.ROCOEnvironmentIsProductionForNODE_ENV(process.env.NODE_ENV)) {
+		if (process.env.NODE_ENV !== 'production') {
 			return res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
 		};
 
 		if (req.accepts('html')) {
-			return res.render(OLSKLive.OLSKLiveSettings()['OLSKErrorControllerSlug'] + '/500', {
+			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/500', {
 				// url: req.url,
 			});
 		};
