@@ -45,7 +45,13 @@ var OLSKLive = {};
 	expressApp.use(function (req, res, next) {
 		req.OLSKLive = OLSKLive;
 
-		res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle'];
+		if (OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle']) {
+			res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageTitle'];
+		}
+
+		if (OLSKLive.OLSKLiveSettings()['OLSKDefaultPageDescription']) {
+			res.locals.OLSKSharedDefaultPageDescription = OLSKLive.OLSKLiveSettings()['OLSKDefaultPageDescription'];
+		}
 
 		next();
 	});
