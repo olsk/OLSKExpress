@@ -416,40 +416,38 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartServer
 
 (function OLSKStartServer() {
-	var serverLibrary = require('./libraries/ROCOServer/main');
-	var httpPackage = require('http');
+	var serverObject = expressApp.listen(process.env.PORT || '3000', process.env.HOST);
 
-	var portValue = serverLibrary.ROCOServerNormalizePort(process.env.PORT || '3000');
-	var serverObject = httpPackage.createServer(expressApp);
-	expressApp.set('port', portValue);
-	serverObject.listen(portValue);
 	serverObject.on('error', function (error) {
 		if (error.syscall !== 'listen') {
 			throw error;
 		};
 
-		var bind = typeof error.port === 'string'
-			? 'Pipe ' + error.port
-			: 'Port ' + error.port;
+		var portBind = [
+			(typeof error.port === 'string' ? 'Pipe' : 'Port'),
+			error.port,
+			].join(' ');
 
 		if (error.code === 'EACCES') {
-			console.error(bind + ' requires elevated privileges');
+			console.error(portBind + ' requires elevated privileges');
 			return process.exit(1);
 		};
 
 		if (error.code === 'EADDRINUSE') {
-			console.error(bind + ' is already in use');
+			console.error(portBind + ' is already in use');
 			return process.exit(1);
 		};
 
 		throw error;
 	});
 	serverObject.on('listening', function () {
-		var serverAddress = serverObject.address();
-		var bind = typeof serverAddress === 'string'
-			? 'pipe ' + serverAddress
-			: 'port ' + serverAddress.port;
-		console.log('Listening on ' + bind);
+		console.log([
+			'Listening on',
+			[
+				process.env.HOST || serverObject.address().host,
+				serverObject.address().port,
+			].join(':'),
+		].join(' '));
 	});
 })();
 
