@@ -93,7 +93,7 @@ var OLSKLive = {};
 
 (function OLSKStartCookies() {
 	if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
-		return console.log('- Skipping setup for cookies (OLSKCookieSessionKeys not found)');
+		return console.log('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found)');
 	}
 	var cookieSessionPackage = require('cookie-session');
 
@@ -112,6 +112,10 @@ var OLSKLive = {};
 //# OLSKStartSessions
 
 (function OLSKStartSessions() {
+	if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
+		return console.log('- Skipping OLSKStartSessions (OLSKCookieSessionKeys not found)');
+	}
+	
 	var expressSessionPackage = require('express-session');
 
 	expressApp.use(expressSessionPackage({
