@@ -103,7 +103,7 @@ var OLSKLive = {};
 	var expressSessionPackage = require('express-session');
 
 	expressApp.use(expressSessionPackage({
-		secret: 'clarinet-gulf-clencher',
+		secret: OLSKLive.OLSKLiveSettings().OLSKSessionSecret,
 		resave: false,
 		saveUninitialized: true
 	}));
