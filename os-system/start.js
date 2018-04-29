@@ -162,7 +162,7 @@ var OLSKStartControllersArray = [];
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
-		};
+		}
 
 		OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
 			OLSKControllerSlug: function() {
@@ -260,7 +260,7 @@ var OLSKStartInternationalizationTranslations = {};
 		.map(function(e) {
 			if (typeof e.OLSKControllerRoutes !== 'function') {
 				return null;
-			};
+			}
 
 			return underscorePackage.pluck(Object.values(e.OLSKControllerRoutes()), 'OLSKRouteLanguages');
 		})
@@ -277,7 +277,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	if (!Object.keys(OLSKStartInternationalizationTranslations).length) {
 		return;
-	};
+	}
 
 	// Set OLSKSharedCurrentLanguage to default value
 
@@ -296,7 +296,7 @@ var OLSKStartInternationalizationTranslations = {};
 		if (Object.keys(OLSKStartInternationalizationTranslations).indexOf(firstElement) === -1) {
 			next();
 			return;
-		};
+		}
 
 		req.OLSKSharedRequestLanguage = firstElement;
 		req.url = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
@@ -311,7 +311,7 @@ var OLSKStartInternationalizationTranslations = {};
 			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
 		})
 		.filter(function(e) {
-			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e))
+			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e));
 		})
 		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), dirPath)))
@@ -351,7 +351,7 @@ var OLSKStartInternationalizationTranslations = {};
 	OLSKStartControllersArray.forEach(function(e) {
 		if (typeof e.OLSKControllerRoutes !== 'function') {
 			return;
-		};
+		}
 
 		allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(e.OLSKControllerRoutes(), function(value, key) {
 			return Object.assign(value, {
@@ -373,7 +373,7 @@ var OLSKStartInternationalizationTranslations = {};
 					OLSKRoutingLanguage: req.OLSKSharedCurrentLanguage,
 				}, optionalParams));
 			};
-		};
+		}
 
 		next();
 	});
@@ -385,7 +385,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 		if (e.OLSKRouteIsHidden) {
 			return;
-		};
+		}
 
 		return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function(req, res) {
 			return res.redirect(e.OLSKRouteRedirect);
@@ -396,13 +396,13 @@ var OLSKStartInternationalizationTranslations = {};
 
 			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
 				return next();
-			};
+			}
 
 			// If the request language available, set current language
 
 			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
 				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
-			};
+			}
 
 			// If no request language and preferred language available and not current, redirect
 
@@ -413,10 +413,10 @@ var OLSKStartInternationalizationTranslations = {};
 
 				if (pathSegments.slice(-1).pop() === '') {
 					pathSegments.pop();
-				};
+				}
 
 				return res.redirect(307, pathSegments.join('/'));
-			};
+			}
 
 			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
@@ -437,7 +437,7 @@ var OLSKStartInternationalizationTranslations = {};
 	serverObject.on('error', function(error) {
 		if (error.syscall !== 'listen') {
 			throw error;
-		};
+		}
 
 		var portBind = [
 			(typeof error.port === 'string' ? 'Pipe' : 'Port'),
@@ -447,12 +447,12 @@ var OLSKStartInternationalizationTranslations = {};
 		if (error.code === 'EACCES') {
 			console.error(portBind + ' requires elevated privileges');
 			return process.exit(1);
-		};
+		}
 
 		if (error.code === 'EADDRINUSE') {
 			console.error(portBind + ' is already in use');
 			return process.exit(1);
-		};
+		}
 
 		throw error;
 	});
@@ -474,7 +474,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 		if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
 			req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
-		};
+		}
 
 		// Set OLSKSharedPageControllerSlug
 
@@ -488,19 +488,19 @@ var OLSKStartInternationalizationTranslations = {};
 
 		if (process.env.NODE_ENV !== 'production') {
 			return res.type('txt').send('Not found'); // #localize
-		};
+		}
 
 		if (req.accepts('html')) {
 			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/404', {
 				// url: req.url,
 			});
-		};
+		}
 
 		if (req.accepts('json')) {
 			return res.send({
 				error: 'Not found', // #localize
 			});
-		};
+		}
 	});
 
 	expressApp.use(function(err, req, res, next) {
@@ -510,19 +510,19 @@ var OLSKStartInternationalizationTranslations = {};
 			return res.send('<pre>' + JSON.stringify({
 				error: err
 			}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
-		};
+		}
 
 		if (req.accepts('html')) {
 			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/500', {
 				// url: req.url,
 			});
-		};
+		}
 
 		if (req.accepts('json')) {
 			return res.send({
 				error: 'System error', // #localize
 			});
-		};
+		}
 
 		return res.type('txt').send('System error'); // #localize
 	});
@@ -542,5 +542,5 @@ var OLSKStartInternationalizationTranslations = {};
 		})
 		.flatten()
 		.filter(tasksLibrary.ROCOTasksInputDataIsTaskObject)
-		.each(tasksLibrary.ROCOTasksTimeoutForTaskObject)
+		.each(tasksLibrary.ROCOTasksTimeoutForTaskObject);
 })();

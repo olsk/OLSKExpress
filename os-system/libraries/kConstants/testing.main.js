@@ -40,7 +40,7 @@ exports.ROCOTestingConstants = function() {
 				ROCOTaskCallback: function() {
 					if (!array) {
 						return;
-					};
+					}
 
 					return array.push(new Date());
 				},

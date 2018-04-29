@@ -62,7 +62,7 @@ describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 	});
 
 	it('throws error if param1 not object', function() {
@@ -92,7 +92,7 @@ describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', 
 
 		var patternFileFullPath = pathPackage.join(testAppDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'alpha' + '.' + filesystemLibrary.ROCOFilesystemSharedFileExtensionJSON());
 		assert.strictEqual(fsPackage.existsSync(patternFileFullPath), true);
-		assert.strictEqual(fsPackage.readFileSync(patternFileFullPath, filesystemLibrary.ROCOFilesystemDefaultTextEncoding()), JSON.stringify(cacheObject, null, "\t"));
+		assert.strictEqual(fsPackage.readFileSync(patternFileFullPath, filesystemLibrary.ROCOFilesystemDefaultTextEncoding()), JSON.stringify(cacheObject, null, '\t'));
 	});
 
 });
@@ -102,7 +102,7 @@ describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory', function tes
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 	});
 
 	it('throws error if param1 not string', function() {

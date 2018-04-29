@@ -20,7 +20,7 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 	});
 
 	it('returns null if parameter not filesystem path', function() {
@@ -53,7 +53,7 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 	});
 
 	var fileFullPath = pathPackage.join(
@@ -87,7 +87,7 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 	});
 
 	it('returns null and creates directory', function() {
@@ -117,7 +117,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 	beforeEach(function() {
 		if (fsPackage.existsSync(testAppDirectory)) {
 			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
-		};
+		}
 		mkdirpPackage.sync(testAppDirectory);
 	});
 

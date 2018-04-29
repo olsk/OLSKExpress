@@ -12,7 +12,7 @@ var mkdirpPackage = require('mkdirp');
 exports.ROCOFilesystemInputDataIsRealDirectoryPath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
-	};
+	}
 
 	return fsPackage.lstatSync(inputData).isDirectory();
 };
@@ -22,7 +22,7 @@ exports.ROCOFilesystemInputDataIsRealDirectoryPath = function(inputData) {
 exports.ROCOFilesystemInputDataIsRealFilePath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
-	};
+	}
 
 	return fsPackage.lstatSync(inputData).isFile();
 };
@@ -32,7 +32,7 @@ exports.ROCOFilesystemInputDataIsRealFilePath = function(inputData) {
 exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		mkdirpPackage.sync(directoryPath);
-	};
+	}
 
 	return null;
 };
@@ -42,11 +42,11 @@ exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function(directoryPath
 exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		return 0;
-	};
+	}
 
 	if (!fsPackage.lstatSync(directoryPath).isDirectory()) {
 		return 0;
-	};
+	}
 
 	fsPackage.readdirSync(directoryPath).forEach(function(fileName, index) {
 		var currentPath = directoryPath + '/' + fileName;
@@ -54,7 +54,7 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
 			exports.ROCOFilesystemHelpDeleteDirectoryRecursive(currentPath);
 		} else {
 			fsPackage.unlinkSync(currentPath);
-		};
+		}
 	});
 
 	fsPackage.rmdirSync(directoryPath);
@@ -102,11 +102,11 @@ exports.ROCOFilesystemWorkspaceTestingDirectoryName = function() {
 exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
-	};
+	}
 
 	if (inputData === '') {
 		throw new Error('ROCOErrorInputInvalid');
-	};
+	}
 
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
