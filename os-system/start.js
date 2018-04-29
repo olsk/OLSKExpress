@@ -113,7 +113,7 @@ var OLSKLive = {};
 
 (function OLSKStartSessions() {
 	if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
-		return console.log('- Skipping OLSKStartSessions (OLSKCookieSessionKeys not found)');
+		return console.log('- Skipping OLSKStartSessions (OLSKSessionSecret not found)');
 	}
 	
 	var expressSessionPackage = require('express-session');
