@@ -8,13 +8,13 @@ var filesystemLibrary = require('../ROCOFilesystem/main');
 
 //_ OLSKInternationalDefaultIdentifier
 
-exports.OLSKInternationalDefaultIdentifier = function () {
+exports.OLSKInternationalDefaultIdentifier = function() {
 	return 'i18n';
 };
 
 //_ OLSKInternationalInputDataIsTranslationFilename
 
-exports.OLSKInternationalInputDataIsTranslationFilename = function (inputData) {
+exports.OLSKInternationalInputDataIsTranslationFilename = function(inputData) {
 	if (typeof inputData !== 'string') {
 		return false;
 	};
@@ -36,7 +36,7 @@ exports.OLSKInternationalInputDataIsTranslationFilename = function (inputData) {
 
 //_ OLSKInternationalLanguageIDForTranslationFilename
 
-exports.OLSKInternationalLanguageIDForTranslationFilename = function (inputData) {
+exports.OLSKInternationalLanguageIDForTranslationFilename = function(inputData) {
 	if (!exports.OLSKInternationalInputDataIsTranslationFilename(inputData)) {
 		throw new Error('OLSKErrorInputInvalid');
 	};
@@ -46,7 +46,7 @@ exports.OLSKInternationalLanguageIDForTranslationFilename = function (inputData)
 
 //_ _OLSKInternationalLanguageIDForInputData
 
-exports._OLSKInternationalLanguageIDForInputData = function (inputData) {
+exports._OLSKInternationalLanguageIDForInputData = function(inputData) {
 	var elements = inputData.split('.');
 
 	elements.pop();
@@ -57,7 +57,7 @@ exports._OLSKInternationalLanguageIDForInputData = function (inputData) {
 
 //_ OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary
 
-exports.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary = function (translationKey, translationDictionary) {
+exports.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary = function(translationKey, translationDictionary) {
 	if (typeof translationDictionary !== 'object' || translationDictionary === null) {
 		throw new Error('OLSKErrorInputInvalid');
 	};

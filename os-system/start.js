@@ -22,27 +22,27 @@ var OLSKLive = {};
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
 	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding())) || {};
 
-	OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function () {
+	OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
 		return kOLSKLiveRootDirectoryAbsolutePath;
 	};
 
-	OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function () {
+	OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
 		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName());
 	};
 
-	OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function () {
+	OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
 		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName());
 	};
 
-	OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function () {
+	OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function() {
 		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName());
 	};
 
-	OLSKLive.OLSKLiveSettings = function () {
+	OLSKLive.OLSKLiveSettings = function() {
 		return kOLSKLiveSettings;
 	};
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		req.OLSKLive = OLSKLive;
 
 		if (OLSKLive.OLSKLiveSettings().OLSKDefaultPageTitle) {
@@ -62,7 +62,7 @@ var OLSKLive = {};
 (function OLSKStartFilesystem() {
 	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist;
 		req.OLSKFilesystemIsRealFilePath = filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath;
 		req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath;
@@ -76,12 +76,12 @@ var OLSKLive = {};
 (function OLSKStartCache() {
 	var cacheLibrary = require('./libraries/ROCOCache/main');
 
-	expressApp.use(function (req, res, next) {
-		req.OLSKCacheWriteWithCacheKeyAndCacheObject = function (cacheKey, cacheObject) {
+	expressApp.use(function(req, res, next) {
+		req.OLSKCacheWriteWithCacheKeyAndCacheObject = function(cacheKey, cacheObject) {
 			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
-		req.OLSKCacheReadForCacheKey = function (cacheKey) {
+		req.OLSKCacheReadForCacheKey = function(cacheKey) {
 			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
@@ -115,7 +115,7 @@ var OLSKLive = {};
 	if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
 		return console.log('- Skipping OLSKStartSessions (OLSKSessionSecret not found)');
 	}
-	
+
 	var expressSessionPackage = require('express-session');
 
 	expressApp.use(expressSessionPackage({
@@ -146,7 +146,7 @@ var OLSKLive = {};
 
 	// Create string format macro
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		res.locals.OLSKFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
 
 		next();
@@ -158,14 +158,14 @@ var OLSKLive = {};
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function (dirItem, index) {
+	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem, index) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		};
 
 		OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
-			OLSKControllerSlug: function () {
+			OLSKControllerSlug: function() {
 				return dirItem;
 			},
 		}));
@@ -178,20 +178,20 @@ var OLSKStartControllersArray = [];
 	OLSKLive.OLSKSharedLocals = {};
 
 	underscorePackage.chain(OLSKStartControllersArray)
-		.filter(function (e) {
+		.filter(function(e) {
 			return typeof e.OLSKControllerSharedLocals === 'function';
 		})
-		.map(function (e) {
+		.map(function(e) {
 			return e.OLSKControllerSharedLocals();
 		})
-		.filter(function (e) {
+		.filter(function(e) {
 			return typeof e === 'object';
 		})
-		.each(function (e) {
+		.each(function(e) {
 			Object.assign(OLSKLive.OLSKSharedLocals, e);
 		});
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals);
 
 		next();
@@ -204,21 +204,21 @@ var OLSKStartControllersArray = [];
 	OLSKLive.OLSKSharedConstants = {};
 
 	underscorePackage.chain(OLSKStartControllersArray)
-		.filter(function (e) {
+		.filter(function(e) {
 			return typeof e.OLSKControllerSharedConstants === 'function';
 		})
-		.map(function (e) {
+		.map(function(e) {
 			return e.OLSKControllerSharedConstants();
 		})
-		.filter(function (e) {
+		.filter(function(e) {
 			return typeof e === 'object';
 		})
-		.each(function (e) {
+		.each(function(e) {
 			Object.assign(OLSKLive.OLSKSharedConstants, e);
 		});
 
-	expressApp.use(function (req, res, next) {
-		res.locals.kConstants = function (constantString) {
+	expressApp.use(function(req, res, next) {
+		res.locals.kConstants = function(constantString) {
 			return OLSKLive.OLSKSharedConstants[constantString];
 		};
 
@@ -231,7 +231,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedPrivateConstants() {
 	OLSKLive.OLSKSharedPrivateConstants = OLSKLive.OLSKLiveSettings().OLSKSharedPrivateConstants;
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		req.OLSKSharedPrivateConstants = OLSKLive.OLSKSharedPrivateConstants;
 
 		next();
@@ -242,7 +242,7 @@ var OLSKStartControllersArray = [];
 
 (function OLSKStartPublicDirectory() {
 	expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
-		extensions:['html'],
+		extensions: ['html'],
 	}));
 })();
 
@@ -257,7 +257,7 @@ var OLSKStartInternationalizationTranslations = {};
 	// Aggregate unique languages specified in controller routes
 
 	underscorePackage.chain(OLSKStartControllersArray)
-		.map(function (e) {
+		.map(function(e) {
 			if (typeof e.OLSKControllerRoutes !== 'function') {
 				return null;
 			};
@@ -266,10 +266,10 @@ var OLSKStartInternationalizationTranslations = {};
 		})
 		.flatten()
 		.uniq()
-		.reject(function (e) {
+		.reject(function(e) {
 			return !e;
 		})
-		.each(function (e) {
+		.each(function(e) {
 			OLSKStartInternationalizationTranslations[e] = {};
 		});
 
@@ -281,7 +281,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Set OLSKSharedCurrentLanguage to default value
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		req.OLSKSharedCurrentLanguage = Object.keys(OLSKStartInternationalizationTranslations).shift();
 
 		next();
@@ -289,10 +289,10 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Set OLSKSharedRequestLanguage if possible
 
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		var pathSegments = req.url.split('/');
 		var firstElement = pathSegments.splice(1, 1).pop();
-		
+
 		if (Object.keys(OLSKStartInternationalizationTranslations).indexOf(firstElement) === -1) {
 			next();
 			return;
@@ -307,30 +307,30 @@ var OLSKStartInternationalizationTranslations = {};
 	// Load translation strings into OLSKStartInternationalizationTranslations
 
 	underscorePackage.chain(fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()))
-		.map(function (e) {
+		.map(function(e) {
 			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
 		})
-		.filter(function (e) {
+		.filter(function(e) {
 			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e))
 		})
-		.each(function (dirPath) {
+		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), dirPath)))
 				.filter(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename)
-				.reject(function (e) {
+				.reject(function(e) {
 					return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)) === -1;
 				})
-				.each(function (e) {
+				.each(function(e) {
 					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
 						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
 						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
-						);
+					);
 				});
 		});
 
 	// Create translation string macro
 
-	expressApp.use(function (req, res, next) {
-		res.locals.OLSKTranslate = function (translationConstant) {
+	expressApp.use(function(req, res, next) {
+		res.locals.OLSKTranslate = function(translationConstant) {
 			return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 		};
 
@@ -348,7 +348,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Aggregate all routes specified in controllers
 
-	OLSKStartControllersArray.forEach(function (e) {
+	OLSKStartControllersArray.forEach(function(e) {
 		if (typeof e.OLSKControllerRoutes !== 'function') {
 			return;
 		};
@@ -362,13 +362,13 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Create canonical link macros
 
-	expressApp.use(function (req, res, next) {
-		res.locals.OLSKCanonicalFor = function (routeConstant, optionalParams) {
+	expressApp.use(function(req, res, next) {
+		res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
 			return routingLibrary.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 		};
 
 		if (req.OLSKSharedCurrentLanguage) {
-			res.locals.OLSKCanonicalLocalizedFor = function (routeConstant, optionalParams) {
+			res.locals.OLSKCanonicalLocalizedFor = function(routeConstant, optionalParams) {
 				return res.locals.OLSKCanonicalFor(routeConstant, Object.assign({
 					OLSKRoutingLanguage: req.OLSKSharedCurrentLanguage,
 				}, optionalParams));
@@ -380,16 +380,16 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Create routing middleware
 
-	Object.keys(allRoutes).forEach(function (key) {
+	Object.keys(allRoutes).forEach(function(key) {
 		var e = allRoutes[key];
 
 		if (e.OLSKRouteIsHidden) {
 			return;
 		};
 
-		return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function (req, res) {
+		return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function(req, res) {
 			return res.redirect(e.OLSKRouteRedirect);
-		} : function (req, res, next) {
+		} : function(req, res, next) {
 			res.locals.OLSKSharedActiveRouteConstant = key;
 
 			// If the request language not available, pass
@@ -414,7 +414,7 @@ var OLSKStartInternationalizationTranslations = {};
 				if (pathSegments.slice(-1).pop() === '') {
 					pathSegments.pop();
 				};
-				
+
 				return res.redirect(307, pathSegments.join('/'));
 			};
 
@@ -434,7 +434,7 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartServer() {
 	var serverObject = expressApp.listen(process.env.PORT || '3000', process.env.HOST);
 
-	serverObject.on('error', function (error) {
+	serverObject.on('error', function(error) {
 		if (error.syscall !== 'listen') {
 			throw error;
 		};
@@ -442,7 +442,7 @@ var OLSKStartInternationalizationTranslations = {};
 		var portBind = [
 			(typeof error.port === 'string' ? 'Pipe' : 'Port'),
 			error.port,
-			].join(' ');
+		].join(' ');
 
 		if (error.code === 'EACCES') {
 			console.error(portBind + ' requires elevated privileges');
@@ -456,10 +456,9 @@ var OLSKStartInternationalizationTranslations = {};
 
 		throw error;
 	});
-	serverObject.on('listening', function () {
+	serverObject.on('listening', function() {
 		console.log([
-			'Listening on',
-			[
+			'Listening on', [
 				process.env.HOST || serverObject.address().host,
 				serverObject.address().port,
 			].join(':'),
@@ -470,7 +469,7 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartErrorHandling
 
 (function OLSKStartErrorHandling() {
-	expressApp.use(function (req, res, next) {
+	expressApp.use(function(req, res, next) {
 		// If the request language available, set current language
 
 		if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
@@ -483,8 +482,8 @@ var OLSKStartInternationalizationTranslations = {};
 
 		next();
 	});
-	
-	expressApp.use(function (req, res, next) {
+
+	expressApp.use(function(req, res, next) {
 		res.status(404);
 
 		if (process.env.NODE_ENV !== 'production') {
@@ -504,11 +503,13 @@ var OLSKStartInternationalizationTranslations = {};
 		};
 	});
 
-	expressApp.use(function (err, req, res, next) {
+	expressApp.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 
 		if (process.env.NODE_ENV !== 'production') {
-			return res.send('<pre>' + JSON.stringify({error: err}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
+			return res.send('<pre>' + JSON.stringify({
+				error: err
+			}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
 		};
 
 		if (req.accepts('html')) {
@@ -533,10 +534,10 @@ var OLSKStartInternationalizationTranslations = {};
 	var tasksLibrary = require('./libraries/ROCOTasks/main');
 
 	underscorePackage.chain(OLSKStartControllersArray)
-		.filter(function (e) {
+		.filter(function(e) {
 			return typeof e.OLSKControllerTasks === 'function';
 		})
-		.map(function (e) {
+		.map(function(e) {
 			return e.OLSKControllerTasks();
 		})
 		.flatten()

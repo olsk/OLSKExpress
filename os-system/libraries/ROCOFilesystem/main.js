@@ -9,27 +9,27 @@ var mkdirpPackage = require('mkdirp');
 
 //_ ROCOFilesystemInputDataIsRealDirectoryPath
 
-exports.ROCOFilesystemInputDataIsRealDirectoryPath = function (inputData) {
+exports.ROCOFilesystemInputDataIsRealDirectoryPath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	};
-	
+
 	return fsPackage.lstatSync(inputData).isDirectory();
 };
 
 //_ ROCOFilesystemInputDataIsRealFilePath
 
-exports.ROCOFilesystemInputDataIsRealFilePath = function (inputData) {
+exports.ROCOFilesystemInputDataIsRealFilePath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	};
-	
+
 	return fsPackage.lstatSync(inputData).isFile();
 };
 
 //_ ROCOFilesystemHelpCreateDirectoryIfDoesNotExist
 
-exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function (directoryPath) {
+exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		mkdirpPackage.sync(directoryPath);
 	};
@@ -39,7 +39,7 @@ exports.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist = function (directoryPat
 
 //_ ROCOFilesystemHelpDeleteDirectoryRecursive
 
-exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
+exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		return 0;
 	};
@@ -48,7 +48,7 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 		return 0;
 	};
 
-	fsPackage.readdirSync(directoryPath).forEach(function (fileName, index) {
+	fsPackage.readdirSync(directoryPath).forEach(function(fileName, index) {
 		var currentPath = directoryPath + '/' + fileName;
 		if (fsPackage.lstatSync(currentPath).isDirectory()) {
 			exports.ROCOFilesystemHelpDeleteDirectoryRecursive(currentPath);
@@ -56,50 +56,50 @@ exports.ROCOFilesystemHelpDeleteDirectoryRecursive = function (directoryPath) {
 			fsPackage.unlinkSync(currentPath);
 		};
 	});
-	
+
 	fsPackage.rmdirSync(directoryPath);
 	return 1;
 };
 
 //_ ROCOFilesystemAppDirectoryName
 
-exports.ROCOFilesystemAppDirectoryName = function () {
+exports.ROCOFilesystemAppDirectoryName = function() {
 	return 'os-app';
 };
 
 //_ ROCOFilesystemCacheDirectoryName
 
-exports.ROCOFilesystemCacheDirectoryName = function () {
+exports.ROCOFilesystemCacheDirectoryName = function() {
 	return 'os-cache';
 };
 
 //_ ROCOFilesystemDataDirectoryName
 
-exports.ROCOFilesystemDataDirectoryName = function () {
+exports.ROCOFilesystemDataDirectoryName = function() {
 	return 'os-data';
 };
 
 //_ ROCOFilesystemPublicDirectoryName
 
-exports.ROCOFilesystemPublicDirectoryName = function () {
+exports.ROCOFilesystemPublicDirectoryName = function() {
 	return 'os-public';
 };
 
 //_ ROCOFilesystemSystemDirectoryName
 
-exports.ROCOFilesystemSystemDirectoryName = function () {
+exports.ROCOFilesystemSystemDirectoryName = function() {
 	return 'os-system';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectoryName
 
-exports.ROCOFilesystemWorkspaceTestingDirectoryName = function () {
+exports.ROCOFilesystemWorkspaceTestingDirectoryName = function() {
 	return 'os-workspace-testing';
 };
 
 //_ ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor
 
-exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inputData) {
+exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
 	};
@@ -113,39 +113,39 @@ exports.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor = function (inpu
 
 //_ ROCOFilesystemLaunchFileName
 
-exports.ROCOFilesystemLaunchFileName = function () {
+exports.ROCOFilesystemLaunchFileName = function() {
 	return 'os-launch.js';
 };
 
 //_ _ROCOFilesystemAbsolutePathRootDirectory
 
-exports._ROCOFilesystemAbsolutePathRootDirectory = function () {
+exports._ROCOFilesystemAbsolutePathRootDirectory = function() {
 	return pathPackage.join(
 		__dirname,
 		'/../../../'
-		);
+	);
 };
 
 //_ _ROCOFilesystemAbsolutePathWorkspaceTestingDirectory
 
-exports._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory = function () {
+exports._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory = function() {
 	return pathPackage.join(exports._ROCOFilesystemAbsolutePathRootDirectory(), exports.ROCOFilesystemWorkspaceTestingDirectoryName());
 };
 
 //_ ROCOFilesystemSharedFileExtensionJSON
 
-exports.ROCOFilesystemSharedFileExtensionJSON = function () {
+exports.ROCOFilesystemSharedFileExtensionJSON = function() {
 	return 'json';
 };
 
 //_ ROCOFilesystemSharedFileExtensionYAML
 
-exports.ROCOFilesystemSharedFileExtensionYAML = function () {
+exports.ROCOFilesystemSharedFileExtensionYAML = function() {
 	return 'yaml';
 };
 
 //_ ROCOFilesystemDefaultTextEncoding
 
-exports.ROCOFilesystemDefaultTextEncoding = function () {
+exports.ROCOFilesystemDefaultTextEncoding = function() {
 	return 'utf8';
 };

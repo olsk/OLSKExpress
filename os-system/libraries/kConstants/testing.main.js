@@ -6,42 +6,42 @@
 
 var filesystemLibrary = require('../ROCOFilesystem/main');
 
-exports.ROCOTestingConstants = function () {
+exports.ROCOTestingConstants = function() {
 	return {
 		ROCOTestingLiveDirectoryAbsolutePath: filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 
-		ROCOTestingCacheObjectValid: function () {
+		ROCOTestingCacheObjectValid: function() {
 			return {
 				'test-1990-01-01T21:09:00.000Z': 12.34,
 			};
 		},
 
-		OLSKTestingRouteObjectValid: function () {
+		OLSKTestingRouteObjectValid: function() {
 			return {
 				OLSKRoutePath: '/alpha',
 				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: function () {},
+				OLSKRouteFunction: function() {},
 			};
 		},
 
-		OLSKTestingRouteObjectValidRedirect: function () {
+		OLSKTestingRouteObjectValidRedirect: function() {
 			return {
 				OLSKRoutePath: '/alpha',
 				OLSKRouteRedirect: '/bravo',
 			};
 		},
 
-		ROCOTestingTaskObjectValid: function (array) {
+		ROCOTestingTaskObjectValid: function(array) {
 			return {
 				ROCOTaskFireTimeInterval: 0.01,
-				ROCOTaskShouldBePerformed: function () {
+				ROCOTaskShouldBePerformed: function() {
 					return true;
 				},
-				ROCOTaskCallback: function () {
+				ROCOTaskCallback: function() {
 					if (!array) {
 						return;
 					};
-					
+
 					return array.push(new Date());
 				},
 			};

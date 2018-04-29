@@ -5,7 +5,7 @@
 
 //_ ROCOStringWithFormat
 
-exports.ROCOStringWithFormat = function (inputData) {
+exports.ROCOStringWithFormat = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
 	};
@@ -18,11 +18,11 @@ exports.ROCOStringWithFormat = function (inputData) {
 
 	var formattedString = inputData;
 
-	(inputData.match(/\%\@/g) || []).forEach(function (e, i) {
+	(inputData.match(/\%\@/g) || []).forEach(function(e, i) {
 		formattedString = formattedString.replace(e, substitutions[i]);
 	});
 
-	exports._ROCOStringAllMatchesWithRegexAndString(/\%\$(\d*)\@/g, inputData).forEach(function (e) {
+	exports._ROCOStringAllMatchesWithRegexAndString(/\%\$(\d*)\@/g, inputData).forEach(function(e) {
 		formattedString = formattedString.replace(e[0], substitutions[e[1] - 1]);
 	});
 
@@ -31,15 +31,15 @@ exports.ROCOStringWithFormat = function (inputData) {
 
 //_ _ROCOStringAllMatchesWithRegexAndString
 
-exports._ROCOStringAllMatchesWithRegexAndString = function (regex, string) {
+exports._ROCOStringAllMatchesWithRegexAndString = function(regex, string) {
 	var matches = [];
 
 	var match = regex.exec(string);
-	
+
 	while (match != null) {
 		matches.push(match);
 
-	  match = regex.exec(string);
+		match = regex.exec(string);
 	};
 
 	return matches;

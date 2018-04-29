@@ -11,7 +11,7 @@ var mkdirpPackage = require('mkdirp');
 
 //_ ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject
 
-exports.ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject = function (callback, key, cacheObject) {
+exports.ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject = function(callback, key, cacheObject) {
 	if (typeof callback !== 'function') {
 		throw new Error('ROCOErrorInputInvalid');
 	};
@@ -33,7 +33,7 @@ exports.ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject = function (cal
 
 //_ ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory
 
-exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = function (inputData, cacheKey, appDirectory) {
+exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = function(inputData, cacheKey, appDirectory) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		throw new Error('ROCOErrorInputInvalid');
 	};
@@ -59,7 +59,7 @@ exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = fu
 
 //_ ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory
 
-exports.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory = function (inputData, appDirectory) {
+exports.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory = function(inputData, appDirectory) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
 	};

@@ -6,7 +6,7 @@
 
 //_ OLSKRoutingInputDataIsRouteObject
 
-exports.OLSKRoutingInputDataIsRouteObject = function (inputData) {
+exports.OLSKRoutingInputDataIsRouteObject = function(inputData) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		return false;
 	};
@@ -42,7 +42,7 @@ exports.OLSKRoutingInputDataIsRouteObject = function (inputData) {
 
 //_ OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams
 
-exports.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams = function (routeObject, optionalParams) {
+exports.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams = function(routeObject, optionalParams) {
 	if (!exports.OLSKRoutingInputDataIsRouteObject(routeObject)) {
 		throw new Error('OLSKErrorInputInvalid');
 	};
@@ -55,7 +55,7 @@ exports.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams = function (rou
 			throw new Error('OLSKErrorInputInvalid');
 		};
 
-		matches.forEach(function (e) {
+		matches.forEach(function(e) {
 			if (!optionalParams[e.split(':').pop()]) {
 				throw new Error('OLSKErrorInputInvalid');
 			};
