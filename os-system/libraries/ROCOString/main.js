@@ -18,11 +18,11 @@ exports.ROCOStringWithFormat = function(inputData) {
 
 	var formattedString = inputData;
 
-	(inputData.match(/\%\@/g) || []).forEach(function(e, i) {
+	(inputData.match(/%@/g) || []).forEach(function(e, i) {
 		formattedString = formattedString.replace(e, substitutions[i]);
 	});
 
-	exports._ROCOStringAllMatchesWithRegexAndString(/\%\$(\d*)\@/g, inputData).forEach(function(e) {
+	exports._ROCOStringAllMatchesWithRegexAndString(/%\$(\d*)@/g, inputData).forEach(function(e) {
 		formattedString = formattedString.replace(e[0], substitutions[e[1] - 1]);
 	});
 

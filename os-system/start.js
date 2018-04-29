@@ -93,7 +93,7 @@ var OLSKLive = {};
 
 (function OLSKStartCookies() {
 	if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
-		return console.log('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found)');
+		return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found)');
 	}
 	var cookieSessionPackage = require('cookie-session');
 
@@ -113,7 +113,7 @@ var OLSKLive = {};
 
 (function OLSKStartSessions() {
 	if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
-		return console.log('- Skipping OLSKStartSessions (OLSKSessionSecret not found)');
+		return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found)');
 	}
 
 	var expressSessionPackage = require('express-session');
@@ -158,7 +158,7 @@ var OLSKLive = {};
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
-	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem, index) {
+	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
@@ -353,7 +353,7 @@ var OLSKStartInternationalizationTranslations = {};
 			return;
 		}
 
-		allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(e.OLSKControllerRoutes(), function(value, key) {
+		allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(e.OLSKControllerRoutes(), function(value) {
 			return Object.assign(value, {
 				_OLSKRouteControllerSlug: e.OLSKControllerSlug(),
 			});
@@ -457,7 +457,7 @@ var OLSKStartInternationalizationTranslations = {};
 		throw error;
 	});
 	serverObject.on('listening', function() {
-		console.log([
+		console.info([
 			'Listening on', [
 				process.env.HOST || serverObject.address().host,
 				serverObject.address().port,
