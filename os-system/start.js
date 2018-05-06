@@ -395,6 +395,9 @@ var OLSKStartInternationalizationTranslations = {};
 			// If the request language not available, pass
 
 			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
+				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+				
 				return next();
 			}
 
@@ -470,15 +473,22 @@ var OLSKStartInternationalizationTranslations = {};
 
 (function OLSKStartErrorHandling() {
 	expressApp.use(function(req, res, next) {
+		// Set OLSKSharedPageControllerSlug
+
+		res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug;
+
 		// If the request language available, set current language
 
 		if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
 			req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 		}
 
-		// Set OLSKSharedPageControllerSlug
+		// If other languages available for route, show switcher
 
-		res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug;
+		if (req.OLSKSharedRequestLanguage && res.locals.OLSKSharedActiveRouteConstant) {
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/lang', {
+			});
+		}
 
 		next();
 	});
@@ -491,7 +501,7 @@ var OLSKStartInternationalizationTranslations = {};
 		}
 
 		if (req.accepts('html')) {
-			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/404', {
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/404', {
 				// url: req.url,
 			});
 		}
@@ -513,7 +523,7 @@ var OLSKStartInternationalizationTranslations = {};
 		}
 
 		if (req.accepts('html')) {
-			return res.render(OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug + '/500', {
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/500', {
 				// url: req.url,
 			});
 		}
