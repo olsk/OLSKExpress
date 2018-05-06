@@ -330,7 +330,7 @@ var OLSKStartInternationalizationTranslations = {};
 	// Create translation string macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.OLSKTranslate = function(translationConstant) {
+		res.locals.OLSKLocalized = function(translationConstant) {
 			return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 		};
 
