@@ -13,7 +13,7 @@ var fsPackage = require('fs');
 var pathPackage = require('path');
 var mkdirpPackage = require('mkdirp');
 
-var testAppDirectory = pathPackage.join(
+var testRootDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.cache'));
 
@@ -57,83 +57,83 @@ describe('ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject', function te
 
 });
 
-describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory', function testROCOCacheWriteCacheObjectFileWithCacheObjectAndAppDirectory() {
+describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory', function testROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	it('throws error if param1 not object', function() {
 		assert.throws(function() {
-			mkdirpPackage.sync(testAppDirectory);
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(null, 'alpha', testAppDirectory);
+			mkdirpPackage.sync(testRootDirectory);
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(null, 'alpha', testRootDirectory);
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
-			mkdirpPackage.sync(testAppDirectory);
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(kConstants.ROCOTestingCacheObjectValid(), null, testAppDirectory);
+			mkdirpPackage.sync(testRootDirectory);
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(kConstants.ROCOTestingCacheObjectValid(), null, testRootDirectory);
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not real directory', function() {
 		assert.throws(function() {
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(kConstants.ROCOTestingCacheObjectValid(), 'alpha', pathPackage.join(testAppDirectory, 'alpha'));
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(kConstants.ROCOTestingCacheObjectValid(), 'alpha', pathPackage.join(testRootDirectory, 'alpha'));
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('returns null and writes data for json', function() {
 		var cacheObject = kConstants.ROCOTestingCacheObjectValid();
-		mkdirpPackage.sync(testAppDirectory);
-		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(cacheObject, 'alpha', testAppDirectory), null);
+		mkdirpPackage.sync(testRootDirectory);
+		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, 'alpha', testRootDirectory), null);
 
-		var patternFileFullPath = pathPackage.join(testAppDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'alpha' + '.' + filesystemLibrary.ROCOFilesystemSharedFileExtensionJSON());
+		var patternFileFullPath = pathPackage.join(testRootDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'alpha' + '.' + filesystemLibrary.ROCOFilesystemSharedFileExtensionJSON());
 		assert.strictEqual(fsPackage.existsSync(patternFileFullPath), true);
 		assert.strictEqual(fsPackage.readFileSync(patternFileFullPath, filesystemLibrary.ROCOFilesystemDefaultTextEncoding()), JSON.stringify(cacheObject, null, '\t'));
 	});
 
 });
 
-describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory', function testROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory() {
+describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory', function testROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
-			mkdirpPackage.sync(pathPackage.join(testAppDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName()));
-			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory(null, testAppDirectory);
+			mkdirpPackage.sync(pathPackage.join(testRootDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName()));
+			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(null, testRootDirectory);
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('throws error if param2 not real directory', function() {
 		assert.throws(function() {
-			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory('alpha', pathPackage.join(testAppDirectory, 'alpha'));
+			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory('alpha', pathPackage.join(testRootDirectory, 'alpha'));
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('returns null if cache directory does not exist', function() {
-		mkdirpPackage.sync(testAppDirectory);
-		assert.strictEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory('alpha', testAppDirectory), null);
+		mkdirpPackage.sync(testRootDirectory);
+		assert.strictEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory('alpha', testRootDirectory), null);
 	});
 
 	it('returns null if cacheKey does not exist', function() {
-		mkdirpPackage.sync(pathPackage.join(testAppDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName()));
-		assert.strictEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory('alpha', testAppDirectory), null);
+		mkdirpPackage.sync(pathPackage.join(testRootDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName()));
+		assert.strictEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory('alpha', testRootDirectory), null);
 	});
 
 	it('returns cacheObject', function() {
-		mkdirpPackage.sync(testAppDirectory);
+		mkdirpPackage.sync(testRootDirectory);
 
 		var cacheObject = kConstants.ROCOTestingCacheObjectValid();
-		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(cacheObject, 'alpha', testAppDirectory), null);
-		assert.deepEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory('alpha', testAppDirectory), cacheObject);
+		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, 'alpha', testRootDirectory), null);
+		assert.deepEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory('alpha', testRootDirectory), cacheObject);
 	});
 
 });

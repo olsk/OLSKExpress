@@ -78,11 +78,11 @@ var OLSKLive = {};
 
 	expressApp.use(function(req, res, next) {
 		req.OLSKCacheWriteWithCacheKeyAndCacheObject = function(cacheKey, cacheObject) {
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
 		req.OLSKCacheReadForCacheKey = function(cacheKey) {
-			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
 		next();

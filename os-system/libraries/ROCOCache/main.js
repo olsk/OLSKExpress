@@ -31,9 +31,9 @@ exports.ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject = function(call
 	return cacheObject[key];
 };
 
-//_ ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory
+//_ ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory
 
-exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = function(inputData, cacheKey, appDirectory) {
+exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory = function(inputData, cacheKey, rootDirectory) {
 	if (typeof inputData !== 'object' || inputData === null) {
 		throw new Error('ROCOErrorInputInvalid');
 	}
@@ -42,11 +42,11 @@ exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = fu
 		throw new Error('ROCOErrorInputInvalid');
 	}
 
-	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(appDirectory)) {
+	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(rootDirectory)) {
 		throw new Error('ROCOErrorInputInvalid');
 	}
 
-	var cacheDirectory = pathPackage.join(appDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName());
+	var cacheDirectory = pathPackage.join(rootDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName());
 
 	if (!fsPackage.existsSync(cacheDirectory)) {
 		mkdirpPackage.sync(cacheDirectory);
@@ -57,18 +57,18 @@ exports.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndAppDirectory = fu
 	return null;
 };
 
-//_ ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory
+//_ ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory
 
-exports.ROCOCacheReadCacheObjectFileWithCacheKeyAndAppDirectory = function(inputData, appDirectory) {
+exports.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory = function(inputData, rootDirectory) {
 	if (typeof inputData !== 'string') {
 		throw new Error('ROCOErrorInputInvalid');
 	}
 
-	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(appDirectory)) {
+	if (!filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(rootDirectory)) {
 		throw new Error('ROCOErrorInputInvalid');
 	}
 
-	var cacheDirectory = pathPackage.join(appDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName());
+	var cacheDirectory = pathPackage.join(rootDirectory, filesystemLibrary.ROCOFilesystemCacheDirectoryName());
 
 	if (!fsPackage.existsSync(cacheDirectory)) {
 		return null;

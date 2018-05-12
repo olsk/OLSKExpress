@@ -11,15 +11,15 @@ var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-var testAppDirectory = pathPackage.join(
+var testRootDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
@@ -28,22 +28,22 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 	});
 
 	it('returns null if directory path does not exist', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testAppDirectory), false);
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
 	});
 
 	it('returns null if path not directory', function() {
 		var fileFullPath = pathPackage.join(
-			testAppDirectory,
+			testRootDirectory,
 			'alpha.txt'
 		);
-		mkdirpPackage.sync(testAppDirectory);
+		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
 	});
 
 	it('returns true if directory exists', function() {
-		mkdirpPackage.sync(testAppDirectory);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testAppDirectory), true);
+		mkdirpPackage.sync(testRootDirectory);
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
 	});
 
 });
@@ -51,13 +51,13 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInputDataIsRealFilePath() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	var fileFullPath = pathPackage.join(
-		testAppDirectory,
+		testRootDirectory,
 		'alpha.txt'
 	);
 
@@ -70,12 +70,12 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 	});
 
 	it('returns null if path not file', function() {
-		mkdirpPackage.sync(testAppDirectory);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(testAppDirectory), false);
+		mkdirpPackage.sync(testRootDirectory);
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(testRootDirectory), false);
 	});
 
 	it('returns true if file exists', function() {
-		mkdirpPackage.sync(testAppDirectory);
+		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(fileFullPath), true);
 	});
@@ -85,13 +85,13 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFilesystemHelpCreateDirectoryIfDoesNotExist() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	it('returns null and creates directory', function() {
-		var directoryFullPath = pathPackage.join(testAppDirectory, 'alpha');
+		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
@@ -99,7 +99,7 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 	});
 
 	it('does not delete existing directory', function() {
-		var directoryFullPath = pathPackage.join(testAppDirectory, 'alpha');
+		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
 		mkdirpPackage.sync(directoryFullPath);
 
 		var fileFullPath = pathPackage.join(directoryFullPath, 'bravo.txt');
@@ -115,15 +115,15 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesystemHelpDeleteDirectoryRecursive() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testAppDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory);
+		if (fsPackage.existsSync(testRootDirectory)) {
+			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
-		mkdirpPackage.sync(testAppDirectory);
+		mkdirpPackage.sync(testRootDirectory);
 	});
 
 	it('returns 0 if path does not exist', function() {
 		var directoryFullPath = pathPackage.join(
-			testAppDirectory,
+			testRootDirectory,
 			'alpha'
 		);
 
@@ -133,10 +133,10 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 
 	it('returns 0 if path not directory', function() {
 		var fileFullPath = pathPackage.join(
-			testAppDirectory,
+			testRootDirectory,
 			'alpha.txt'
 		);
-		mkdirpPackage.sync(testAppDirectory);
+		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
 
 		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
@@ -144,7 +144,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 
 	it('returns 1 and deletes directory', function() {
 		var directoryFullPath = pathPackage.join(
-			testAppDirectory,
+			testRootDirectory,
 			'alpha'
 		);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
@@ -157,9 +157,9 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testAppDirectory), 1);
+		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(fsPackage.existsSync(testAppDirectory), false);
+		assert.strictEqual(fsPackage.existsSync(testRootDirectory), false);
 	});
 
 });
