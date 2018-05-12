@@ -155,21 +155,25 @@ var OLSKLive = {};
 
 //# OLSKStartControllers
 
-var OLSKStartControllersArray = [];
-
 (function OLSKStartControllers() {
+	var controllersArray = [];
+
 	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		}
 
-		OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
+		controllersArray.push(Object.assign(require('../' + itemPath), {
 			OLSKControllerSlug: function() {
 				return dirItem;
 			},
 		}));
 	});
+
+	OLSKLive.OLSKLiveControllersArray = function() {
+		return [].concat(controllersArray);
+	};
 })();
 
 //# OLSKStartSharedLocals
@@ -177,7 +181,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedLocals() {
 	OLSKLive.OLSKSharedLocals = {};
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedLocals === 'function';
 		})
@@ -203,7 +207,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedConstants() {
 	OLSKLive.OLSKSharedConstants = {};
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedConstants === 'function';
 		})
@@ -256,7 +260,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Aggregate unique languages specified in controller routes
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
 		.map(function(e) {
 			if (typeof e.OLSKControllerRoutes !== 'function') {
 				return null;
@@ -348,7 +352,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Aggregate all routes specified in controllers
 
-	OLSKStartControllersArray.forEach(function(e) {
+	OLSKLive.OLSKLiveControllersArray().forEach(function(e) {
 		if (typeof e.OLSKControllerRoutes !== 'function') {
 			return;
 		}
@@ -543,7 +547,7 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartTasks() {
 	var tasksLibrary = require('./libraries/ROCOTasks/main');
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
 		.filter(function(e) {
 			return typeof e.OLSKControllerTasks === 'function';
 		})
