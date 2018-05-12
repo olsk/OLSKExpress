@@ -156,19 +156,20 @@ var OLSKLive = {};
 //# OLSKStartControllers
 
 (function OLSKStartControllers() {
-	var controllersArray = [];
-
-	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
+	var controllersArray = fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).map(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
+		
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
-			return;
+			return null;
 		}
 
-		controllersArray.push(Object.assign(require('../' + itemPath), {
+		return Object.assign(require('../' + itemPath), {
 			OLSKControllerSlug: function() {
 				return dirItem;
 			},
-		}));
+		});
+	}).filter(function(e) {
+		return !!e;
 	});
 
 	OLSKLive.OLSKLiveControllersArray = function() {
