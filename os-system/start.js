@@ -82,7 +82,7 @@ var OLSKLive = {};
 		};
 
 		req.OLSKCacheReadForCacheKey = function(cacheKey) {
-			cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+			return cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
 		next();
@@ -155,26 +155,21 @@ var OLSKLive = {};
 
 //# OLSKStartControllers
 
+var OLSKStartControllersArray = [];
+
 (function OLSKStartControllers() {
-	var controllersArray = fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).map(function(dirItem) {
+	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
-		
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
-			return null;
+			return;
 		}
 
-		return Object.assign(require('../' + itemPath), {
+		OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
 			OLSKControllerSlug: function() {
 				return dirItem;
 			},
-		});
-	}).filter(function(e) {
-		return !!e;
+		}));
 	});
-
-	OLSKLive.OLSKLiveControllersArray = function() {
-		return [].concat(controllersArray);
-	};
 })();
 
 //# OLSKStartSharedLocals
@@ -182,7 +177,7 @@ var OLSKLive = {};
 (function OLSKStartSharedLocals() {
 	OLSKLive.OLSKSharedLocals = {};
 
-	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
+	underscorePackage.chain(OLSKStartControllersArray)
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedLocals === 'function';
 		})
@@ -208,7 +203,7 @@ var OLSKLive = {};
 (function OLSKStartSharedConstants() {
 	OLSKLive.OLSKSharedConstants = {};
 
-	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
+	underscorePackage.chain(OLSKStartControllersArray)
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedConstants === 'function';
 		})
@@ -261,7 +256,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Aggregate unique languages specified in controller routes
 
-	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
+	underscorePackage.chain(OLSKStartControllersArray)
 		.map(function(e) {
 			if (typeof e.OLSKControllerRoutes !== 'function') {
 				return null;
@@ -353,7 +348,7 @@ var OLSKStartInternationalizationTranslations = {};
 
 	// Aggregate all routes specified in controllers
 
-	OLSKLive.OLSKLiveControllersArray().forEach(function(e) {
+	OLSKStartControllersArray.forEach(function(e) {
 		if (typeof e.OLSKControllerRoutes !== 'function') {
 			return;
 		}
@@ -380,7 +375,7 @@ var OLSKStartInternationalizationTranslations = {};
 			};
 		}
 
-		return next();
+		next();
 	});
 
 	// Create routing middleware
@@ -548,7 +543,7 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartTasks() {
 	var tasksLibrary = require('./libraries/ROCOTasks/main');
 
-	underscorePackage.chain(OLSKLive.OLSKLiveControllersArray())
+	underscorePackage.chain(OLSKStartControllersArray)
 		.filter(function(e) {
 			return typeof e.OLSKControllerTasks === 'function';
 		})

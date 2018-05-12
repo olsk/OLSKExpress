@@ -80,6 +80,5 @@ exports.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory = function(inpu
 		return null;
 	}
 
-	var cacheObject = JSON.parse(fsPackage.readFileSync(cacheObjectFileFullPath, filesystemLibrary.ROCOFilesystemDefaultTextEncoding()));
-	return cacheObject;
+	return JSON.parse(fsPackage.readFileSync(cacheObjectFileFullPath, filesystemLibrary.ROCOFilesystemDefaultTextEncoding()));
 };
