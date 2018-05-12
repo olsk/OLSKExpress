@@ -375,7 +375,7 @@ var OLSKStartInternationalizationTranslations = {};
 			};
 		}
 
-		next();
+		return next();
 	});
 
 	// Create routing middleware
