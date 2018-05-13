@@ -397,7 +397,7 @@ var OLSKStartInternationalizationTranslations = {};
 			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
 				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
-				
+
 				return next();
 			}
 
@@ -486,8 +486,7 @@ var OLSKStartInternationalizationTranslations = {};
 		// If other languages available for route, show switcher
 
 		if (req.OLSKSharedRequestLanguage && res.locals.OLSKSharedActiveRouteConstant) {
-			return res.render(res.locals.OLSKSharedPageControllerSlug + '/lang', {
-			});
+			return res.render(res.locals.OLSKSharedPageControllerSlug + '/lang', {});
 		}
 
 		next();
