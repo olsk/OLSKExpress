@@ -5,10 +5,6 @@
  */
 
 var expressPackage = require('express');
-var pathPackage = require('path');
-var fsPackage = require('fs');
-var underscorePackage = require('underscore');
-var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 
 var expressApp = expressPackage();
 
@@ -17,7 +13,11 @@ var expressApp = expressPackage();
 var OLSKLive = {};
 
 (function OLSKStartLive() {
+	var fsPackage = require('fs');
+	var pathPackage = require('path');
 	var jsYAMLPackage = require('js-yaml');
+
+	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
 
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
 	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding())) || {};
@@ -158,6 +158,11 @@ var OLSKLive = {};
 var OLSKStartControllersArray = [];
 
 (function OLSKStartControllers() {
+	var fsPackage = require('fs');
+	var pathPackage = require('path');
+
+	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+
 	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
 		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
@@ -177,7 +182,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedLocals() {
 	OLSKLive.OLSKSharedLocals = {};
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	OLSKStartControllersArray
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedLocals === 'function';
 		})
@@ -187,7 +192,7 @@ var OLSKStartControllersArray = [];
 		.filter(function(e) {
 			return typeof e === 'object';
 		})
-		.each(function(e) {
+		.forEach(function(e) {
 			Object.assign(OLSKLive.OLSKSharedLocals, e);
 		});
 
@@ -203,7 +208,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedConstants() {
 	OLSKLive.OLSKSharedConstants = {};
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	OLSKStartControllersArray
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedConstants === 'function';
 		})
@@ -213,7 +218,7 @@ var OLSKStartControllersArray = [];
 		.filter(function(e) {
 			return typeof e === 'object';
 		})
-		.each(function(e) {
+		.forEach(function(e) {
 			Object.assign(OLSKLive.OLSKSharedConstants, e);
 		});
 
@@ -243,7 +248,7 @@ var OLSKStartControllersArray = [];
 (function OLSKStartSharedMiddlewares() {
 	OLSKLive.OLSKSharedMiddlewares = {};
 
-	underscorePackage.chain(OLSKStartControllersArray)
+	OLSKStartControllersArray
 		.filter(function(e) {
 			return typeof e.OLSKControllerSharedMiddlewares === 'function';
 		})
@@ -253,7 +258,7 @@ var OLSKStartControllersArray = [];
 		.filter(function(e) {
 			return typeof e === 'object';
 		})
-		.each(function(e) {
+		.forEach(function(e) {
 			Object.assign(OLSKLive.OLSKSharedMiddlewares, e);
 		});
 })();
@@ -271,8 +276,13 @@ var OLSKStartControllersArray = [];
 var OLSKStartInternationalizationTranslations = {};
 
 (function OLSKStartInternationalization() {
-	var internationalLibrary = require('./libraries/OLSKInternational/main');
+	var underscorePackage = require('underscore');
+	var pathPackage = require('path');
+	var fsPackage = require('fs');
 	var jsYAMLPackage = require('js-yaml');
+
+	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+	var internationalLibrary = require('./libraries/OLSKInternational/main');
 
 	// Aggregate unique languages specified in controller routes
 
@@ -361,8 +371,10 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartRouting
 
 (function OLSKStartRouting() {
-	var routingLibrary = require('./libraries/OLSKRouting/main');
 	var expressRouter = require('express').Router();
+	var underscorePackage = require('underscore');
+
+	var routingLibrary = require('./libraries/OLSKRouting/main');
 
 	var allRoutes = {};
 
@@ -447,13 +459,13 @@ var OLSKStartInternationalizationTranslations = {};
 				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
 
 				return e.OLSKRouteFunction(req, res, next);
-			}
+			};
 
 			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
 				var callbackArray = [];
 
 				var routeMiddlewares = e.OLSKRouteMiddlewares.map(function(e) {
-					return OLSKLive.OLSKSharedMiddlewares[e]
+					return OLSKLive.OLSKSharedMiddlewares[e];
 				}).filter(function(e) {
 					return !!e;
 				}).reverse().forEach(function(e, i) {
@@ -581,6 +593,8 @@ var OLSKStartInternationalizationTranslations = {};
 //# OLSKStartTasks
 
 (function OLSKStartTasks() {
+	var underscorePackage = require('underscore');
+
 	var tasksLibrary = require('./libraries/ROCOTasks/main');
 
 	underscorePackage.chain(OLSKStartControllersArray)
