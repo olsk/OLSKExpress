@@ -1,12 +1,6 @@
 {
-  "name": "PROJECT_NAME",
-  "version": "0.0.0",
+  "name": "OldSkool",
   "private": true,
-  "scripts": {
-    "start": "node ./os-launch",
-    "test": "mocha $(find $PWD -path '*os-*' -name '*-tests.js')",
-    "dstart": "supervisor --extensions node,js,yaml ./os-launch"
-  },
   "dependencies": {
     "// EXPRESS": null,
     "express": "latest",
@@ -29,9 +23,5 @@
 
     "// UTILITIES": null,
     "underscore": "latest"
-  },
-  "devDependencies": {
-    "// .ENV": null,
-    "dotenv": "latest"
   }
 }
