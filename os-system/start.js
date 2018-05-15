@@ -450,13 +450,19 @@ var OLSKStartInternationalizationTranslations = {};
 			}
 
 			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
-				e.OLSKRouteMiddlewares.each(function(e) {
-					if (!OLSKLive.OLSKSharedMiddlewares[e]) {
-						return;
-					}
+				var callbackArray = [];
 
-					OLSKLive.OLSKSharedMiddlewares[e](req, res, routeNext);
+				var routeMiddlewares = e.OLSKRouteMiddlewares.map(function(e) {
+					return OLSKLive.OLSKSharedMiddlewares[e]
+				}).filter(function(e) {
+					return !!e;
+				}).reverse().forEach(function(e, i) {
+					return callbackArray.push(function() {
+						return e(req, res, i === 0 ? routeNext : callbackArray.slice(-1).pop());
+					});
 				});
+
+				return callbackArray.slice(-1).pop()();
 			}
 
 			return routeNext();
