@@ -67,6 +67,22 @@ describe('OLSKRoutingInputDataIsRouteObject', function testOLSKRoutingInputDataI
 
 	});
 
+	describe('OLSKRouteMiddlewares', function() {
+
+		it('returns false if not array', function() {
+			assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(Object.assign(kConstants.OLSKTestingRouteObjectValid(), {
+				OLSKRouteMiddlewares: 'alpha',
+			})), false);
+		});
+
+		it('returns true', function() {
+			assert.strictEqual(routingLibrary.OLSKRoutingInputDataIsRouteObject(Object.assign(kConstants.OLSKTestingRouteObjectValid(), {
+				OLSKRouteMiddlewares: ['alpha'],
+			})), true);
+		});
+
+	});
+
 });
 
 describe('OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams', function testOLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams() {

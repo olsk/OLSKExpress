@@ -37,6 +37,12 @@ exports.OLSKRoutingInputDataIsRouteObject = function(inputData) {
 		}
 	}
 
+	if (inputData.OLSKRouteMiddlewares) {
+		if (!Array.isArray(inputData.OLSKRouteMiddlewares)) {
+			return false;
+		}
+	}
+
 	return true;
 };
 
