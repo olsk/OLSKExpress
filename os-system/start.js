@@ -449,6 +449,16 @@ var OLSKStartInternationalizationTranslations = {};
 				return e.OLSKRouteFunction(req, res, next);
 			}
 
+			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
+				e.OLSKRouteMiddlewares.each(function(e) {
+					if (!OLSKLive.OLSKSharedMiddlewares[e]) {
+						return;
+					}
+
+					OLSKLive.OLSKSharedMiddlewares[e](req, res, routeNext);
+				});
+			}
+
 			return routeNext();
 
 		});
