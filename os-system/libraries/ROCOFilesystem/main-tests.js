@@ -4,7 +4,6 @@
  */
 
 var assert = require('assert');
-var kConstants = require('../kConstants/testing.main').ROCOTestingConstants();
 
 var filesystemLibrary = require('./main');
 var pathPackage = require('path');
@@ -12,7 +11,7 @@ var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
 var testRootDirectory = pathPackage.join(
-	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
+	filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath() {

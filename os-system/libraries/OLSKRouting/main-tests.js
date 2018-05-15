@@ -5,7 +5,6 @@
  */
 
 var assert = require('assert');
-var kConstants = require('../kConstants/testing.main').ROCOTestingConstants();
 
 var routingLibrary = require('./main');
 

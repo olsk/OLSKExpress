@@ -4,7 +4,6 @@
  */
 
 var assert = require('assert');
-var kConstants = require('../kConstants/testing.main').ROCOTestingConstants();
 
 var cacheLibrary = require('./main');
 var filesystemLibrary = require('../ROCOFilesystem/main');
@@ -14,7 +13,7 @@ var pathPackage = require('path');
 var mkdirpPackage = require('mkdirp');
 
 var testRootDirectory = pathPackage.join(
-	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
+	filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.cache'));
 
 var ROCOTestingCacheObjectValid = function() {
