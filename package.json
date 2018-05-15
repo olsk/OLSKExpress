@@ -31,7 +31,7 @@
     "underscore": "latest"
   },
   "devDependencies": {
-    "// DOTENV": null,
+    "// .ENV": null,
     "dotenv": "latest"
   }
 }
