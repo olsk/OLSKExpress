@@ -10,21 +10,6 @@ exports.ROCOTestingConstants = function() {
 	return {
 		ROCOTestingLiveDirectoryAbsolutePath: filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 
-		OLSKTestingRouteObjectValid: function() {
-			return {
-				OLSKRoutePath: '/alpha',
-				OLSKRouteMethod: 'get',
-				OLSKRouteFunction: function() {},
-			};
-		},
-
-		OLSKTestingRouteObjectValidRedirect: function() {
-			return {
-				OLSKRoutePath: '/alpha',
-				OLSKRouteRedirect: '/bravo',
-			};
-		},
-
 		ROCOTestingTaskObjectValid: function(array) {
 			return {
 				ROCOTaskFireTimeInterval: 0.01,
