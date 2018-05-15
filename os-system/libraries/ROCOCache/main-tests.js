@@ -17,6 +17,12 @@ var testRootDirectory = pathPackage.join(
 	kConstants.ROCOTestingLiveDirectoryAbsolutePath,
 	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('alpha.cache'));
 
+var ROCOTestingCacheObjectValid = function() {
+	return {
+		'test-1990-01-01T21:09:00.000Z': 12.34,
+	};
+};
+
 describe('ROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject', function testROCOCacheValueWithCallbackFunctionCacheKeyAndCacheObject() {
 
 	it('throws error if param1 not function', function() {
@@ -75,18 +81,18 @@ describe('ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory',
 	it('throws error if param2 not string', function() {
 		assert.throws(function() {
 			mkdirpPackage.sync(testRootDirectory);
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(kConstants.ROCOTestingCacheObjectValid(), null, testRootDirectory);
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(ROCOTestingCacheObjectValid(), null, testRootDirectory);
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('throws error if param3 not real directory', function() {
 		assert.throws(function() {
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(kConstants.ROCOTestingCacheObjectValid(), 'alpha', pathPackage.join(testRootDirectory, 'alpha'));
+			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(ROCOTestingCacheObjectValid(), 'alpha', pathPackage.join(testRootDirectory, 'alpha'));
 		}, /ROCOErrorInputInvalid/);
 	});
 
 	it('returns null and writes data for json', function() {
-		var cacheObject = kConstants.ROCOTestingCacheObjectValid();
+		var cacheObject = ROCOTestingCacheObjectValid();
 		mkdirpPackage.sync(testRootDirectory);
 		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, 'alpha', testRootDirectory), null);
 
@@ -131,7 +137,7 @@ describe('ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory', function te
 	it('returns cacheObject', function() {
 		mkdirpPackage.sync(testRootDirectory);
 
-		var cacheObject = kConstants.ROCOTestingCacheObjectValid();
+		var cacheObject = ROCOTestingCacheObjectValid();
 		assert.strictEqual(cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, 'alpha', testRootDirectory), null);
 		assert.deepEqual(cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory('alpha', testRootDirectory), cacheObject);
 	});

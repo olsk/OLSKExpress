@@ -10,12 +10,6 @@ exports.ROCOTestingConstants = function() {
 	return {
 		ROCOTestingLiveDirectoryAbsolutePath: filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
 
-		ROCOTestingCacheObjectValid: function() {
-			return {
-				'test-1990-01-01T21:09:00.000Z': 12.34,
-			};
-		},
-
 		OLSKTestingRouteObjectValid: function() {
 			return {
 				OLSKRoutePath: '/alpha',
