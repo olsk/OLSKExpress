@@ -29,5 +29,9 @@
 
     "// UTILITIES": null,
     "underscore": "latest"
+  },
+  "devDependencies": {
+    "// DOTENV": null,
+    "dotenv": "latest"
   }
 }
