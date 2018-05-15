@@ -238,6 +238,26 @@ var OLSKStartControllersArray = [];
 	});
 })();
 
+//# OLSKStartSharedMiddlewares
+
+(function OLSKStartSharedMiddlewares() {
+	OLSKLive.OLSKSharedMiddlewares = {};
+
+	underscorePackage.chain(OLSKStartControllersArray)
+		.filter(function(e) {
+			return typeof e.OLSKControllerSharedMiddlewares === 'function';
+		})
+		.map(function(e) {
+			return e.OLSKControllerSharedMiddlewares();
+		})
+		.filter(function(e) {
+			return typeof e === 'object';
+		})
+		.each(function(e) {
+			Object.assign(OLSKLive.OLSKSharedMiddlewares, e);
+		});
+})();
+
 //# OLSKStartPublicDirectory
 
 (function OLSKStartPublicDirectory() {
