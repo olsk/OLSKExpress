@@ -412,40 +412,45 @@ var OLSKStartInternationalizationTranslations = {};
 		} : function(req, res, next) {
 			res.locals.OLSKSharedActiveRouteConstant = key;
 
-			// If the request language not available, pass
+			var routeNext = function() {
+				// If the request language not available, pass
 
-			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
-				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
-				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
+					res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+					res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
-				return next();
-			}
-
-			// If the request language available, set current language
-
-			if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
-				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
-			}
-
-			// If no request language and preferred language available and not current, redirect
-
-			var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
-			if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
-				var pathSegments = req.url.split('/');
-				pathSegments.splice(1, 0, preferredLanguage);
-
-				if (pathSegments.slice(-1).pop() === '') {
-					pathSegments.pop();
+					return next();
 				}
 
-				return res.redirect(307, pathSegments.join('/'));
+				// If the request language available, set current language
+
+				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+					req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
+				}
+
+				// If no request language and preferred language available and not current, redirect
+
+				var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
+				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
+					var pathSegments = req.url.split('/');
+					pathSegments.splice(1, 0, preferredLanguage);
+
+					if (pathSegments.slice(-1).pop() === '') {
+						pathSegments.pop();
+					}
+
+					return res.redirect(307, pathSegments.join('/'));
+				}
+
+				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
+
+				return e.OLSKRouteFunction(req, res, next);
 			}
 
-			res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
-			res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
-			res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
+			return routeNext();
 
-			return e.OLSKRouteFunction(req, res, next);
 		});
 	});
 
