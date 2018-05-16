@@ -1,6 +1,8 @@
 {
   "name": "OldSkool",
+  "version": "0.0.0",
   "private": true,
+  "main": "start.js",
   "dependencies": {
     "// EXPRESS": null,
     "express": "latest",
@@ -21,7 +23,7 @@
     "// YAML": null,
     "js-yaml": "latest",
 
-    "// UTILITIES": null,
+    "// SYNTAX": null,
     "underscore": "latest"
   }
 }
