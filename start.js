@@ -20,22 +20,22 @@ var OLSKLive = {};
 	var filesystemLibrary = require('OLSKFilesystem');
 
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
-	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding())) || {};
+	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {};
 
 	OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
 		return kOLSKLiveRootDirectoryAbsolutePath;
 	};
 
 	OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
-		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemAppDirectoryName());
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKFilesystemAppDirectoryName());
 	};
 
 	OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemPublicDirectoryName());
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKFilesystemPublicDirectoryName());
 	};
 
 	OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function() {
-		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.ROCOFilesystemSystemDirectoryName());
+		return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKFilesystemSystemDirectoryName());
 	};
 
 	OLSKLive.OLSKLiveSettings = function() {
@@ -63,9 +63,9 @@ var OLSKLive = {};
 	var filesystemLibrary = require('OLSKFilesystem');
 
 	expressApp.use(function(req, res, next) {
-		req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist;
-		req.OLSKFilesystemIsRealFilePath = filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath;
-		req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath;
+		req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist;
+		req.OLSKFilesystemIsRealFilePath = filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath;
+		req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath;
 
 		next();
 	});
@@ -78,11 +78,11 @@ var OLSKLive = {};
 
 	expressApp.use(function(req, res, next) {
 		req.OLSKCacheWriteWithCacheKeyAndCacheObject = function(cacheKey, cacheObject) {
-			cacheLibrary.ROCOCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+			cacheLibrary.OLSKCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
 		req.OLSKCacheReadForCacheKey = function(cacheKey) {
-			return cacheLibrary.ROCOCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+			return cacheLibrary.OLSKCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 		};
 
 		next();
@@ -147,7 +147,7 @@ var OLSKLive = {};
 	// Create string format macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.OLSKFormatted = require('OLSKString').ROCOStringWithFormat;
+		res.locals.OLSKFormatted = require('OLSKString').OLSKStringWithFormat;
 
 		next();
 	});
@@ -164,8 +164,8 @@ var OLSKStartControllersArray = [];
 	var filesystemLibrary = require('OLSKFilesystem');
 
 	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
-		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
-		if (!filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
+		var itemPath = pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), dirItem, 'controller.js');
+		if (!filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 			return;
 		}
 
@@ -338,10 +338,10 @@ var OLSKStartInternationalizationTranslations = {};
 
 	underscorePackage.chain(fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()))
 		.map(function(e) {
-			return pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), e);
+			return pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), e);
 		})
 		.filter(function(e) {
-			return filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e));
+			return filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e));
 		})
 		.each(function(dirPath) {
 			underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), dirPath)))
@@ -352,7 +352,7 @@ var OLSKStartInternationalizationTranslations = {};
 				.each(function(e) {
 					OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
 						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
-						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.ROCOFilesystemDefaultTextEncoding()))
+						jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.OLSKFilesystemDefaultTextEncoding()))
 					);
 				});
 		});
@@ -605,6 +605,6 @@ var OLSKStartInternationalizationTranslations = {};
 			return e.OLSKControllerTasks();
 		})
 		.flatten()
-		.filter(tasksLibrary.ROCOTasksInputDataIsTaskObject)
-		.each(tasksLibrary.ROCOTasksTimeoutForTaskObject);
+		.filter(tasksLibrary.OLSKTasksInputDataIsTaskObject)
+		.each(tasksLibrary.OLSKTasksTimeoutForTaskObject);
 })();
