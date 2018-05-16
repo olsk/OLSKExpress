@@ -144,6 +144,8 @@ module.exports = function(rootDirectory) {
 	//# OLSKStartTemplatingEngine
 
 	(function OLSKStartTemplatingEngine() {
+		var stringLibrary = require('OLSKString');
+
 		expressApp.set('view engine', 'ejs');
 		expressApp.set('views', [
 			OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
@@ -152,7 +154,7 @@ module.exports = function(rootDirectory) {
 		// Create string format macro
 
 		expressApp.use(function(req, res, next) {
-			res.locals.OLSKFormatted = require('OLSKString').OLSKStringWithFormat;
+			res.locals.OLSKFormatted = stringLibrary.OLSKStringWithFormat;
 
 			next();
 		});
