@@ -506,11 +506,7 @@ module.exports = function(rootDirectory) {
 			} : function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 
-				var routeNext = function(inputData) {
-					if (inputData instanceof Error) {
-						return next(inputData);
-					}
-
+				var routeNext = function() {
 					// If the request language not available, pass
 
 					if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
@@ -550,17 +546,35 @@ module.exports = function(rootDirectory) {
 				if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
 					var callbackArray = [];
 
+					// Create chain of callbacks (in reverse order)
 					e.OLSKRouteMiddlewares.map(function(e) {
 						return OLSKLive.OLSKSharedMiddlewares[e];
 					}).filter(function(e) {
 						return !!e;
-					}).reverse().forEach(function(e, i) {
+					}).reverse().forEach(function(middleware, i) {
 						return callbackArray.push(function() {
-							return e(req, res, i === 0 ? routeNext : callbackArray.slice(-1).pop());
+
+							// Call middleware
+							return middleware(req, res, function(inputData) {
+
+								// If middleware returns next(Error), pass to error handler
+								if (inputData instanceof Error) {
+									return next(inputData);
+								}
+
+								// If last middleware, continue routing
+								if (i === 0) {
+									return routeNext();
+								}
+
+								// Continue to next middleware
+								return callbackArray.pop()();
+							});
 						});
 					});
 
-					return callbackArray.slice(-1).pop()();
+					// Call the first middleware to start the chain
+					return callbackArray.pop()();
 				}
 
 				return routeNext();
