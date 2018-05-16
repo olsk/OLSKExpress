@@ -10,7 +10,7 @@ module.exports = function(inputData) {
 
 	var expressApp = expressPackage();
 
-	//# OLSKLive
+	//# OLSKStartLive
 
 	var OLSKLive = {};
 
