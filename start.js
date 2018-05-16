@@ -22,7 +22,7 @@ module.exports = function(rootDirectory) {
 		var filesystemLibrary = require('OLSKFilesystem');
 
 		if (!filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(rootDirectory)) {
-			throw new Error('OLSKErrorRootDirectoryDoesNotExist');
+			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
 		var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {};
@@ -436,7 +436,7 @@ module.exports = function(rootDirectory) {
 					if (inputData instanceof Error) {
 						return next(inputData);
 					}
-					
+
 					// If the request language not available, pass
 
 					if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
