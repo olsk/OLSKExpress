@@ -170,11 +170,12 @@ module.exports = function(rootDirectory) {
 
 		fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 			var itemPath = pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), dirItem, 'controller.js');
+			
 			if (!filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 				return;
 			}
 
-			OLSKStartControllersArray.push(Object.assign(require('../' + itemPath), {
+			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath)), {
 				OLSKControllerSlug: function() {
 					return dirItem;
 				},
