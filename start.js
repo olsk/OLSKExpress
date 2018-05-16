@@ -556,45 +556,29 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			res.status(404);
 
-			if (process.env.NODE_ENV !== 'production') {
-				return res.type('txt').send('Not found'); // #localize
-			}
-
-			if (req.accepts('html')) {
+			if (process.env.NODE_ENV === 'production') {
 				return res.render(res.locals.OLSKSharedPageControllerSlug + '/404', {
 					// url: req.url,
 				});
 			}
 
-			if (req.accepts('json')) {
-				return res.send({
-					error: 'Not found', // #localize
-				});
-			}
+			return res.send({
+				error: 'Not found', // #localize
+			});
 		});
 
 		expressApp.use(function(err, req, res, next) {
 			res.status(err.status || 500);
 
-			if (process.env.NODE_ENV !== 'production') {
-				return res.send('<pre>' + JSON.stringify({
-					error: err
-				}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
-			}
-
-			if (req.accepts('html')) {
+			if (process.env.NODE_ENV === 'production') {
 				return res.render(res.locals.OLSKSharedPageControllerSlug + '/500', {
 					// url: req.url,
 				});
 			}
 
-			if (req.accepts('json')) {
-				return res.send({
-					error: 'System error', // #localize
-				});
-			}
-
-			return res.type('txt').send('System error'); // #localize
+			return res.send('<pre>' + JSON.stringify({
+				error: err
+			}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
 		});
 	})();
 
