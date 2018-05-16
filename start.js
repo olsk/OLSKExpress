@@ -17,7 +17,7 @@ var OLSKLive = {};
 	var pathPackage = require('path');
 	var jsYAMLPackage = require('js-yaml');
 
-	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+	var filesystemLibrary = require('OLSKFilesystem');
 
 	var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
 	var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.ROCOFilesystemDefaultTextEncoding())) || {};
@@ -60,7 +60,7 @@ var OLSKLive = {};
 //# OLSKStartFilesystem
 
 (function OLSKStartFilesystem() {
-	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+	var filesystemLibrary = require('OLSKFilesystem');
 
 	expressApp.use(function(req, res, next) {
 		req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist;
@@ -74,7 +74,7 @@ var OLSKLive = {};
 //# OLSKStartCache
 
 (function OLSKStartCache() {
-	var cacheLibrary = require('./libraries/ROCOCache/main');
+	var cacheLibrary = require('OLSKCache');
 
 	expressApp.use(function(req, res, next) {
 		req.OLSKCacheWriteWithCacheKeyAndCacheObject = function(cacheKey, cacheObject) {
@@ -147,7 +147,7 @@ var OLSKLive = {};
 	// Create string format macro
 
 	expressApp.use(function(req, res, next) {
-		res.locals.OLSKFormatted = require('./libraries/ROCOString/main').ROCOStringWithFormat;
+		res.locals.OLSKFormatted = require('OLSKString').ROCOStringWithFormat;
 
 		next();
 	});
@@ -161,7 +161,7 @@ var OLSKStartControllersArray = [];
 	var fsPackage = require('fs');
 	var pathPackage = require('path');
 
-	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
+	var filesystemLibrary = require('OLSKFilesystem');
 
 	fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 		var itemPath = pathPackage.join(filesystemLibrary.ROCOFilesystemAppDirectoryName(), dirItem, 'controller.js');
@@ -281,8 +281,8 @@ var OLSKStartInternationalizationTranslations = {};
 	var fsPackage = require('fs');
 	var jsYAMLPackage = require('js-yaml');
 
-	var filesystemLibrary = require('./libraries/ROCOFilesystem/main');
-	var internationalLibrary = require('./libraries/OLSKInternational/main');
+	var filesystemLibrary = require('OLSKFilesystem');
+	var internationalLibrary = require('OLSKInternational');
 
 	// Aggregate unique languages specified in controller routes
 
@@ -374,7 +374,7 @@ var OLSKStartInternationalizationTranslations = {};
 	var expressRouter = require('express').Router();
 	var underscorePackage = require('underscore');
 
-	var routingLibrary = require('./libraries/OLSKRouting/main');
+	var routingLibrary = require('OLSKRouting');
 
 	var allRoutes = {};
 
@@ -595,7 +595,7 @@ var OLSKStartInternationalizationTranslations = {};
 (function OLSKStartTasks() {
 	var underscorePackage = require('underscore');
 
-	var tasksLibrary = require('./libraries/ROCOTasks/main');
+	var tasksLibrary = require('OLSKTasks');
 
 	underscorePackage.chain(OLSKStartControllersArray)
 		.filter(function(e) {

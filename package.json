@@ -24,6 +24,13 @@
     "js-yaml": "latest",
 
     "// SYNTAX": null,
-    "underscore": "latest"
+    "underscore": "latest",
+
+    "// LIBRARIES": null,
+    "OLSKFilesystem": "git@github.com:olsk/OLSKFilesystem.git",
+    "OLSKCache": "git@github.com:olsk/OLSKCache.git",
+    "OLSKInternational": "git@github.com:olsk/OLSKInternational.git",
+    "OLSKRouting": "git@github.com:olsk/OLSKRouting.git",
+    "OLSKTasks": "git@github.com:olsk/OLSKTasks.git"
   }
 }
