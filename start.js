@@ -679,4 +679,18 @@ module.exports = function(rootDirectory) {
 			.each(tasksLibrary.OLSKTasksTimeoutForTaskObject);
 	})();
 
+	//# OLSKStartCleanup
+
+	(function OLSKStartCleanup() {
+		function cleanup() {
+			OLSKStartSharedConnectionsCleanupFunctionsArray.forEach(function(e) {
+				e();
+			});
+			process.exit(0);
+		};
+
+		process.on('SIGINT', cleanup);
+		process.on('SIGTERM', cleanup);
+	})();
+
 };
