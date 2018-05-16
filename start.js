@@ -472,7 +472,7 @@ module.exports = function(rootDirectory) {
 				if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
 					var callbackArray = [];
 
-					e.OLSKRouteMiddlewares.forEach(function(e) {
+					e.OLSKRouteMiddlewares.map(function(e) {
 						return OLSKLive.OLSKSharedMiddlewares[e];
 					}).filter(function(e) {
 						return !!e;
