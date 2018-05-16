@@ -185,6 +185,80 @@ module.exports = function(rootDirectory) {
 		});
 	})();
 
+	//# OLSKStartSharedConnections
+
+	var OLSKStartSharedConnectionsCleanupFunctionsArray = [];
+
+	(function OLSKStartSharedConnections() {
+		var OLSKSharedConnections = {};
+
+		OLSKStartControllersArray
+			.filter(function(e) {
+				return typeof e.OLSKControllerSharedConnections === 'function';
+			})
+			.map(function(e) {
+				return e.OLSKControllerSharedConnections();
+			})
+			.filter(function(e) {
+				return typeof e === 'object';
+			})
+			.forEach(function(e) {
+				Object.assign(OLSKSharedConnections, e);
+			});
+
+		var OLSKConnectionObjects = {};
+
+		Object.keys(OLSKSharedConnections).forEach(function(e) {
+			if (typeof OLSKSharedConnections[e] !== 'object') {
+				throw new Error('OLSKErrorConnectionMissingObject', e);
+			}
+
+			if (typeof OLSKSharedConnections[e].OLSKConnectionCleanup !== 'function') {
+				throw new Error('OLSKErrorConnectionMissingCleanup', e);
+			}
+
+			if (typeof OLSKSharedConnections[e].OLSKConnectionInitializer !== 'function') {
+				throw new Error('OLSKErrorConnectionMissingInitializer', e);
+			}
+
+			OLSKConnectionObjects[e] = {
+				OLSKConnectionName: e,
+				OLSKConnectionAttempted: false,
+				OLSKConnectionError: undefined,
+				OLSKConnectionClient: undefined,
+			};
+
+			OLSKSharedConnections[e].OLSKConnectionInitializer(function(error, client) {
+				OLSKConnectionObjects[e].OLSKConnectionAttempted = true;
+				
+				if (error) {
+					OLSKConnectionObjects[e].OLSKConnectionError = error;
+					return;
+				}
+
+				OLSKConnectionObjects[e].OLSKConnectionClient = client;
+
+				OLSKStartSharedConnectionsCleanupFunctionsArray.push(function() {
+					OLSKSharedConnections[e].OLSKConnectionCleanup(client);
+				});
+			});
+		});
+
+		function OLSKSharedConnectionFor(inputData) {
+			if (Object.keys(OLSKConnectionObjects).indexOf(inputData) === -1) {
+				throw new Error('OLSKErrorConnectionDoesNotExist');
+			}
+
+			return OLSKConnectionObjects[inputData];
+		};
+
+		expressApp.use(function(req, res, next) {
+			req.OLSKSharedConnectionFor = OLSKSharedConnectionFor;
+
+			next();
+		});
+	})();
+
 	//# OLSKStartSharedLocals
 
 	(function OLSKStartSharedLocals() {
