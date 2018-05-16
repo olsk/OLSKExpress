@@ -432,7 +432,11 @@ module.exports = function(rootDirectory) {
 			} : function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 
-				var routeNext = function() {
+				var routeNext = function(inputData) {
+					if (inputData instanceof Error) {
+						return next(inputData);
+					}
+					
 					// If the request language not available, pass
 
 					if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
