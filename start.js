@@ -4,8 +4,8 @@
  * MIT Licensed
  */
 
-module.exports = function(inputData) {
-	
+module.exports = function(rootDirectory) {
+
 	var expressPackage = require('express');
 
 	var expressApp = expressPackage();
@@ -21,11 +21,14 @@ module.exports = function(inputData) {
 
 		var filesystemLibrary = require('OLSKFilesystem');
 
-		var kOLSKLiveRootDirectoryAbsolutePath = pathPackage.join(__dirname, '/../');
-		var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(kOLSKLiveRootDirectoryAbsolutePath, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {};
+		if (!filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(rootDirectory)) {
+			throw new Error('rootDirectory does not exist');
+		}
+
+		var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {};
 
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
-			return kOLSKLiveRootDirectoryAbsolutePath;
+			return rootDirectory;
 		};
 
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
