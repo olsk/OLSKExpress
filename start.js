@@ -172,7 +172,7 @@ module.exports = function(rootDirectory) {
 
 		fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
 			var itemPath = pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), dirItem, 'controller.js');
-			
+
 			if (!filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
 				return;
 			}
@@ -472,7 +472,7 @@ module.exports = function(rootDirectory) {
 				if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
 					var callbackArray = [];
 
-					var routeMiddlewares = e.OLSKRouteMiddlewares.map(function(e) {
+					e.OLSKRouteMiddlewares.forEach(function(e) {
 						return OLSKLive.OLSKSharedMiddlewares[e];
 					}).filter(function(e) {
 						return !!e;
@@ -617,4 +617,4 @@ module.exports = function(rootDirectory) {
 			.each(tasksLibrary.OLSKTasksTimeoutForTaskObject);
 	})();
 
-}
+};
