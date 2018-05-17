@@ -519,7 +519,9 @@ module.exports = function(rootDirectory) {
 				}).filter(function(e) {
 					return !!e;
 				}).forEach(function(middleware) {
-					expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
+					return underscorePackage.flatten([middleware]).forEach(function() {
+						return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
+					});
 				});
 			}
 
