@@ -230,7 +230,7 @@ module.exports = function(rootDirectory) {
 
 			OLSKSharedConnections[e].OLSKConnectionInitializer(function(error, client) {
 				OLSKConnectionObjects[e].OLSKConnectionAttempted = true;
-				
+
 				if (error) {
 					OLSKConnectionObjects[e].OLSKConnectionError = error;
 					return;
@@ -250,7 +250,7 @@ module.exports = function(rootDirectory) {
 			}
 
 			return OLSKConnectionObjects[inputData];
-		};
+		}
 
 		expressApp.use(function(req, res, next) {
 			req.OLSKSharedConnectionFor = OLSKSharedConnectionFor;
@@ -507,87 +507,58 @@ module.exports = function(rootDirectory) {
 				});
 			}
 
-
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 
 				next();
 			});
 
-			return expressRouter[e.OLSKRouteMethod](function(req, res, next) {
-				var routeNext = function() {
-					// If the request language not available, pass
+			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
+				e.OLSKRouteMiddlewares.map(function(e) {
+					return OLSKLive.OLSKSharedMiddlewares[e];
+				}).filter(function(e) {
+					return !!e;
+				}).forEach(function(middleware) {
+					expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
+				});
+			}
 
-					if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
-						res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
-						res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+			return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 
-						return next();
-					}
+				// If the request language not available, pass
 
-					// If the request language available, set current language
-
-					if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
-						req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
-					}
-
-					// If no request language and preferred language available and not current, redirect
-
-					var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
-					if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
-						var pathSegments = req.url.split('/');
-						pathSegments.splice(1, 0, preferredLanguage);
-
-						if (pathSegments.slice(-1).pop() === '') {
-							pathSegments.pop();
-						}
-
-						return res.redirect(307, pathSegments.join('/'));
-					}
-
+				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
 					res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 					res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
-					res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
 
-					return e.OLSKRouteFunction(req, res, next);
-				};
-
-				if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
-					var callbackArray = [];
-
-					// Create chain of callbacks (in reverse order)
-					e.OLSKRouteMiddlewares.map(function(e) {
-						return OLSKLive.OLSKSharedMiddlewares[e];
-					}).filter(function(e) {
-						return !!e;
-					}).reverse().forEach(function(middleware, i) {
-						return callbackArray.push(function() {
-
-							// Call middleware
-							return middleware(req, res, function(inputData) {
-
-								// If middleware returns next(Error), pass to error handler
-								if (inputData instanceof Error) {
-									return next(inputData);
-								}
-
-								// If last middleware, continue routing
-								if (i === 0) {
-									return routeNext();
-								}
-
-								// Continue to next middleware
-								return callbackArray.pop()();
-							});
-						});
-					});
-
-					// Call the first middleware to start the chain
-					return callbackArray.pop()();
+					return next();
 				}
 
-				return routeNext();
+				// If the request language available, set current language
 
+				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+					req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
+				}
+
+				// If no request language and preferred language available and not current, redirect
+
+				var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
+				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
+					var pathSegments = req.url.split('/');
+					pathSegments.splice(1, 0, preferredLanguage);
+
+					if (pathSegments.slice(-1).pop() === '') {
+						pathSegments.pop();
+					}
+
+					return res.redirect(307, pathSegments.join('/'));
+				}
+
+				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
+				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
+
+				return e.OLSKRouteFunction(req, res, next);
 			});
 		});
 
@@ -710,7 +681,7 @@ module.exports = function(rootDirectory) {
 				e();
 			});
 			process.exit(0);
-		};
+		}
 
 		process.on('SIGINT', cleanup);
 		process.on('SIGTERM', cleanup);
