@@ -492,7 +492,7 @@ module.exports = function(rootDirectory) {
 			next();
 		});
 
-		// Create routing middleware
+		// Create routing middlewares
 
 		Object.keys(allRoutes).forEach(function(key) {
 			var e = allRoutes[key];
@@ -501,11 +501,20 @@ module.exports = function(rootDirectory) {
 				return;
 			}
 
-			return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteRedirect ? function(req, res) {
-				return res.redirect(e.OLSKRouteRedirect);
-			} : function(req, res, next) {
+			if (e.OLSKRouteRedirect) {
+				return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res) {
+					return res.redirect(e.OLSKRouteRedirect);
+				});
+			}
+
+
+			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 
+				next();
+			});
+
+			return expressRouter[e.OLSKRouteMethod](function(req, res, next) {
 				var routeNext = function() {
 					// If the request language not available, pass
 
