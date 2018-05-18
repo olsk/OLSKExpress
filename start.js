@@ -174,7 +174,7 @@ module.exports = function(rootDirectory) {
 		}).forEach(function(e) {
 			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
 				OLSKControllerSlug: function() {
-					return pathPackage.dirname(e).split(pathPackage.sep).pop();
+					return pathPackage.dirname(e);
 				},
 			}));
 		});
