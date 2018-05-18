@@ -165,21 +165,16 @@ module.exports = function(rootDirectory) {
 	var OLSKStartControllersArray = [];
 
 	(function OLSKStartControllers() {
-		var fsPackage = require('fs');
+		var globPackage = require('glob');
 		var pathPackage = require('path');
 
-		var filesystemLibrary = require('OLSKFilesystem');
-
-		fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()).forEach(function(dirItem) {
-			var itemPath = pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), dirItem, 'controller.js');
-
-			if (!filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath))) {
-				return;
-			}
-
-			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), itemPath)), {
+		globPackage.sync('controller.js', {
+			matchBase: true,
+			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+		}).forEach(function(e) {
+			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
 				OLSKControllerSlug: function() {
-					return dirItem;
+					return pathPackage.dirname(e).split(pathPackage.sep).pop();
 				},
 			}));
 		});

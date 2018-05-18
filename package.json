@@ -7,6 +7,9 @@
     "// EXPRESS": null,
     "express": "latest",
 
+    "// FILE MATCHING": null,
+    "glob": "latest",
+
     "// SESSIONS": null,
     "cookie-session": "latest",
     "express-session": "latest",
