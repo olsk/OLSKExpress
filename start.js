@@ -419,14 +419,14 @@ module.exports = function(rootDirectory) {
 			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		})
 		.filter(function(e) {
-			return internationalLibrary.OLSKInternationalInputDataIsTranslationFilename(pathPackage.basename(e));
+			return internationalLibrary.OLSKInternationalInputDataIsTranslationFileBasename(pathPackage.basename(e));
 		})
 		.filter(function(e) {
-			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))) !== -1;
+			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))) !== -1;
 		})
 		.forEach(function(e) {
-			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))] = Object.assign(
-				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))],
+			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))] = Object.assign(
+				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))],
 				jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e), filesystemLibrary.OLSKFilesystemDefaultTextEncoding()))
 			);
 		});
