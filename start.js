@@ -354,6 +354,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartInternationalization() {
 		var underscorePackage = require('underscore');
+		var globPackage = require('glob');
 		var pathPackage = require('path');
 		var fsPackage = require('fs');
 		var jsYAMLPackage = require('js-yaml');
@@ -413,26 +414,22 @@ module.exports = function(rootDirectory) {
 
 		// Load translation strings into OLSKStartInternationalizationTranslations
 
-		underscorePackage.chain(fsPackage.readdirSync(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()))
-			.map(function(e) {
-				return pathPackage.join(filesystemLibrary.OLSKFilesystemAppDirectoryName(), e);
-			})
-			.filter(function(e) {
-				return filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), e));
-			})
-			.each(function(dirPath) {
-				underscorePackage.chain(fsPackage.readdirSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), dirPath)))
-					.filter(internationalLibrary.OLSKInternationalInputDataIsTranslationFilename)
-					.reject(function(e) {
-						return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)) === -1;
-					})
-					.each(function(e) {
-						OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)] = Object.assign(
-							OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(e)],
-							jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), pathPackage.join(dirPath, e)), filesystemLibrary.OLSKFilesystemDefaultTextEncoding()))
-						);
-					});
-			});
+		globPackage.sync('*i18n*.yaml', {
+			matchBase: true,
+			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+		})
+		.filter(function(e) {
+			return internationalLibrary.OLSKInternationalInputDataIsTranslationFilename(pathPackage.basename(e));
+		})
+		.filter(function(e) {
+			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))) !== -1;
+		})
+		.forEach(function(e) {
+			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))] = Object.assign(
+				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFilename(pathPackage.basename(e))],
+				jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e), filesystemLibrary.OLSKFilesystemDefaultTextEncoding()))
+			);
+		});
 
 		// Create translation string macro
 
