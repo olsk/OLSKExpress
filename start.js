@@ -10,6 +10,12 @@ module.exports = function(rootDirectory) {
 
 	var expressApp = expressPackage();
 
+	//# OLSKStartSecurity
+
+	(function OLSKStartSecurity() {
+		expressApp.disable('x-powered-by');
+	})();
+
 	//# OLSKStartLive
 
 	var OLSKLive = {};
