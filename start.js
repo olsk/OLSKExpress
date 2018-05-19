@@ -13,7 +13,11 @@ module.exports = function(rootDirectory) {
 	//# OLSKStartSecurity
 
 	(function OLSKStartSecurity() {
+		var helmetPackage = require('helmet');
+
 		expressApp.disable('x-powered-by');
+
+		expressApp.use(helmetPackage());
 	})();
 
 	//# OLSKStartLive
