@@ -625,15 +625,6 @@ module.exports = function(rootDirectory) {
 			next(err);
 		});
 
-		// If other languages available for route, show switcher
-		expressApp.use(function(err, req, res, next) {
-			if (req.OLSKSharedRequestLanguage && res.locals.OLSKSharedActiveRouteConstant) {
-				return res.render(res.locals.OLSKSharedPageControllerSlug + '/lang', {});
-			}
-
-			next(err);
-		});
-
 		// Call shared error handlers
 		OLSKStartControllersArray
 			.filter(function(e) {
