@@ -570,6 +570,27 @@ module.exports = function(rootDirectory) {
 		expressApp.use('/', expressRouter);
 	})();
 
+	//# OLSKStartSharedErrorHandlers
+
+	(function OLSKStartSharedErrorHandlers() {
+		OLSKStartControllersArray
+			.filter(function(e) {
+				return typeof e.OLSKControllerSharedErrorHandlers === 'function';
+			})
+			.map(function(e) {
+				return e.OLSKControllerSharedErrorHandlers();
+			})
+			.filter(function(e) {
+				return Array.isArray(e);
+			})
+			.reduce(function(array, e) {
+				return array.concat(e)
+			}, [])
+			.forEach(function(e) {
+				expressApp.use(e);
+			});
+	})();
+
 	//# OLSKStartServer
 
 	(function OLSKStartServer() {
