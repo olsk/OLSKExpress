@@ -68,7 +68,7 @@ module.exports = function(rootDirectory) {
 				res.locals.OLSKSharedDefaultPageDescription = OLSKLive.OLSKLiveSettings().OLSKDefaultPageDescription;
 			}
 
-			next();
+			return next();
 		});
 	})();
 
@@ -83,7 +83,7 @@ module.exports = function(rootDirectory) {
 			req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath;
 			req.OLSKFilesystemSafeBasenameFor = filesystemLibrary.OLSKFilesystemSafeBasenameFor;
 
-			next();
+			return next();
 		});
 	})();
 
@@ -101,7 +101,7 @@ module.exports = function(rootDirectory) {
 				return cacheLibrary.OLSKCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 			};
 
-			next();
+			return next();
 		});
 	})();
 
@@ -167,7 +167,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			res.locals.OLSKFormatted = stringLibrary.OLSKStringWithFormat;
 
-			next();
+			return next();
 		});
 	})();
 
@@ -261,7 +261,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			req.OLSKSharedConnectionFor = OLSKSharedConnectionFor;
 
-			next();
+			return next();
 		});
 	})();
 
@@ -287,7 +287,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals);
 
-			next();
+			return next();
 		});
 	})();
 
@@ -315,7 +315,7 @@ module.exports = function(rootDirectory) {
 				return OLSKLive.OLSKSharedConstants[constantString];
 			};
 
-			next();
+			return next();
 		});
 	})();
 
@@ -327,7 +327,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			req.OLSKSharedPrivateConstants = OLSKLive.OLSKSharedPrivateConstants;
 
-			next();
+			return next();
 		});
 	})();
 
@@ -403,7 +403,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			req.OLSKSharedCurrentLanguage = Object.keys(OLSKStartInternationalizationTranslations).shift();
 
-			next();
+			return next();
 		});
 
 		// Set OLSKSharedRequestLanguage if possible
@@ -413,14 +413,14 @@ module.exports = function(rootDirectory) {
 			var firstElement = pathSegments.splice(1, 1).pop();
 
 			if (Object.keys(OLSKStartInternationalizationTranslations).indexOf(firstElement) === -1) {
-				next();
+				return next();
 				return;
 			}
 
 			req.OLSKSharedRequestLanguage = firstElement;
 			req.url = pathSegments.length <= 1 ? '/' : pathSegments.join('/');
 
-			next();
+			return next();
 		});
 
 		// Load translation strings into OLSKStartInternationalizationTranslations
@@ -449,7 +449,7 @@ module.exports = function(rootDirectory) {
 				return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 			};
 
-			next();
+			return next();
 		});
 	})();
 
@@ -492,7 +492,7 @@ module.exports = function(rootDirectory) {
 				};
 			}
 
-			next();
+			return next();
 		});
 
 		// Create routing middlewares
@@ -513,7 +513,7 @@ module.exports = function(rootDirectory) {
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 
-				next();
+				return next();
 			});
 
 			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
@@ -613,7 +613,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(function(req, res, next) {
 			res.status(404);
 
-			next(new Error('OLSKRoutingErrorNotFound'));
+			return next(new Error('OLSKRoutingErrorNotFound'));
 		});
 
 		// If the request language available, set current language
@@ -622,7 +622,7 @@ module.exports = function(rootDirectory) {
 				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 			}
 
-			next(err);
+			return next(err);
 		});
 
 		// Call shared error handlers
