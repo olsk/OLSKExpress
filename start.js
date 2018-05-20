@@ -521,8 +521,8 @@ module.exports = function(rootDirectory) {
 					return OLSKLive.OLSKSharedMiddlewares[e];
 				}).filter(function(e) {
 					return !!e;
-				}).forEach(function(middleware) {
-					return underscorePackage.flatten([middleware]).forEach(function() {
+				}).forEach(function(middlewares) {
+					return underscorePackage.flatten([middlewares]).forEach(function(middleware) {
 						return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
 					});
 				});
