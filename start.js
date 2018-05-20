@@ -611,33 +611,30 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartErrorHandling() {
 		expressApp.use(function(req, res, next) {
-			// If the request language available, set current language
+			res.status(404);
 
+			next(new Error('OLSKRoutingErrorNotFound'));
+		});
+
+		// If the request language available, set current language
+		expressApp.use(function(err, req, res, next) {
 			if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
 				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 			}
 
-			// If other languages available for route, show switcher
+			next(err);
+		});
 
+		// If other languages available for route, show switcher
+		expressApp.use(function(err, req, res, next) {
 			if (req.OLSKSharedRequestLanguage && res.locals.OLSKSharedActiveRouteConstant) {
 				return res.render(res.locals.OLSKSharedPageControllerSlug + '/lang', {});
 			}
 
-			next();
-		});
-
-		expressApp.use(function(req, res, next) {
-			res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug;
-
-			next();
-		});
-
-		expressApp.use(function(err, req, res, next) {
-			res.locals.OLSKSharedPageControllerSlug = OLSKLive.OLSKLiveSettings().OLSKErrorControllerSlug;
-
 			next(err);
 		});
 
+		// Call shared error handlers
 		OLSKStartControllersArray
 			.filter(function(e) {
 				return typeof e.OLSKControllerSharedErrorHandlers === 'function';
@@ -655,32 +652,22 @@ module.exports = function(rootDirectory) {
 				expressApp.use(e);
 			});
 
-		expressApp.use(function(req, res, next) {
-			res.status(404);
-
-			if (process.env.NODE_ENV === 'production') {
-				return res.render(res.locals.OLSKSharedPageControllerSlug + '/404', {
-					// url: req.url,
-				});
+		// Call 404 handler
+		expressApp.use(function(err, req, res, next) {
+			if (res.statusCode !== 404) {
+				return next(err);
 			}
 
-			return res.send({
-				error: 'Not found', // #localize
-			});
+			return res.send(err.message);
 		});
 
+		// Call final handler
 		expressApp.use(function(err, req, res, next) {
-			res.status(err.status || 500);
-
-			if (process.env.NODE_ENV === 'production') {
-				return res.render(res.locals.OLSKSharedPageControllerSlug + '/500', {
-					// url: req.url,
-				});
+			if (res.statusCode === 200) {
+				res.status(500);
 			}
 
-			return res.send('<pre>' + JSON.stringify({
-				error: err
-			}, null, 4) + '</pre><pre>' + err.stack + '</pre>');
+			return res.send('<pre>' + err.stack + '</pre>');
 		});
 	})();
 
