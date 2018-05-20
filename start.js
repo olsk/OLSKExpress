@@ -18,6 +18,16 @@ module.exports = function(rootDirectory) {
 		expressApp.disable('x-powered-by');
 
 		expressApp.use(helmetPackage());
+
+		if (process.env.OLSK_SECURITY_HTTPS_ALWAYS) {
+			expressApp.use(function(req, res, next) {
+				if (req.secure) {
+					return next();
+				}
+
+				return res.redirect('https://' + req.get('host') + req.originalUrl);
+			});
+		}
 	})();
 
 	//# OLSKStartLive
