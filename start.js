@@ -81,6 +81,7 @@ module.exports = function(rootDirectory) {
 			req.OLSKFilesystemMakeDirIfDoesNotExist = filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist;
 			req.OLSKFilesystemIsRealFilePath = filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath;
 			req.OLSKFilesystemIsRealDirectoryPath = filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath;
+			req.OLSKFilesystemSafeBasenameFor = filesystemLibrary.OLSKFilesystemSafeBasenameFor;
 
 			next();
 		});
