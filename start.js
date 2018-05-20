@@ -706,15 +706,15 @@ module.exports = function(rootDirectory) {
 	//# OLSKStartCleanup
 
 	(function OLSKStartCleanup() {
-		function cleanup() {
+		var callback = function () {
 			OLSKStartSharedConnectionsCleanupFunctionsArray.forEach(function(e) {
 				e();
 			});
 			process.exit(0);
-		}
+		};
 
-		process.on('SIGINT', cleanup);
-		process.on('SIGTERM', cleanup);
+		process.on('SIGINT', callback);
+		process.on('SIGTERM', callback);
 	})();
 
 };
