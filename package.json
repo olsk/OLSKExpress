@@ -33,11 +33,11 @@
     "underscore": "latest",
 
     "// LIBRARIES": null,
-    "OLSKCache": "git@github.com:olsk/OLSKCache.git",
-    "OLSKFilesystem": "git@github.com:olsk/OLSKFilesystem.git",
-    "OLSKInternational": "git@github.com:olsk/OLSKInternational.git",
-    "OLSKRouting": "git@github.com:olsk/OLSKRouting.git",
-    "OLSKString": "git@github.com:olsk/OLSKString.git",
-    "OLSKTasks": "git@github.com:olsk/OLSKTasks.git"
+    "OLSKCache": "olsk/OLSKCache",
+    "OLSKFilesystem": "olsk/OLSKFilesystem",
+    "OLSKInternational": "olsk/OLSKInternational",
+    "OLSKRouting": "olsk/OLSKRouting",
+    "OLSKString": "olsk/OLSKString",
+    "OLSKTasks": "olsk/OLSKTasks"
   }
 }
