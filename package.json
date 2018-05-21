@@ -5,7 +5,7 @@
   "main": "start.js",
   "dependencies": {
     "// EXPRESS": null,
-    "express": "latest",
+    "express": "4.x",
 
     "// SECURITY": null,
     "helmet": "latest",
