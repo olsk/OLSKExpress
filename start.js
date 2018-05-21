@@ -522,6 +522,7 @@ module.exports = function(rootDirectory) {
 
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
+				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
 
 				return next();
 			});
@@ -571,7 +572,6 @@ module.exports = function(rootDirectory) {
 
 				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
-				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
 
 				return e.OLSKRouteFunction(req, res, next);
 			});
