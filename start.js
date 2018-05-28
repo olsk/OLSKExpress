@@ -45,7 +45,11 @@ module.exports = function(rootDirectory) {
 			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
-		var kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {};
+		var kOLSKLiveSettings = {};
+
+		if (filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'))) {
+			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {}
+		}
 
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
 			return rootDirectory;
