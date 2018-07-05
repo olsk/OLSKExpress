@@ -151,7 +151,7 @@ module.exports = function(rootDirectory) {
 		expressApp.use(expressSessionPackage({
 			secret: OLSKLive.OLSKLiveSettings().OLSKSessionSecret,
 			resave: false,
-			saveUninitialized: true
+			saveUninitialized: true,
 		}));
 	})();
 
@@ -162,7 +162,7 @@ module.exports = function(rootDirectory) {
 
 		expressApp.use(bodyParserPackage.json());
 		expressApp.use(bodyParserPackage.urlencoded({
-			extended: true
+			extended: true,
 		}));
 	})();
 
