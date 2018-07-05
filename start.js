@@ -25,7 +25,7 @@ module.exports = function(rootDirectory) {
 					return next();
 				}
 
-				return res.redirect('https://' + req.get('host') + req.originalUrl);
+				return res.redirect(307, 'https://' + req.get('host') + req.originalUrl);
 			});
 		}
 	})();
