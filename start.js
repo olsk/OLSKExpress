@@ -277,6 +277,8 @@ module.exports = function(rootDirectory) {
 
 			return next();
 		});
+
+		OLSKLive.OLSKSharedConnectionFor = OLSKSharedConnectionFor;
 	})();
 
 	//# OLSKStartSharedLocals
@@ -696,7 +698,11 @@ module.exports = function(rootDirectory) {
 			})
 			.flatten()
 			.filter(tasksLibrary.OLSKTasksInputDataIsTaskObject)
-			.each(tasksLibrary.OLSKTasksTimeoutForTaskObject);
+			.each(function(e) {
+				tasksLibrary.OLSKTasksTimeoutForTaskObject(e, {
+					OLSKLive: OLSKLive,
+				});
+			});
 	})();
 
 	//# OLSKStartCleanup
