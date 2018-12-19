@@ -682,7 +682,7 @@ module.exports = function(rootDirectory) {
 				res.status(500);
 			}
 
-			return res.send('<pre>' + err.stack + '</pre>');
+			return res.send('<!DOCTYPE html><html><head><title>error</title></head><body><pre>' + err.stack.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</pre></body></html>');
 		});
 	})();
 
