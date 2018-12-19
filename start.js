@@ -496,6 +496,10 @@ module.exports = function(rootDirectory) {
 		// Create canonical link macros
 
 		expressApp.use(function(req, res, next) {
+			res.locals.OLSKRouteObjectFor = function(routeConstant) {
+				return allRoutes[routeConstant];
+			};
+
 			res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
 				return routingLibrary.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
 			};
