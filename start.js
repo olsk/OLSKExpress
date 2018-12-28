@@ -501,7 +501,7 @@ module.exports = function(rootDirectory) {
 			};
 
 			res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
-				return routingLibrary.OLSKRoutingCanonicalPathWithRouteObjectAndOptionalParams(allRoutes[routeConstant], optionalParams);
+				return routingLibrary.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams(allRoutes[routeConstant].OLSKRoutePath, optionalParams);
 			};
 
 			res.locals.OLSKCanonicalSubstitutionFunctionFor = function(routeConstant) {
