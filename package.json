@@ -1,37 +1,28 @@
 {
   "name": "OldSkool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "main": "start.js",
   "dependencies": {
     "// EXPRESS": null,
     "express": "4.x",
-
     "// SECURITY": null,
     "helmet": "latest",
-    
     "// FILE MATCHING": null,
     "glob": "latest",
-    
     "// SESSIONS": null,
     "cookie-session": "latest",
     "express-session": "latest",
-    
     "// POST DATA": null,
     "body-parser": "latest",
-    
     "// TEMPLATES": null,
     "ejs": "latest",
-    
     "// FILESYSTEM": null,
     "mkdirp": "latest",
-    
     "// YAML": null,
     "js-yaml": "latest",
-    
     "// SYNTAX": null,
     "underscore": "latest",
-    
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
     "OLSKFilesystem": "olsk/OLSKFilesystem",
@@ -39,7 +30,6 @@
     "OLSKRouting": "olsk/OLSKRouting",
     "OLSKString": "olsk/OLSKString",
     "OLSKTasks": "olsk/OLSKTasks",
-    
     "// I sacrifice myself for the commas of others": null
   }
 }
