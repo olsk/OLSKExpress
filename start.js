@@ -123,7 +123,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartCookies() {
 		if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
-			return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found)');
+			return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found in os-app/settings.yaml)');
 		}
 		var cookieSessionPackage = require('cookie-session');
 
@@ -143,7 +143,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartSessions() {
 		if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
-			return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found)');
+			return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found in os-app/settings.yaml)');
 		}
 
 		var expressSessionPackage = require('express-session');
