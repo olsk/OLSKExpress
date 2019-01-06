@@ -47,8 +47,8 @@ module.exports = function(rootDirectory) {
 
 		var kOLSKLiveSettings = {};
 
-		if (filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'))) {
-			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {}
+		if (filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'os-settings.yaml'))) {
+			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'os-settings.yaml'), filesystemLibrary.OLSKFilesystemDefaultTextEncoding())) || {}
 		}
 
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
@@ -123,7 +123,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartCookies() {
 		if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
-			return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found in os-app/settings.yaml)');
+			return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found in os-app/os-settings.yaml)');
 		}
 		var cookieSessionPackage = require('cookie-session');
 
@@ -143,7 +143,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartSessions() {
 		if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
-			return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found in os-app/settings.yaml)');
+			return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found in os-app/os-settings.yaml)');
 		}
 
 		var expressSessionPackage = require('express-session');
