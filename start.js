@@ -709,6 +709,8 @@ module.exports = function(rootDirectory) {
 			.flatten()
 			.filter(tasksLibrary.OLSKTasksInputDataIsTaskObject)
 			.each(function(e) {
+				console.info('OLSKStartTasks', e.OLSKTaskName);
+				
 				tasksLibrary.OLSKTasksTimeoutForTaskObject(e, {
 					OLSKLive: OLSKLive,
 				});
