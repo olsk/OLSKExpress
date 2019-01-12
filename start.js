@@ -106,14 +106,20 @@ module.exports = function(rootDirectory) {
 	(function OLSKStartCache() {
 		var cacheLibrary = require('OLSKCache');
 
-		expressApp.use(function(req, res, next) {
-			req.OLSKCacheWriteWithCacheKeyAndCacheObject = function(cacheKey, cacheObject) {
+		let cacheFunctions = {
+			OLSKCacheWriteWithCacheKeyAndCacheObject: function(cacheKey, cacheObject) {
 				cacheLibrary.OLSKCacheWriteCacheObjectFileWithCacheObjectCacheKeyAndRootDirectory(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
-			};
+			},
 
-			req.OLSKCacheReadForCacheKey = function(cacheKey) {
+			OLSKCacheReadForCacheKey: function(cacheKey) {
 				return cacheLibrary.OLSKCacheReadCacheObjectFileWithCacheKeyAndRootDirectory(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
-			};
+			},
+		};
+
+		Object.assign(OLSKLive, cacheFunctions);
+
+		expressApp.use(function(req, res, next) {
+			Object.assign(req, cacheFunctions);
 
 			return next();
 		});
