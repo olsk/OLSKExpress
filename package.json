@@ -23,9 +23,6 @@
     "// TEMPLATES": null,
     "ejs": "latest",
     
-    "// FILESYSTEM": null,
-    "mkdirp": "latest",
-    
     "// YAML": null,
     "js-yaml": "latest",
     
