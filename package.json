@@ -29,13 +29,18 @@
     "// SYNTAX": null,
     "underscore": "latest",
     
+    "// TASKS": null,
+    "OLSKTasks": "olsk/OLSKTasks",
+    
+    "// EXPOSE API": null,
+    "OLSKString": "olsk/OLSKString",
+    
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
     "OLSKFilesystem": "olsk/OLSKFilesystem",
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKRouting": "olsk/OLSKRouting",
     "OLSKString": "olsk/OLSKString",
-    "OLSKTasks": "olsk/OLSKTasks",
     
     "// I sacrifice myself for the commas of others": null
   }

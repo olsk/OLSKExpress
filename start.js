@@ -388,7 +388,7 @@ module.exports = function(rootDirectory) {
 	var OLSKStartInternationalizationTranslations = {};
 
 	(function OLSKStartInternationalization() {
-		var underscorePackage = require('underscore');
+		const underscorePackage = require('underscore');
 		var globPackage = require('glob');
 		var pathPackage = require('path');
 		var fsPackage = require('fs');
@@ -481,7 +481,7 @@ module.exports = function(rootDirectory) {
 
 	(function OLSKStartRouting() {
 		var expressRouter = require('express').Router();
-		var underscorePackage = require('underscore');
+		const underscorePackage = require('underscore');
 
 		var routingLibrary = require('OLSKRouting');
 
@@ -697,9 +697,9 @@ module.exports = function(rootDirectory) {
 	//# OLSKStartTasks
 
 	(function OLSKStartTasks() {
-		var underscorePackage = require('underscore');
+		const underscorePackage = require('underscore');
 
-		var tasksLibrary = require('OLSKTasks');
+		const OLSKTasks = require('OLSKTasks');
 
 		underscorePackage.chain(OLSKStartControllersArray)
 			.filter(function(e) {
@@ -709,11 +709,11 @@ module.exports = function(rootDirectory) {
 				return e.OLSKControllerTasks();
 			})
 			.flatten()
-			.filter(tasksLibrary.OLSKTasksInputDataIsTaskObject)
+			.filter(OLSKTasks.OLSKTasksInputDataIsTaskObject)
 			.each(function(e) {
 				console.info('OLSKStartTasks', e.OLSKTaskName);
 				
-				tasksLibrary.OLSKTasksTimeoutForTaskObject(e, {
+				OLSKTasks.OLSKTasksTimeoutForTaskObject(e, {
 					OLSKLive: OLSKLive,
 				});
 			});
