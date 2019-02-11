@@ -43,5 +43,8 @@
     "OLSKString": "olsk/OLSKString",
     
     "// I sacrifice myself for the commas of others": null
+  },
+  "devDependencies": {
+    "supertest": "latest"
   }
 }
