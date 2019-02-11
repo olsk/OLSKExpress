@@ -11,7 +11,7 @@ const kTesting = {
   },
 };
 
-describe('public', function () {
+describe.skip('public', function () {
 
   it('returns 404 if not found', function () {
     return supertestPackage(kTesting.StubApp())
@@ -36,7 +36,7 @@ describe('app', function () {
       .expect(404);
   });
 
-  it.only('returns 200 if declared', function () {
+  it('returns 200 if declared', function () {
     return supertestPackage(kTesting.StubApp())
       .get('/alfa-bravo/charlie.txt')
       .expect('Content-Type', /text/)
