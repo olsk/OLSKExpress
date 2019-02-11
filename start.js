@@ -585,6 +585,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartPublicDirectory
 
 	(function OLSKStartPublicDirectory() {
+		return;
 		expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
 			redirect: false,
 		}));
