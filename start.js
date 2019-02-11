@@ -1,14 +1,6 @@
-/*!
- * OldSkool
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
-
 module.exports = function (rootDirectory, optionsObject = {}) {
-
-	var expressPackage = require('express');
-
-	var expressApp = expressPackage();
+	const expressPackage = require('express');
+	const expressApp = expressPackage();
 
 	//# OLSKStartSecurity
 
