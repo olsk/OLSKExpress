@@ -12,28 +12,11 @@ const kTesting = {
   },
 };
 
-describe.skip('public', function () {
+describe('OLSKStartStaticFiles', function () {
 
-  it('returns 404 if not found', function () {
+  it('returns 404 if undeclared', function () {
     return supertestPackage(kTesting.StubApp())
-      .get('/bravo.txt')
-      .expect(404);
-  });
-
-  it('returns 200', function () {
-    return supertestPackage(kTesting.StubApp())
-      .get('/alfa.txt')
-      .expect('Content-Type', /text/)
-      .expect(200, 'bravo');
-  });
-
-});
-
-describe('app', function () {
-
-  it('returns 500 if undeclared', function () {
-    return supertestPackage(kTesting.StubApp())
-      .get('/echo.js')
+      .get('/alfa-bravo/echo.js')
       .expect(404);
   });
 
@@ -46,23 +29,23 @@ describe('app', function () {
 
   it('returns 200 if prefixed with ui-', function () {
     return supertestPackage(kTesting.StubApp())
-      .get('/ui-golf.js')
+      .get('/alfa-bravo/ui-golf.js')
       .expect('Content-Type', /javascript/)
       .expect(200, 'hotel');
   });
 
   it('returns 200 if inside ui-* folder', function () {
     return supertestPackage(kTesting.StubApp())
-      .get('/ui-text/indigo.txt')
+      .get('/alfa-bravo/ui-india/juliet.txt')
       .expect('Content-Type', /text/)
-      .expect(200, 'juliet');
+      .expect(200, 'kilo');
   });
 
   it('returns 200 if inside declared folder', function () {
     return supertestPackage(kTesting.StubApp())
-      .get('/_shared/external/kilo.json')
+      .get('/lima/mike.json')
       .expect('Content-Type', /json/)
-      .expect(200, '{"llama":1}');
+      .expect(200, '{"november":1}');
   });
 
 });
