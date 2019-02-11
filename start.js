@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-module.exports = function(rootDirectory) {
+module.exports = function (rootDirectory, optionsObject = {}) {
 
 	var expressPackage = require('express');
 
@@ -601,6 +601,10 @@ module.exports = function(rootDirectory) {
 	//# OLSKStartServer
 
 	(function OLSKStartServer() {
+		if (optionsObject.OLSKOptionDisableServer) {
+			return;
+		}
+
 		var serverObject = expressApp.listen(process.env.PORT || '3000', process.env.HOST);
 
 		serverObject.on('error', function(error) {
