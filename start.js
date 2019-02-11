@@ -63,10 +63,6 @@ module.exports = function(rootDirectory) {
 			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKFilesystemPublicDirectoryName());
 		};
 
-		OLSKLive.OLSKLiveSystemDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKFilesystemSystemDirectoryName());
-		};
-
 		OLSKLive.OLSKLivePathJoin = pathPackage.join;
 
 		OLSKLive.OLSKLiveSettings = function() {
