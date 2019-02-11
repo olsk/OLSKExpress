@@ -20,6 +20,12 @@ describe('OLSKStartStaticFiles', function () {
       .expect(404);
   });
 
+  it('returns 404 if undeclared (controller.js)', function () {
+    return supertestPackage(kTesting.StubApp())
+      .get('/alfa-bravo/controller.js')
+      .expect(404);
+  });
+
   it('returns 200 if declared', function () {
     return supertestPackage(kTesting.StubApp())
       .get('/alfa-bravo/charlie.txt')
