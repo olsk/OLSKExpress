@@ -7,6 +7,7 @@ const kTesting = {
       OLSKOptionSkipCookies: true,
       OLSKOptionSkipSessions: true,
       OLSKOptionSkipServer: true,
+      OLSKOptionSkipCleanup: true,
     });
   },
 };

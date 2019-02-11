@@ -792,6 +792,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartCleanup
 
 	(function OLSKStartCleanup() {
+		if (optionsObject.OLSKOptionSkipCleanup) {
+			return;
+		}
+
 		var callback = function () {
 			OLSKStartSharedConnectionsCleanupFunctionsArray.forEach(function(e) {
 				e();
