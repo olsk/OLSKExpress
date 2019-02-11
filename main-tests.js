@@ -4,7 +4,9 @@ const mainModule = require('./start.js');
 const kTesting = {
   StubApp: function() {
     return mainModule(__dirname, {
-      OLSKOptionDisableServer: true,
+      OLSKOptionSkipCookies: true,
+      OLSKOptionSkipSessions: true,
+      OLSKOptionSkipServer: true,
     });
   },
 };
