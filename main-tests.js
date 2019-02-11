@@ -1,5 +1,5 @@
 const supertestPackage = require('supertest');
-const mainModule = require('./start.js');
+const mainModule = require('./main.js');
 
 const kTesting = {
   StubApp: function() {

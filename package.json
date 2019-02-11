@@ -2,7 +2,7 @@
   "name": "OldSkool",
   "version": "0.0.4",
   "private": true,
-  "main": "start.js",
+  "main": "main.js",
   "dependencies": {
     "// EXPRESS": null,
     "express": "4.x",
