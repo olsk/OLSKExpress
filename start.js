@@ -795,4 +795,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		process.on('SIGTERM', callback);
 	})();
 
+	return expressApp;
+
 };
