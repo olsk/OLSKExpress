@@ -607,10 +607,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		let OLSKStartStaticAssetsArray = OLSKStartControllersArray
 			.filter(function(e) {
-				return typeof e.OLSKControllerStaticAssets === 'function';
+				return typeof e.OLSKControllerStaticAssetFiles === 'function';
 			})
 			.map(function(e) {
-				return e.OLSKControllerStaticAssets().map(function (path) {
+				return e.OLSKControllerStaticAssetFiles().map(function (path) {
 					return pathPackage.join(e.OLSKControllerSlug(), path);
 				});
 			})
@@ -620,10 +620,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		let OLSKStartStaticAssetsFoldersArray = OLSKStartControllersArray
 			.filter(function(e) {
-				return typeof e.OLSKControllerStaticAssetFolders === 'function';
+				return typeof e.OLSKControllerSharedStaticAssetFolders === 'function';
 			})
 			.map(function(e) {
-				return e.OLSKControllerStaticAssetFolders();
+				return e.OLSKControllerSharedStaticAssetFolders();
 			})
 			.reduce(function(coll, e) {
 				return coll.concat(e);

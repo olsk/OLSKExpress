@@ -1,14 +1,14 @@
-//_ OLSKControllerStaticAssets
+//_ OLSKControllerStaticAssetFiles
 
-exports.OLSKControllerStaticAssets = function() {
+exports.OLSKControllerStaticAssetFiles = function() {
 	return [
 		'charlie.txt',
 	];
 };
 
-//_ OLSKControllerStaticAssetFolders
+//_ OLSKControllerSharedStaticAssetFolders
 
-exports.OLSKControllerStaticAssetFolders = function() {
+exports.OLSKControllerSharedStaticAssetFolders = function() {
 	return [
 		'lima',
 	];
