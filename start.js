@@ -590,6 +590,68 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			redirect: false,
 		}));
 	})();
+
+	//# OLSKStartStaticFiles
+
+	(function OLSKStartStaticFiles() {
+		const pathPackage = require('path');
+		const OLSKFilesystem = require('OLSKFilesystem');
+
+		let OLSKStartStaticAssetsArray = OLSKStartControllersArray
+			.filter(function(e) {
+				return typeof e.OLSKControllerStaticAssets === 'function';
+			})
+			.map(function(e) {
+				return e.OLSKControllerStaticAssets().map(function (path) {
+					return pathPackage.join(e.OLSKControllerSlug(), path);
+				});
+			})
+			.reduce(function(coll, e) {
+				return coll.concat(e);
+			}, []);
+
+		let OLSKStartStaticAssetsFoldersArray = OLSKStartControllersArray
+			.filter(function(e) {
+				return typeof e.OLSKControllerStaticAssetFolders === 'function';
+			})
+			.map(function(e) {
+				return e.OLSKControllerStaticAssetFolders();
+			})
+			.reduce(function(coll, e) {
+				return coll.concat(e);
+			}, []);
+
+		expressApp.use(function(req, res, next) {
+			if (!OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), req.url))) {
+				return next();
+			}
+
+			if (pathPackage.basename(req.url).match(/^ui-/)) {
+				return next();
+			}
+
+			if (pathPackage.dirname(req.url).match(/ui-/)) {
+				return next();
+			}
+
+			if (OLSKStartStaticAssetsArray.indexOf(req.url.slice(1)) !== -1) {
+				return next();
+			}
+
+			if (OLSKStartStaticAssetsFoldersArray.filter(function (e) {
+				return req.url.match(e);
+			}).length) {
+				return next();
+			}
+
+			return next(new Error('OLSKRoutingErrorNotFound'));
+		});
+
+		expressApp.use(expressPackage.static(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()), {
+			redirect: false,
+		}));
+	})();
+
 	//# OLSKStartServer
 
 	(function OLSKStartServer() {
