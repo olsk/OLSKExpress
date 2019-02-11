@@ -696,6 +696,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartErrorHandling
 
 	(function OLSKStartErrorHandling() {
+		expressApp.use(function(err, req, res, next) {
+			if (err.message === 'OLSKRoutingErrorNotFound') {
+				return next();
+			}
+
+			return next(err);
+		});
+
 		expressApp.use(function(req, res, next) {
 			res.status(404);
 
