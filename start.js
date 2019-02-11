@@ -363,14 +363,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			});
 	})();
 
-	//# OLSKStartPublicDirectory
-
-	(function OLSKStartPublicDirectory() {
-		expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
-			redirect: false,
-		}));
-	})();
-
 	//# OLSKStartInternationalization
 
 	var OLSKStartInternationalizationTranslations = {};
@@ -590,6 +582,13 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		expressApp.use('/', expressRouter);
 	})();
 
+	//# OLSKStartPublicDirectory
+
+	(function OLSKStartPublicDirectory() {
+		expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
+			redirect: false,
+		}));
+	})();
 	//# OLSKStartServer
 
 	(function OLSKStartServer() {
