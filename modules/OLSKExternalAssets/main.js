@@ -22,6 +22,8 @@ exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
+	OLSKFilesystem.OLSKFilesystemHelpDeleteDirectoryRecursive(param3);
+
 	return globPackage.sync('**/*.+(js|css)', {
 		matchBase: true,
 		cwd: param2,

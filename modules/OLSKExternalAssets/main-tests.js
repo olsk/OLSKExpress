@@ -55,6 +55,11 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
   it('returns undefined', function () {
   	assert.strictEqual(mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
 	});
+	
+  it.skip('clears directory', function () {
+  	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
+	});
 
 	context('declared', function () {
 
