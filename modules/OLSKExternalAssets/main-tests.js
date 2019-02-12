@@ -56,12 +56,24 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
   	assert.strictEqual(mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
 	});
 	
-  it.skip('clears directory', function () {
+  it('clears directory', function () {
   	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
   	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
 	});
 
-	context('declared', function () {
+	context('if not declared', function () {
+
+		beforeEach(function () {
+			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+		});
+	
+	  it('copies nothing', function () {
+	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('zulu/xylophone.js')), false);
+		});
+
+	});
+
+	context('if declared', function () {
 
 		beforeEach(function () {
 			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
