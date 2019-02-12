@@ -91,6 +91,9 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
 		});
 	
+	  it('excludes others', function () {
+	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
+		});
 
 	});
 
