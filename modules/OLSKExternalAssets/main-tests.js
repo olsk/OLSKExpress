@@ -86,6 +86,11 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 	  it('copies .css', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/echo.css')), true);
 		});
+	
+	  it('copies .map', function () {
+	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
+		});
+	
 
 	});
 

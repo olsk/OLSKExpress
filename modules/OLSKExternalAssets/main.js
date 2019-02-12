@@ -24,7 +24,7 @@ exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 
 	OLSKFilesystem.OLSKFilesystemHelpDeleteDirectoryRecursive(param3);
 
-	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css)`, {
+	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css|map)`, {
 		matchBase: true,
 		cwd: param2,
 	}).forEach(function(e) {
