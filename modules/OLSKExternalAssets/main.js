@@ -1,3 +1,6 @@
+const globPackage = require('glob');
+const fsPackage = require('fs');
+const pathPackage = require('path');
 const OLSKFilesystem = require('OLSKFilesystem');
 
 //_ OLSKExternalAssetsCopyAssetsFromTo
@@ -19,7 +22,11 @@ exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	if (!OLSKFilesystem.OLSKFilesystemInputDataIsRealDirectoryPath(param3)) {
-		throw new Error('OLSKErrorInputInvalid');
-	}
+	return globPackage.sync('**/*.+(js|css)', {
+		matchBase: true,
+		cwd: param2,
+	}).forEach(function(e) {;
+		OLSKFilesystem.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(pathPackage.dirname(pathPackage.join(param3, e)));
+		fsPackage.copyFileSync(pathPackage.join(param2, e), pathPackage.join(param3, e));
+	});
 };
