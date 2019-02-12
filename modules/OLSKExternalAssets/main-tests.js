@@ -79,8 +79,12 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
-	  it('copies js files', function () {
+	  it('copies .js', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), true);
+		});
+	
+	  it('copies .css', function () {
+	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/echo.css')), true);
 		});
 
 	});
