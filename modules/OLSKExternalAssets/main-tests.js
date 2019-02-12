@@ -67,7 +67,7 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
-	  it('copies nothing', function () {
+	  it('ignores', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('zulu/xylophone.js')), false);
 		});
 
@@ -91,7 +91,7 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
 		});
 	
-	  it('excludes others', function () {
+	  it('ignores', function () {
 	  	assert.strictEqual(OLSKFilesystem.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
 		});
 
