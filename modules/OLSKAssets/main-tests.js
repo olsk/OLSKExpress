@@ -58,7 +58,7 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	
   it('clears directory', function () {
   	mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
-  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
+  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
 	});
 
 	context('if not declared', function () {
@@ -68,7 +68,7 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 		});
 	
 	  it('ignores', function () {
-	  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('zulu/xylophone.js')), false);
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('zulu/xylophone.js')), false);
 		});
 
 	});
@@ -80,19 +80,19 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 		});
 	
 	  it('copies .js', function () {
-	  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), true);
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), true);
 		});
 	
 	  it('copies .css', function () {
-	  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/echo.css')), true);
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/echo.css')), true);
 		});
 	
 	  it('copies .map', function () {
-	  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
 		});
 	
 	  it('ignores', function () {
-	  	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
 		});
 
 	});

@@ -39,7 +39,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		var kOLSKLiveSettings = {};
 
-		if (filesystemLibrary.OLSKDiskInputDataIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppDirectoryName(), 'os-settings.yaml'))) {
+		if (filesystemLibrary.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppDirectoryName(), 'os-settings.yaml'))) {
 			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppDirectoryName(), 'os-settings.yaml'), filesystemLibrary.OLSKDiskDefaultTextEncoding())) || {}
 		}
 
@@ -83,7 +83,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		expressApp.use(function(req, res, next) {
 			req.OLSKDiskMakeDirIfDoesNotExist = filesystemLibrary.OLSKDiskCreateFolder;
-			req.OLSKDiskIsRealFilePath = filesystemLibrary.OLSKDiskInputDataIsRealFilePath;
+			req.OLSKDiskIsRealFilePath = filesystemLibrary.OLSKDiskIsRealFilePath;
 			req.OLSKDiskIsRealDirectoryPath = filesystemLibrary.OLSKDiskIsRealFolderPath;
 			req.OLSKDiskSafeBasenameFor = filesystemLibrary.OLSKDiskSafeBasenameFor;
 
@@ -621,7 +621,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			}, []);
 
 		expressApp.use(function(req, res, next) {
-			if (!OLSKDisk.OLSKDiskInputDataIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), req.url))) {
+			if (!OLSKDisk.OLSKDiskIsRealFilePath(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), req.url))) {
 				return next();
 			}
 
