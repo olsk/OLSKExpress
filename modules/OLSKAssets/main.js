@@ -22,7 +22,7 @@ exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	OLSKDisk.OLSKDiskHelpDeleteDirectoryRecursive(param3);
+	OLSKDisk.OLSKDiskDeleteFolder(param3);
 
 	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css|map)`, {
 		matchBase: true,

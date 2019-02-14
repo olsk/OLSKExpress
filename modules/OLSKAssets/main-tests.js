@@ -18,7 +18,7 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 
 	afterEach(function() {
 		if (OLSKDisk.OLSKDiskInputDataIsRealDirectoryPath(kTesting.StubDestinationPath())) {
-			OLSKDisk.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubDestinationPath());
+			OLSKDisk.OLSKDiskDeleteFolder(kTesting.StubDestinationPath());
 		}
 	});
 
