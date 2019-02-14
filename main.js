@@ -82,7 +82,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var filesystemLibrary = require('OLSKDisk');
 
 		expressApp.use(function(req, res, next) {
-			req.OLSKDiskMakeDirIfDoesNotExist = filesystemLibrary.OLSKDiskHelpCreateDirectoryIfDoesNotExist;
+			req.OLSKDiskMakeDirIfDoesNotExist = filesystemLibrary.OLSKDiskCreateFolder;
 			req.OLSKDiskIsRealFilePath = filesystemLibrary.OLSKDiskInputDataIsRealFilePath;
 			req.OLSKDiskIsRealDirectoryPath = filesystemLibrary.OLSKDiskInputDataIsRealDirectoryPath;
 			req.OLSKDiskSafeBasenameFor = filesystemLibrary.OLSKDiskSafeBasenameFor;

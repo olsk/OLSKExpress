@@ -28,7 +28,7 @@ exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		matchBase: true,
 		cwd: param2,
 	}).forEach(function(e) {
-		OLSKDisk.OLSKDiskHelpCreateDirectoryIfDoesNotExist(pathPackage.dirname(pathPackage.join(param3, e)));
+		OLSKDisk.OLSKDiskCreateFolder(pathPackage.dirname(pathPackage.join(param3, e)));
 		fsPackage.copyFileSync(pathPackage.join(param2, e), pathPackage.join(param3, e));
 	});
 };
