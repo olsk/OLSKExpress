@@ -14,7 +14,7 @@ const kTesting = {
 	},
 };
 
-describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
+describe('OLSKAssetsCopyAssetsFromTo', function () {
 
 	afterEach(function() {
 		if (OLSKDisk.OLSKDiskInputDataIsRealDirectoryPath(kTesting.StubDestinationPath())) {
@@ -24,47 +24,47 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 
   it('throws if param1 not array', function () {
     assert.throws(function () {
-    	mainModule.OLSKExternalAssetsCopyAssetsFromTo(null, 'alfa', 'bravo');
+    	mainModule.OLSKAssetsCopyAssetsFromTo(null, 'alfa', 'bravo');
     }, /OLSKErrorInputInvalid/);
   });
 
   it('throws if param2 not string', function () {
     assert.throws(function () {
-    	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], null, 'alfa');
+    	mainModule.OLSKAssetsCopyAssetsFromTo([], null, 'alfa');
     }, /OLSKErrorInputInvalid/);
   });
 
   it('throws if param3 not string', function () {
     assert.throws(function () {
-    	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], 'alfa', null);
+    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', null);
     }, /OLSKErrorInputInvalid/);
   });
 
   it('throws if param3 not real directory', function () {
     assert.throws(function () {
-    	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
+    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputInvalid/);
   });
 
   it('throws if param3 not real directory', function () {
     assert.throws(function () {
-    	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
+    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputInvalid/);
   });
 
   it('returns undefined', function () {
-  	assert.strictEqual(mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
+  	assert.strictEqual(mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
 	});
 	
   it('clears directory', function () {
-  	mainModule.OLSKExternalAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+  	mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
   	assert.strictEqual(OLSKDisk.OLSKDiskInputDataIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
 	});
 
 	context('if not declared', function () {
 
 		beforeEach(function () {
-			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+			mainModule.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
 	  it('ignores', function () {
@@ -76,7 +76,7 @@ describe('OLSKExternalAssetsCopyAssetsFromTo', function () {
 	context('if declared', function () {
 
 		beforeEach(function () {
-			mainModule.OLSKExternalAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+			mainModule.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
 	  it('copies .js', function () {

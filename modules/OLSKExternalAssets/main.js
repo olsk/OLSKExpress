@@ -3,9 +3,9 @@ const fsPackage = require('fs');
 const pathPackage = require('path');
 const OLSKDisk = require('OLSKDisk');
 
-//_ OLSKExternalAssetsCopyAssetsFromTo
+//_ OLSKAssetsCopyAssetsFromTo
 
-exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
+exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 	if (!Array.isArray(param1)) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
