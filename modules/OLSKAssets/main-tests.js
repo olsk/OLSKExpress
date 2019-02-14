@@ -17,7 +17,7 @@ const kTesting = {
 describe('OLSKAssetsCopyAssetsFromTo', function () {
 
 	afterEach(function() {
-		if (OLSKDisk.OLSKDiskInputDataIsRealDirectoryPath(kTesting.StubDestinationPath())) {
+		if (OLSKDisk.OLSKDiskIsRealFolderPath(kTesting.StubDestinationPath())) {
 			OLSKDisk.OLSKDiskDeleteFolder(kTesting.StubDestinationPath());
 		}
 	});

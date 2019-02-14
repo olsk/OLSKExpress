@@ -14,7 +14,7 @@ exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	if (!OLSKDisk.OLSKDiskInputDataIsRealDirectoryPath(param2)) {
+	if (!OLSKDisk.OLSKDiskIsRealFolderPath(param2)) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 

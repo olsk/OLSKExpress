@@ -33,7 +33,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		var filesystemLibrary = require('OLSKDisk');
 
-		if (!filesystemLibrary.OLSKDiskInputDataIsRealDirectoryPath(rootDirectory)) {
+		if (!filesystemLibrary.OLSKDiskIsRealFolderPath(rootDirectory)) {
 			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
@@ -84,7 +84,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		expressApp.use(function(req, res, next) {
 			req.OLSKDiskMakeDirIfDoesNotExist = filesystemLibrary.OLSKDiskCreateFolder;
 			req.OLSKDiskIsRealFilePath = filesystemLibrary.OLSKDiskInputDataIsRealFilePath;
-			req.OLSKDiskIsRealDirectoryPath = filesystemLibrary.OLSKDiskInputDataIsRealDirectoryPath;
+			req.OLSKDiskIsRealDirectoryPath = filesystemLibrary.OLSKDiskIsRealFolderPath;
 			req.OLSKDiskSafeBasenameFor = filesystemLibrary.OLSKDiskSafeBasenameFor;
 
 			return next();
