@@ -1,7 +1,7 @@
 const globPackage = require('glob');
 const fsPackage = require('fs');
 const pathPackage = require('path');
-const OLSKFilesystem = require('OLSKFilesystem');
+const OLSKDisk = require('OLSKDisk');
 
 //_ OLSKExternalAssetsCopyAssetsFromTo
 
@@ -14,7 +14,7 @@ exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	if (!OLSKFilesystem.OLSKFilesystemInputDataIsRealDirectoryPath(param2)) {
+	if (!OLSKDisk.OLSKDiskInputDataIsRealDirectoryPath(param2)) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
@@ -22,13 +22,13 @@ exports.OLSKExternalAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	OLSKFilesystem.OLSKFilesystemHelpDeleteDirectoryRecursive(param3);
+	OLSKDisk.OLSKDiskHelpDeleteDirectoryRecursive(param3);
 
 	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css|map)`, {
 		matchBase: true,
 		cwd: param2,
 	}).forEach(function(e) {
-		OLSKFilesystem.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(pathPackage.dirname(pathPackage.join(param3, e)));
+		OLSKDisk.OLSKDiskHelpCreateDirectoryIfDoesNotExist(pathPackage.dirname(pathPackage.join(param3, e)));
 		fsPackage.copyFileSync(pathPackage.join(param2, e), pathPackage.join(param3, e));
 	});
 };

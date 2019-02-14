@@ -37,7 +37,7 @@
     
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
-    "OLSKFilesystem": "olsk/OLSKFilesystem",
+    "OLSKDisk": "olsk/OLSKDisk",
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKRouting": "olsk/OLSKRouting",
     "OLSKString": "olsk/OLSKString",
