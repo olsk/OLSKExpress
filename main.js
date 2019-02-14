@@ -39,8 +39,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		var kOLSKLiveSettings = {};
 
-		if (filesystemLibrary.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppDirectoryName(), 'os-settings.yaml'))) {
-			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppDirectoryName(), 'os-settings.yaml'), filesystemLibrary.OLSKDiskDefaultTextEncoding())) || {}
+		if (filesystemLibrary.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppFolderName(), 'os-settings.yaml'))) {
+			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppFolderName(), 'os-settings.yaml'), filesystemLibrary.OLSKDiskDefaultTextEncoding())) || {}
 		}
 
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
@@ -48,11 +48,11 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		};
 
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskAppDirectoryName());
+			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskAppFolderName());
 		};
 
 		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskPublicDirectoryName());
+			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskPublicFolderName());
 		};
 
 		OLSKLive.OLSKLivePathJoin = pathPackage.join;
