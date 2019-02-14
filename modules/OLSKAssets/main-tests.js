@@ -40,13 +40,13 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
     }, /OLSKErrorInputInvalid/);
   });
 
-  it('throws if param3 not real directory', function () {
+  it('throws if param3 not real folder', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputInvalid/);
   });
 
-  it('throws if param3 not real directory', function () {
+  it('throws if param3 not real folder', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputInvalid/);
@@ -56,7 +56,7 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
   	assert.strictEqual(mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
 	});
 	
-  it('clears directory', function () {
+  it('clears folder', function () {
   	mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
   	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
 	});
