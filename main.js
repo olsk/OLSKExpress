@@ -81,7 +81,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var OLSKDisk = require('OLSKDisk');
 
 		expressApp.use(function(req, res, next) {
-			req.OLSKDiskMakeDirIfDoesNotExist = OLSKDisk.OLSKDiskCreateFolder;
+			req.OLSKDiskCreateFolder = OLSKDisk.OLSKDiskCreateFolder;
 			req.OLSKDiskIsRealFilePath = OLSKDisk.OLSKDiskIsRealFilePath;
 			req.OLSKDiskIsRealDirectoryPath = OLSKDisk.OLSKDiskIsRealFolderPath;
 			req.OLSKDiskSafeBasenameFor = OLSKDisk.OLSKDiskSafeBasenameFor;
