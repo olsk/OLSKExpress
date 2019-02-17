@@ -83,8 +83,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		expressApp.use(function(req, res, next) {
 			req.OLSKDiskCreateFolder = OLSKDisk.OLSKDiskCreateFolder;
 			req.OLSKDiskIsRealFilePath = OLSKDisk.OLSKDiskIsRealFilePath;
-			req.OLSKDiskIsRealDirectoryPath = OLSKDisk.OLSKDiskIsRealFolderPath;
+			req.OLSKDiskIsRealFolderPath = OLSKDisk.OLSKDiskIsRealFolderPath;
 			req.OLSKDiskSafeBasenameFor = OLSKDisk.OLSKDiskSafeBasenameFor;
+			req.OLSKDiskWriteFile = OLSKDisk.OLSKDiskWriteFile;
+			req.OLSKDiskReadFile = OLSKDisk.OLSKDiskReadFile;
 
 			return next();
 		});
