@@ -27,20 +27,19 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	var OLSKLive = {};
 
 	(function OLSKStartLive() {
-		var fsPackage = require('fs');
 		var pathPackage = require('path');
 		var jsYAMLPackage = require('js-yaml');
 
-		var filesystemLibrary = require('OLSKDisk');
+		const OLSKDisk = require('OLSKDisk');
 
-		if (!filesystemLibrary.OLSKDiskIsRealFolderPath(rootDirectory)) {
+		if (!OLSKDisk.OLSKDiskIsRealFolderPath(rootDirectory)) {
 			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
 		var kOLSKLiveSettings = {};
 
-		if (filesystemLibrary.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppFolderName(), 'os-settings.yaml'))) {
-			kOLSKLiveSettings = jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(rootDirectory, filesystemLibrary.OLSKDiskAppFolderName(), 'os-settings.yaml'), filesystemLibrary.OLSKDiskDefaultTextEncoding())) || {}
+		if (OLSKDisk.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, OLSKDisk.OLSKDiskAppFolderName(), 'os-settings.yaml'))) {
+			kOLSKLiveSettings = jsYAMLPackage.safeLoad(OLSKDisk.OLSKDiskReadFile(pathPackage.join(rootDirectory, OLSKDisk.OLSKDiskAppFolderName(), 'os-settings.yaml'))) || {}
 		}
 
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
@@ -48,11 +47,11 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		};
 
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskAppFolderName());
+			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk.OLSKDiskAppFolderName());
 		};
 
 		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), filesystemLibrary.OLSKDiskPublicFolderName());
+			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk.OLSKDiskPublicFolderName());
 		};
 
 		OLSKLive.OLSKLivePathJoin = pathPackage.join;
@@ -79,13 +78,13 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartFilesystem
 
 	(function OLSKStartFilesystem() {
-		var filesystemLibrary = require('OLSKDisk');
+		var OLSKDisk = require('OLSKDisk');
 
 		expressApp.use(function(req, res, next) {
-			req.OLSKDiskMakeDirIfDoesNotExist = filesystemLibrary.OLSKDiskCreateFolder;
-			req.OLSKDiskIsRealFilePath = filesystemLibrary.OLSKDiskIsRealFilePath;
-			req.OLSKDiskIsRealDirectoryPath = filesystemLibrary.OLSKDiskIsRealFolderPath;
-			req.OLSKDiskSafeBasenameFor = filesystemLibrary.OLSKDiskSafeBasenameFor;
+			req.OLSKDiskMakeDirIfDoesNotExist = OLSKDisk.OLSKDiskCreateFolder;
+			req.OLSKDiskIsRealFilePath = OLSKDisk.OLSKDiskIsRealFilePath;
+			req.OLSKDiskIsRealDirectoryPath = OLSKDisk.OLSKDiskIsRealFolderPath;
+			req.OLSKDiskSafeBasenameFor = OLSKDisk.OLSKDiskSafeBasenameFor;
 
 			return next();
 		});
@@ -379,10 +378,9 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		const underscorePackage = require('underscore');
 		var globPackage = require('glob');
 		var pathPackage = require('path');
-		var fsPackage = require('fs');
 		var jsYAMLPackage = require('js-yaml');
 
-		var filesystemLibrary = require('OLSKDisk');
+		var OLSKDisk = require('OLSKDisk');
 		var internationalLibrary = require('OLSKInternational');
 
 		// Aggregate unique languages specified in controller routes
@@ -450,7 +448,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		.forEach(function(e) {
 			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))] = Object.assign(
 				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))],
-				jsYAMLPackage.safeLoad(fsPackage.readFileSync(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e), filesystemLibrary.OLSKDiskDefaultTextEncoding()))
+				jsYAMLPackage.safeLoad(OLSKDisk.OLSKDiskReadFile(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)))
 			);
 		});
 
