@@ -692,6 +692,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 		serverObject.on('listening', function() {
 			console.info([
+				Date.now(),
 				'Listening on', [
 					process.env.HOST || serverObject.address().host,
 					serverObject.address().port,
