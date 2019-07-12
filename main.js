@@ -466,6 +466,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 			};
 
+			res.locals.OLSKLocalizedStringKeys = function() {
+				return Object.keys(OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
+			};
+
 			return next();
 		});
 	})();
