@@ -716,7 +716,12 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		require('https').createServer({
 		  key: require('fs').readFileSync(`${ process.env.OLSK_HTTPS_FILE_PATH_TEMPLATE }.key`),
 		  cert: require('fs').readFileSync(`${ process.env.OLSK_HTTPS_FILE_PATH_TEMPLATE }.crt`)
-		}, expressApp).listen(443);
+		}, expressApp).listen(443).on('listening', function (a, b, c) {
+			console.info([
+				'Listening on port',
+				this.address().port,
+			].join(' '));
+		});
 	})();
 
 	//# OLSKStartErrorHandling
