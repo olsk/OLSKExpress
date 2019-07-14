@@ -699,6 +699,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 			throw error;
 		});
+
 		serverObject.on('listening', function() {
 			console.info([
 				'Listening on', [
@@ -707,6 +708,15 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				].join(':'),
 			].join(' '));
 		});
+
+		if (!process.env.OLSK_HTTPS_FILE_PATH_TEMPLATE) {
+			return;
+		}
+
+		require('https').createServer({
+		  key: require('fs').readFileSync(`${ process.env.OLSK_HTTPS_FILE_PATH_TEMPLATE }.key`),
+		  cert: require('fs').readFileSync(`${ process.env.OLSK_HTTPS_FILE_PATH_TEMPLATE }.crt`)
+		}, expressApp).listen(443);
 	})();
 
 	//# OLSKStartErrorHandling
