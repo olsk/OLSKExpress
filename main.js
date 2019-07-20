@@ -415,7 +415,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return;
 		}
 
-		// Set OLSKSharedCurrentLanguage to default value
+		// Set OLSKSharedCurrentLanguage to fallback locale
 
 		expressApp.use(function(req, res, next) {
 			req.OLSKSharedCurrentLanguage = Object.keys(OLSKStartInternationalizationTranslations).shift();
