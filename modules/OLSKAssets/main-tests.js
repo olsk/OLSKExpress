@@ -95,6 +95,14 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/juliet.svelte')), true);
 		});
 	
+	  it('copies .yaml', function () {
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/kilo.en.yaml')), true);
+		});
+	
+	  it('copies .yml', function () {
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/kilo.fr.yml')), true);
+		});
+	
 	  it('ignores', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
 		});
