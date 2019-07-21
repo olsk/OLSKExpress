@@ -442,7 +442,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		// Load translation strings into OLSKStartInternationalizationTranslations
 
-		globPackage.sync('*i18n*.yaml', {
+		globPackage.sync('*i18n*.y*(a)ml', {
 			matchBase: true,
 			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		})
