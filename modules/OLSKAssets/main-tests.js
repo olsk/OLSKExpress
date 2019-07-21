@@ -91,6 +91,10 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/foxtrot.map')), true);
 		});
 	
+	  it('copies .svelte', function () {
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/juliet.svelte')), true);
+		});
+	
 	  it('ignores', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
 		});
