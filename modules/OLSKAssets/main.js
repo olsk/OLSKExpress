@@ -24,7 +24,7 @@ exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 
 	OLSKDisk.OLSKDiskDeleteFolder(param3);
 
-	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css|map|svelte|y*(a)ml)`, {
+	return globPackage.sync(`+(${ param1.join('|') })/**/*.+(js|css|map|svelte|y*(a)ml|svg)`, {
 		matchBase: true,
 		cwd: param2,
 	}).forEach(function(e) {

@@ -102,6 +102,9 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	  it('copies .yml', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/kilo.fr.yml')), true);
 		});
+	  it('copies .svg', function () {
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/ui-assets/llama.svg')), true);
+		});
 	
 	  it('ignores', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
