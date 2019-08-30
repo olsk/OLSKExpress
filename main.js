@@ -7,24 +7,30 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		Date.now(),
 	].join(' '));
 
-	//# OLSKStartSecurity
+	//# OLSKStartHelmet
 
-	(function OLSKStartSecurity() {
+	(function OLSKStartHelmet() {
 		var helmetPackage = require('helmet');
 
 		expressApp.disable('x-powered-by');
 
 		expressApp.use(helmetPackage());
+	})();
 
-		if (process.env.OLSK_SECURITY_HTTPS_ALWAYS) {
-			expressApp.use(function(req, res, next) {
-				if (req.secure) {
-					return next();
-				}
+	//# OLSKStartPreferHTTPS
 
-				return res.redirect(307, 'https://' + req.get('host') + req.originalUrl);
-			});
+	(function OLSKStartPreferHTTPS() {
+		if (!process.env.OLSK_SECURITY_HTTPS_ALWAYS) {
+			return
 		}
+
+		expressApp.use(function(req, res, next) {
+			if (req.secure) {
+				return next();
+			}
+
+			return res.redirect(307, 'https://' + req.get('host') + req.originalUrl);
+		});
 	})();
 
 	//# OLSKStartLive
