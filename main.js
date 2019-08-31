@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 module.exports = function (rootDirectory, optionsObject = {}) {
 	const expressPackage = require('express');
 	const expressApp = expressPackage();
