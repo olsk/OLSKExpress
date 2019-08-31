@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 module.exports = function (rootDirectory, optionsObject = {}) {
 	const expressPackage = require('express');
 	const expressApp = expressPackage();
@@ -213,9 +211,9 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		globPackage.sync('controller.js', {
 			matchBase: true,
-			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+			cwd: optionsObject.OLSKOptionControllersViaRootDirectory ? rootDirectory : OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		}).forEach(function(e) {
-			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
+			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(optionsObject.OLSKOptionControllersViaRootDirectory ? rootDirectory : OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
 				OLSKControllerSlug: function() {
 					return pathPackage.dirname(e);
 				},
