@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-require('./main.js')(__dirname, {
+require('./main.js')(process.cwd(), {
 	OLSKOptionControllersViaRootDirectory: true,
 });
