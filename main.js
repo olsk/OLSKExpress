@@ -3,8 +3,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	const expressApp = expressPackage();
 
 	console.info([
-		'Starting',
 		Date.now(),
+		rootDirectory,
 	].join(' '));
 
 	//# OLSKStartHelmet
