@@ -1,6 +1,5 @@
 {
   "name": "OLSKApp",
-  "private": true,
   "main": "main.js",
   "dependencies": {
     "// EXPRESS": null,
