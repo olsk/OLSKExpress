@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
 require('./main.js')(process.cwd(), {
-	OLSKOptionControllersViaRootDirectory: true,
+	OLSKOptionControllersViaRootDirectory: process.argv.pop() === __filename,
 });
