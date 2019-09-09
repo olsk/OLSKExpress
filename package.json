@@ -1,6 +1,5 @@
 {
   "name": "OLSKApp",
-  "version": "0.0.4",
   "private": true,
   "main": "main.js",
   "dependencies": {
