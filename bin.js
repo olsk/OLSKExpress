@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
 require('./main.js')(process.cwd(), {
-	OLSKOptionControllersViaRootDirectory: process.argv.length === 2,
+	OLSKOptionCustomAppDirectory: process.argv.length === 2 ? undefined : process.argv.slice(-1).pop(),
 });

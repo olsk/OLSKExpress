@@ -58,7 +58,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		};
 
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk.OLSKDiskAppFolderName());
+			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), optionsObject.OLSKOptionCustomAppDirectory || OLSKDisk.OLSKDiskAppFolderName());
 		};
 
 		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
@@ -211,9 +211,9 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		globPackage.sync('controller.js', {
 			matchBase: true,
-			cwd: optionsObject.OLSKOptionControllersViaRootDirectory ? rootDirectory : OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		}).forEach(function(e) {
-			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(optionsObject.OLSKOptionControllersViaRootDirectory ? rootDirectory : OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
+			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
 				OLSKControllerSlug: function() {
 					return pathPackage.dirname(e);
 				},
