@@ -453,14 +453,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		})
 		.filter(function(e) {
-			return internationalLibrary.OLSKInternationalInputDataIsTranslationFileBasename(pathPackage.basename(e));
+			return internationalLibrary.OLSKInternationalIsTranslationFileBasename(pathPackage.basename(e));
 		})
 		.filter(function(e) {
-			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))) !== -1;
+			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))) !== -1;
 		})
 		.forEach(function(e) {
-			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))] = Object.assign(
-				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageIDForTranslationFileBasename(pathPackage.basename(e))],
+			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))] = Object.assign(
+				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))],
 				jsYAMLPackage.safeLoad(OLSKDisk.OLSKDiskReadFile(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)))
 			);
 		});
@@ -469,7 +469,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		expressApp.use(function(req, res, next) {
 			res.locals.OLSKLocalized = function(translationConstant) {
-				return internationalLibrary.OLSKInternationalLocalizedStringWithTranslationKeyAndTranslationDictionary(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
+				return internationalLibrary.OLSKInternationalLocalizedString(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 			};
 
 			res.locals.OLSKLocalizedStringKeys = function() {
