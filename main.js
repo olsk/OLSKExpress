@@ -480,9 +480,9 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 	})();
 
-	//# OLSKStartRouting
+	//# OLSKStartRoutes
 
-	(function OLSKStartRouting() {
+	(function OLSKStartRoutes() {
 		var expressRouter = require('express').Router();
 		const underscorePackage = require('underscore');
 
@@ -497,7 +497,17 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				return;
 			}
 
-			allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(e.OLSKControllerRoutes(), function(value) {
+			allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(((function(inputData) {
+				if (!Array.isArray(inputData)) {
+					return inputData;
+				};
+
+				return inputData.reduce(function (coll, item) {
+					coll[item.OLSKRouteSignature] = item;
+
+					return coll;
+				}, {})
+			})(e.OLSKControllerRoutes())), function(value) {
 				return Object.assign(value, {
 					_OLSKRouteControllerSlug: e.OLSKControllerSlug(),
 				});
