@@ -188,6 +188,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var stringLibrary = require('OLSKString');
 
 		expressApp.set('view engine', 'ejs');
+		expressApp.engine('html', require('ejs').renderFile);
 		expressApp.set('views', [
 			OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		]);
