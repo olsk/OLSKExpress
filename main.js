@@ -218,6 +218,9 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				OLSKControllerSlug: function() {
 					return pathPackage.dirname(e);
 				},
+				OLSKControllerFullPath: function() {
+					return pathPackage.dirname(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e));
+				},
 			}));
 		});
 	})();
@@ -739,6 +742,39 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				this.address().port,
 			].join(' '));
 		});
+	})();
+
+	//# OLSKStartLivereload
+
+	(function OLSKStartLivereload() {
+		if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
+			return;
+		}
+
+		if (process.env.NODE_ENV !== 'development') {
+			return;
+		}
+
+		const livereloadDirectories = OLSKStartControllersArray.filter(function (e) {
+			if (typeof e.OLSKControllerUseLivereload !== 'function') {
+				return false;
+			};
+
+			return e.OLSKControllerUseLivereload();
+		}).map(function (e) {
+			return e.OLSKControllerFullPath()
+		})
+
+		if (!livereloadDirectories.length) {
+			return;
+		}
+
+		require('livereload').createServer({
+			extraExts: [
+				'md',
+				'ejs',
+			],
+		}).watch(livereloadDirectories);
 	})();
 
 	//# OLSKStartErrorHandling
