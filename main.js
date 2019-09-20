@@ -472,8 +472,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		// Create translation string macro
 
 		expressApp.use(function(req, res, next) {
+			const callback = internationalLibrary.OLSKInternationalLocalizedStringCallback(OLSKStartInternationalizationTranslations, ['en']);
+
 			res.locals.OLSKLocalized = function(translationConstant) {
-				return internationalLibrary.OLSKInternationalLocalizedString(translationConstant, OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
+				return callback(translationConstant, [req.OLSKSharedCurrentLanguage]);
 			};
 
 			res.locals.OLSKLocalizedStringKeys = function() {
