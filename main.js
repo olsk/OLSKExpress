@@ -24,6 +24,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return
 		}
 
+		return expressApp.use(require('express-sslify').HTTPS({ trustProtoHeader: true }));
+
 		expressApp.use(function(req, res, next) {
 			if (req.secure) {
 				return next();

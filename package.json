@@ -6,8 +6,11 @@
     "// EXPRESS": null,
     "express": "4.x",
 
-    "// SECURITY": null,
+    "// SAFETY HEADERS": null,
     "helmet": "latest",
+
+    "// SAFETY HTTPS": null,
+    "express-sslify": "latest",
     
     "// FILE MATCHING": null,
     "glob": "latest",
