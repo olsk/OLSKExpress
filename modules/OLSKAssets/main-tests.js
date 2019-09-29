@@ -25,31 +25,31 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
   it('throws if param1 not array', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo(null, 'alfa', 'bravo');
-    }, /OLSKErrorInputInvalid/);
+    }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param2 not string', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], null, 'alfa');
-    }, /OLSKErrorInputInvalid/);
+    }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not string', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', null);
-    }, /OLSKErrorInputInvalid/);
+    }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not real folder', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
-    }, /OLSKErrorInputInvalid/);
+    }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not real folder', function () {
     assert.throws(function () {
     	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
-    }, /OLSKErrorInputInvalid/);
+    }, /OLSKErrorInputNotValid/);
   });
 
   it('returns undefined', function () {

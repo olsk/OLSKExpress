@@ -7,19 +7,19 @@ const OLSKDisk = require('OLSKDisk');
 
 exports.OLSKAssetsCopyAssetsFromTo = function(param1, param2, param3) {
 	if (!Array.isArray(param1)) {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (typeof param2 !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (!OLSKDisk.OLSKDiskIsRealFolderPath(param2)) {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (typeof param3 !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	OLSKDisk.OLSKDiskDeleteFolder(param3);
