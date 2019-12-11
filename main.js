@@ -216,6 +216,10 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			matchBase: true,
 			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		}).forEach(function(e) {
+			if (e.match(require('OLSKDisk').OLSKDiskStandardIgnorePattern())) {
+				return;
+			}
+
 			OLSKStartControllersArray.push(Object.assign(require(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)), {
 				OLSKControllerSlug: function() {
 					return pathPackage.dirname(e);
