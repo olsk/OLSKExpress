@@ -616,7 +616,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
-				return e.OLSKRouteFunction(req, res, next);
+				return e.OLSKRouteFunction (req, res, next);
 			});
 		});
 
