@@ -610,7 +610,11 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 						pathSegments.pop();
 					}
 
-					return res.redirect(307, pathSegments.join('/'));
+					if (!e._OLSKRouteSkipLanguageRedirect) {
+						return res.redirect(307, pathSegments.join('/'));
+					}
+					
+					req.OLSKSharedCurrentLanguage = preferredLanguage;
 				}
 
 				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
