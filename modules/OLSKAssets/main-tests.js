@@ -110,6 +110,10 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	  it('copies .ejs', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/mike.ejs')), true);
 		});
+		
+	  it('copies .wasm', function () {
+	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/nancy.wasm')), true);
+		});
 	
 	  it('ignores', function () {
 	  	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/golf.md')), false);
