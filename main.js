@@ -291,7 +291,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 
 		function OLSKSharedConnectionFor(inputData) {
-			if (Object.keys(OLSKConnectionObjects).indexOf(inputData) === -1) {
+			if (!Object.keys(OLSKConnectionObjects).includes(inputData)) {
 				throw new Error('OLSKErrorConnectionDoesNotExist');
 			}
 
@@ -445,7 +445,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			var pathSegments = req.url.split('/');
 			var firstElement = pathSegments.splice(1, 1).pop();
 
-			if (Object.keys(OLSKStartInternationalizationTranslations).indexOf(firstElement) === -1) {
+			if (!Object.keys(OLSKStartInternationalizationTranslations).includes(firstElement)) {
 				return next();
 				return;
 			}
@@ -466,7 +466,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return internationalLibrary.OLSKInternationalIsTranslationFileBasename(pathPackage.basename(e));
 		})
 		.filter(function(e) {
-			return Object.keys(OLSKStartInternationalizationTranslations).indexOf(internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))) !== -1;
+			return Object.keys(OLSKStartInternationalizationTranslations).includes(internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e)));
 		})
 		.forEach(function(e) {
 			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))] = Object.assign(
@@ -586,7 +586,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 				// If the request language not available, pass
 
-				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) === -1)) {
+				if (req.OLSKSharedRequestLanguage && !e.OLSKRouteLanguages.includes(req.OLSKSharedRequestLanguage)) {
 					res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 					res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
@@ -595,14 +595,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 				// If the request language available, set current language
 
-				if (req.OLSKSharedRequestLanguage && (e.OLSKRouteLanguages.indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+				if (req.OLSKSharedRequestLanguage && e.OLSKRouteLanguages.includes(req.OLSKSharedRequestLanguage)) {
 					req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 				}
 
 				// If no request language and preferred language available and not current, redirect
 
 				var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
-				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && (e.OLSKRouteLanguages.indexOf(preferredLanguage) !== -1) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
+				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && e.OLSKRouteLanguages.includes(preferredLanguage) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
 					var pathSegments = req.url.split('/');
 					pathSegments.splice(1, 0, preferredLanguage);
 
@@ -670,7 +670,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				return next();
 			}
 
-			if (OLSKStartStaticAssetsArray.indexOf(req.url.slice(1)) !== -1) {
+			if (OLSKStartStaticAssetsArray.includes(req.url.slice(1))) {
 				return next();
 			}
 
@@ -804,7 +804,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		// If the request language available, set current language
 		expressApp.use(function(err, req, res, next) {
-			if (req.OLSKSharedRequestLanguage && (Object.keys(OLSKStartInternationalizationTranslations).indexOf(req.OLSKSharedRequestLanguage) !== -1)) {
+			if (req.OLSKSharedRequestLanguage && Object.keys(OLSKStartInternationalizationTranslations).includes(req.OLSKSharedRequestLanguage)) {
 				req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 			}
 
