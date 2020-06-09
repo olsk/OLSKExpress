@@ -703,7 +703,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return;
 		}
 
-		var serverObject = expressApp.listen(process.env.OLSK_SERVER_PORT || '3000', process.env.HOST);
+		var serverObject = expressApp.listen(process.env.PORT || '3000', process.env.HOST);
 
 		serverObject.on('error', function(error) {
 			if (error.syscall !== 'listen') {
