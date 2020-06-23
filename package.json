@@ -50,6 +50,6 @@
     "supertest": "latest"
   },
   "bin": {
-    "olsk-express": "./bin.js"
+    "olsk-express": "./package-bin.js"
   }
 }
