@@ -5,45 +5,32 @@
   "dependencies": {
     "// EXPRESS": null,
     "express": "4.x",
-
     "// SAFETY HEADERS": null,
     "helmet": "latest",
-
     "// SAFETY HTTPS": null,
     "express-sslify": "latest",
-    
     "// FILE MATCHING": null,
     "glob": "latest",
-    
     "// SESSIONS": null,
     "cookie-session": "latest",
     "express-session": "latest",
-    
     "// POST DATA": null,
     "body-parser": "latest",
-    
     "// TEMPLATES": null,
     "ejs": "latest",
-    
     "// YAML": null,
     "js-yaml": "latest",
-    
     "// SYNTAX": null,
     "underscore": "latest",
-    
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
-    
     "// EXPOSE API": null,
     "OLSKString": "olsk/OLSKString",
-    
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
     "OLSKDisk": "olsk/OLSKDisk",
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKRouting": "olsk/OLSKRouting",
-    "OLSKString": "olsk/OLSKString",
-    
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
