@@ -7,7 +7,7 @@
     "express": "4.x",
 
     "// SAFETY HEADERS": null,
-    "helmet": "latest",
+    "helmet": "3.x",
 
     "// SAFETY HTTPS": null,
     "express-sslify": "latest",
