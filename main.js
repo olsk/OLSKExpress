@@ -566,24 +566,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
-
-				return next();
-			});
-
-			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
-				e.OLSKRouteMiddlewares.map(function(e) {
-					return OLSKLive.OLSKSharedMiddlewares[e];
-				}).filter(function(e) {
-					return !!e;
-				}).forEach(function(middlewares) {
-					return underscorePackage.flatten([middlewares]).forEach(function(middleware) {
-						return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
-					});
-				});
-			}
-
-			return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
-
+				
 				// If the request language not available, pass
 
 				if (req.OLSKSharedRequestLanguage && !e.OLSKRouteLanguages.includes(req.OLSKSharedRequestLanguage)) {
@@ -620,8 +603,22 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
 				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
-				return e.OLSKRouteFunction (req, res, next);
+				return next();
 			});
+
+			if (e.OLSKRouteMiddlewares && e.OLSKRouteMiddlewares.length) {
+				e.OLSKRouteMiddlewares.map(function(e) {
+					return OLSKLive.OLSKSharedMiddlewares[e];
+				}).filter(function(e) {
+					return !!e;
+				}).forEach(function(middlewares) {
+					return underscorePackage.flatten([middlewares]).forEach(function(middleware) {
+						return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, middleware);
+					});
+				});
+			}
+
+			return expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, e.OLSKRouteFunction);
 		});
 
 		expressApp.use('/', expressRouter);
