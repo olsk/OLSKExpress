@@ -109,14 +109,16 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 	(function OLSKStartCache() {
 		var cacheLibrary = require('OLSKCache');
+		var OLSKDisk = require('OLSKDisk');
+		var pathPackage = require('path');
 
 		let cacheFunctions = {
 			OLSKCacheWriteWithCacheKeyAndCacheObject: function(cacheKey, cacheObject) {
-				cacheLibrary.OLSKCacheWriteFile(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+				cacheLibrary.OLSKCacheWriteFile(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk, pathPackage);
 			},
 
 			OLSKCacheReadForCacheKey: function(cacheKey) {
-				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
+				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk, pathPackage);
 			},
 		};
 
