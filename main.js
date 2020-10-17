@@ -49,12 +49,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
-		var kOLSKLiveSettings = {};
-
-		if (OLSKDisk.OLSKDiskIsRealFilePath(pathPackage.join(rootDirectory, OLSKDisk.OLSKDiskAppFolderName(), 'os-settings.yaml'))) {
-			kOLSKLiveSettings = jsYAMLPackage.safeLoad(OLSKDisk.OLSKDiskReadFile(pathPackage.join(rootDirectory, OLSKDisk.OLSKDiskAppFolderName(), 'os-settings.yaml'))) || {}
-		}
-
 		OLSKLive.OLSKLiveRootDirectoryAbsolutePath = function() {
 			return rootDirectory;
 		};
@@ -69,20 +63,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		OLSKLive.OLSKLivePathJoin = pathPackage.join;
 
-		OLSKLive.OLSKLiveSettings = function() {
-			return kOLSKLiveSettings;
-		};
-
 		expressApp.use(function(req, res, next) {
 			req.OLSKLive = OLSKLive;
-
-			if (OLSKLive.OLSKLiveSettings().OLSKDefaultPageTitle) {
-				res.locals.OLSKSharedDefaultPageTitle = OLSKLive.OLSKLiveSettings().OLSKDefaultPageTitle;
-			}
-
-			if (OLSKLive.OLSKLiveSettings().OLSKDefaultPageDescription) {
-				res.locals.OLSKSharedDefaultPageDescription = OLSKLive.OLSKLiveSettings().OLSKDefaultPageDescription;
-			}
 
 			return next();
 		});
@@ -314,18 +296,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			res.locals.kConstants = function(constantString) {
 				return OLSKLive.OLSKSharedConstants[constantString];
 			};
-
-			return next();
-		});
-	})();
-
-	//# OLSKStartSharedPrivateConstants
-
-	(function OLSKStartSharedPrivateConstants() {
-		OLSKLive.OLSKSharedPrivateConstants = OLSKLive.OLSKLiveSettings().OLSKSharedPrivateConstants;
-
-		expressApp.use(function(req, res, next) {
-			req.OLSKSharedPrivateConstants = OLSKLive.OLSKSharedPrivateConstants;
 
 			return next();
 		});
