@@ -131,26 +131,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 	})();
 
-	//# OLSKStartSessions
-
-	(function OLSKStartSessions() {
-		if (optionsObject.OLSKOptionSkipSessions) {
-			return;
-		}
-
-		if (!OLSKLive.OLSKLiveSettings().OLSKSessionSecret) {
-			return console.info('- Skipping OLSKStartSessions (OLSKSessionSecret not found in os-app/os-settings.yaml)');
-		}
-
-		var expressSessionPackage = require('express-session');
-
-		expressApp.use(expressSessionPackage({
-			secret: OLSKLive.OLSKLiveSettings().OLSKSessionSecret,
-			resave: false,
-			saveUninitialized: true,
-		}));
-	})();
-
 	//# OLSKStartBodyParsing
 
 	(function OLSKStartBodyParsing() {

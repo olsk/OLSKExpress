@@ -15,9 +15,6 @@
     "// FILE MATCHING": null,
     "glob": "latest",
     
-    "// SESSIONS": null,
-    "express-session": "latest",
-    
     "// POST DATA": null,
     "body-parser": "latest",
     
