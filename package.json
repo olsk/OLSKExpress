@@ -16,7 +16,6 @@
     "glob": "latest",
     
     "// SESSIONS": null,
-    "cookie-session": "latest",
     "express-session": "latest",
     
     "// POST DATA": null,

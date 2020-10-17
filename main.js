@@ -131,30 +131,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 	})();
 
-	//# OLSKStartCookies
-
-	(function OLSKStartCookies() {
-		if (optionsObject.OLSKOptionSkipCookies) {
-			return;
-		}
-
-		if (!OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys) {
-			return console.info('- Skipping OLSKStartCookies (OLSKCookieSessionKeys not found in os-app/os-settings.yaml)');
-		}
-		var cookieSessionPackage = require('cookie-session');
-
-		expressApp.set('trust proxy', OLSKLive.OLSKLiveSettings().OLSKCookieSessionTrustProxy);
-		expressApp.use(cookieSessionPackage({
-			name: OLSKLive.OLSKLiveSettings().OLSKCookieSessionName,
-			keys: OLSKLive.OLSKLiveSettings().OLSKCookieSessionKeys,
-			cookie: {
-				secure: true,
-				httpOnly: true,
-				domain: OLSKLive.OLSKLiveSettings().OLSKCookieSessionDomain,
-			},
-		}));
-	})();
-
 	//# OLSKStartSessions
 
 	(function OLSKStartSessions() {
