@@ -324,7 +324,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		const underscorePackage = require('underscore');
 		var globPackage = require('glob');
 		var pathPackage = require('path');
-		var jsYAMLPackage = require('js-yaml');
 
 		var OLSKDisk = require('OLSKDisk');
 		var internationalLibrary = require('OLSKInternational');
@@ -381,22 +380,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		// Load translation strings into OLSKStartInternationalizationTranslations
 
-		globPackage.sync('*i18n*.y*(a)ml', {
-			matchBase: true,
-			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
-		})
-		.filter(function(e) {
-			return internationalLibrary.OLSKInternationalIsTranslationFileBasename(pathPackage.basename(e));
-		})
-		.filter(function(e) {
-			return Object.keys(OLSKStartInternationalizationTranslations).includes(internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e)));
-		})
-		.forEach(function(e) {
-			OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))] = Object.assign(
-				OLSKStartInternationalizationTranslations[internationalLibrary.OLSKInternationalLanguageID(pathPackage.basename(e))],
-				jsYAMLPackage.safeLoad(OLSKDisk.OLSKDiskReadFile(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath(), e)))
-			);
-		});
+		Object.assign(OLSKStartInternationalizationTranslations, require('OLSKInternational').OLSKInternationalDictionary({
+			OLSKInternationalFileDelegateDirectory: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+			OLSKInternationalFileDelegateGlobSync: globPackage.sync,
+			OLSKInternationalFileDelegatePathBasename: require('path').basename,
+			OLSKInternationalFileDelegateFileRead: require('fs').readFileSync,
+			OLSKInternationalFileDelegateYAMLRead: require('js-yaml').safeLoad,
+			OLSKInternationalFileDelegateFileWrite: (function () {}),
+		}));
 
 		// Create translation string macro
 
