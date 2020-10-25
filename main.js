@@ -384,7 +384,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			OLSKInternationalFileDelegateDirectory: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 			OLSKInternationalFileDelegateGlobSync: globPackage.sync,
 			OLSKInternationalFileDelegateYAMLRead: require('js-yaml').safeLoad,
-			OLSKInternationalFileDelegateFileWrite: (function () {}),
 		}));
 
 		// Create translation string macro
