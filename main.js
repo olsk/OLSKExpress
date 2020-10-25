@@ -40,12 +40,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	var OLSKLive = {};
 
 	(function OLSKStartLive() {
-		var pathPackage = require('path');
-		var jsYAMLPackage = require('js-yaml');
-
-		const OLSKDisk = require('OLSKDisk');
-
-		if (!OLSKDisk.OLSKDiskIsRealFolderPath(rootDirectory)) {
+		if (!require('OLSKDisk').OLSKDiskIsRealFolderPath(rootDirectory)) {
 			throw new Error('OLSKErrorNonexistantRootDirectory');
 		}
 
@@ -54,14 +49,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		};
 
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), optionsObject.OLSKOptionCustomAppDirectory || OLSKDisk.OLSKDiskAppFolderName());
+			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), optionsObject.OLSKOptionCustomAppDirectory || require('OLSKDisk').OLSKDiskAppFolderName());
 		};
 
 		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-			return pathPackage.join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk.OLSKDiskPublicFolderName());
+			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), require('OLSKDisk').OLSKDiskPublicFolderName());
 		};
 
-		OLSKLive.OLSKLivePathJoin = pathPackage.join;
+		OLSKLive.OLSKLivePathJoin = require('path').join;
 
 		expressApp.use(function(req, res, next) {
 			req.OLSKLive = OLSKLive;
