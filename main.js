@@ -383,7 +383,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		Object.assign(OLSKStartInternationalizationTranslations, require('OLSKInternational').OLSKInternationalDictionary({
 			OLSKInternationalFileDelegateDirectory: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 			OLSKInternationalFileDelegateGlobSync: globPackage.sync,
-			OLSKInternationalFileDelegateFileRead: require('fs').readFileSync,
 			OLSKInternationalFileDelegateYAMLRead: require('js-yaml').safeLoad,
 			OLSKInternationalFileDelegateFileWrite: (function () {}),
 		}));
