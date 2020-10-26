@@ -381,7 +381,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		// Load translation strings into OLSKStartInternationalizationTranslations
 
 		Object.assign(OLSKStartInternationalizationTranslations, require('OLSKInternational').OLSKInternationalDictionary({
-			OLSKInternationalFileDelegateGlobSync: globPackage.sync,
 			OLSKInternationalFileDelegateYAMLRead: require('js-yaml').safeLoad,
 		}, OLSKLive.OLSKLiveAppDirectoryAbsolutePath()));
 
