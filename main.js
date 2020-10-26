@@ -380,9 +380,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		// Load translation strings into OLSKStartInternationalizationTranslations
 
-		Object.assign(OLSKStartInternationalizationTranslations, require('OLSKInternational').OLSKInternationalDictionary({
-			OLSKInternationalFileDelegateYAMLRead: require('js-yaml').safeLoad,
-		}, OLSKLive.OLSKLiveAppDirectoryAbsolutePath()));
+		Object.assign(OLSKStartInternationalizationTranslations, require('OLSKInternational').OLSKInternationalDictionary(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()));
 
 		// Create translation string macro
 
