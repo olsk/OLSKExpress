@@ -21,9 +21,6 @@
     "// TEMPLATES": null,
     "ejs": "latest",
     
-    "// YAML": null,
-    "js-yaml": "latest",
-    
     "// SYNTAX": null,
     "underscore": "latest",
     

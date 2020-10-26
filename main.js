@@ -326,7 +326,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var pathPackage = require('path');
 
 		var OLSKDisk = require('OLSKDisk');
-		var internationalLibrary = require('OLSKInternational');
 
 		// Aggregate unique languages specified in controller routes
 
@@ -385,7 +384,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		// Create translation string macro
 
 		expressApp.use(function(req, res, next) {
-			const callback = internationalLibrary.OLSKInternationalLocalizedStringCallback(OLSKStartInternationalizationTranslations, ['en']);
+			const callback = require('OLSKInternational').OLSKInternationalLocalizedStringCallback(OLSKStartInternationalizationTranslations, ['en']);
 
 			res.locals.OLSKLocalized = function(translationConstant) {
 				return callback(translationConstant, [req.OLSKSharedCurrentLanguage]);
