@@ -90,10 +90,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var pathPackage = require('path');
 
 		let cacheFunctions = {
-			OLSKCacheWriteWithCacheKeyAndCacheObject: function(cacheKey, cacheObject) {
-				cacheLibrary.OLSKCacheWriteFile(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
-			},
-
 			OLSKCacheReadForCacheKey: function(cacheKey) {
 				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
 			},
