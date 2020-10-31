@@ -82,28 +82,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 	})();
 
-	//# OLSKStartCache
-
-	(function OLSKStartCache() {
-		var cacheLibrary = require('OLSKCache');
-		var OLSKDisk = require('OLSKDisk');
-		var pathPackage = require('path');
-
-		let cacheFunctions = {
-			OLSKCacheReadForCacheKey: function(cacheKey) {
-				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath());
-			},
-		};
-
-		Object.assign(OLSKLive, cacheFunctions);
-
-		expressApp.use(function(req, res, next) {
-			Object.assign(req, cacheFunctions);
-
-			return next();
-		});
-	})();
-
 	//# OLSKStartBodyParsing
 
 	(function OLSKStartBodyParsing() {
