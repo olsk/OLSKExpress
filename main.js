@@ -91,11 +91,11 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 		let cacheFunctions = {
 			OLSKCacheWriteWithCacheKeyAndCacheObject: function(cacheKey, cacheObject) {
-				cacheLibrary.OLSKCacheWriteFile(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk, pathPackage);
+				cacheLibrary.OLSKCacheWriteFile(cacheObject, cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk);
 			},
 
 			OLSKCacheReadForCacheKey: function(cacheKey) {
-				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk, pathPackage);
+				return cacheLibrary.OLSKCacheReadFile(cacheKey, OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), OLSKDisk);
 			},
 		};
 
