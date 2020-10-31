@@ -52,10 +52,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), optionsObject.OLSKOptionCustomAppDirectory || require('OLSKDisk').OLSKDiskAppFolderName());
 		};
 
-		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), require('OLSKDisk').OLSKDiskPublicFolderName());
-		};
-
 		OLSKLive.OLSKLivePathJoin = require('path').join;
 
 		expressApp.use(function(req, res, next) {
