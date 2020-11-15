@@ -77,19 +77,16 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			require('path').join(__dirname, '../OLSKLayout')
 		]);
 
-		// Create layout render
-
 		expressApp.use(function(req, res, next) {
-			res.OLSKLayoutRender = function (view, locals = {}, callback) {
-				return res.render('layout', Object.assign({
-					OLSKLayoutPartial: view,
-				}, locals), callback);
-			};
+			Object.assign(res, {
 
-			return next();
-		});
+				OLSKLayoutRender (view, locals = {}, callback) {
+					return res.render('layout', Object.assign({
+						OLSKLayoutPartial: view,
+					}, locals), callback);
+				},
 
-		expressApp.use(function(req, res, next) {
+			});
 
 			return next();
 		});
