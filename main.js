@@ -71,8 +71,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartTemplatingEngine
 
 	(function OLSKStartTemplatingEngine() {
-		var stringLibrary = require('OLSKString');
-
 		expressApp.set('view engine', 'ejs');
 		expressApp.engine('html', require('ejs').renderFile);
 		expressApp.set('views', [
@@ -91,10 +89,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			return next();
 		});
 
-		// Create string format macro
-
 		expressApp.use(function(req, res, next) {
-			res.locals.OLSKFormatted = stringLibrary.OLSKStringWithFormat;
 
 			return next();
 		});
@@ -354,6 +349,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			res.locals.OLSKLocalizedStringKeys = function() {
 				return Object.keys(OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 			};
+
+			res.locals.OLSKFormatted = require('OLSKString').OLSKStringWithFormat;
 
 			return next();
 		});
