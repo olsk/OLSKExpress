@@ -76,8 +76,21 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		expressApp.set('view engine', 'ejs');
 		expressApp.engine('html', require('ejs').renderFile);
 		expressApp.set('views', [
-			OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
+			require('path').join(__dirname, '../OLSKLayout')
 		]);
+
+		// Create layout render
+
+		expressApp.use(function(req, res, next) {
+			res.OLSKLayoutRender = function (view, locals = {}, callback) {
+				return res.render('layout', Object.assign({
+					title: 'The index page!',
+					OLSKLayoutPartial: view,
+				}, locals), callback)
+			};
+
+			return next();
+		});
 
 		// Create string format macro
 
