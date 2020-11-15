@@ -26,8 +26,9 @@
     
     "// TASKS": null,
     "OLSKTasks": "olsk/OLSKTasks",
-    
-    "// EXPOSE API": null,
+
+    "// MARKDOWN CONTENT": null,
+    "marked": "latest",
     "OLSKString": "olsk/OLSKString",
     
     "// LIBRARIES": null,

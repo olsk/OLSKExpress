@@ -86,6 +86,17 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 					}, locals), callback);
 				},
 
+				OLSKMarkdownContent (path, tokens = {}) {
+					return require('OLSKString').OLSKStringReplaceTokens(require('marked').setOptions({
+						gfm: true,
+						headerIds: true,
+					})(require('fs').readFileSync(path, 'utf-8')), Object.assign(tokens, res.locals.OLSKLocalizedStringKeys().reduce(function (coll, item) {
+						return Object.assign(coll, {
+							[item]: res.locals.OLSKLocalized(item),
+						});
+					}, {})));
+				},
+
 			});
 
 			return next();
