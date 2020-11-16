@@ -1,3 +1,5 @@
+require('OLSKEnv').OLSKEnvGuard();
+
 module.exports = function (rootDirectory, optionsObject = {}) {
 	const expressPackage = require('express');
 	const expressApp = expressPackage();

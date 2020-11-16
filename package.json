@@ -30,6 +30,9 @@
     "// MARKDOWN CONTENT": null,
     "marked": "latest",
     "OLSKString": "olsk/OLSKString",
+
+    "// ENV GUARD": null,
+    "OLSKEnv": "olsk/OLSKEnv",
     
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
