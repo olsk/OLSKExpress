@@ -301,7 +301,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 					return null;
 				}
 
-				return underscorePackage.pluck(Object.values(e.OLSKControllerRoutes()), 'OLSKRouteLanguages');
+				return underscorePackage.pluck(Object.values(e.OLSKControllerRoutes()), 'OLSKRouteLanguageCodes');
 			})
 			.flatten()
 			.uniq()
@@ -443,8 +443,8 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				
 				// If the request language not available, pass
 
-				if (req.OLSKSharedRequestLanguage && !e.OLSKRouteLanguages.includes(req.OLSKSharedRequestLanguage)) {
-					res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+				if (req.OLSKSharedRequestLanguage && !e.OLSKRouteLanguageCodes.includes(req.OLSKSharedRequestLanguage)) {
+					res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguageCodes;
 					res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
 					return next();
@@ -452,14 +452,14 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 
 				// If the request language available, set current language
 
-				if (req.OLSKSharedRequestLanguage && e.OLSKRouteLanguages.includes(req.OLSKSharedRequestLanguage)) {
+				if (req.OLSKSharedRequestLanguage && e.OLSKRouteLanguageCodes.includes(req.OLSKSharedRequestLanguage)) {
 					req.OLSKSharedCurrentLanguage = req.OLSKSharedRequestLanguage;
 				}
 
 				// If no request language and preferred language available and not current, redirect
 
-				var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguages);
-				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguages && e.OLSKRouteLanguages.includes(preferredLanguage) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
+				var preferredLanguage = req.acceptsLanguages(e.OLSKRouteLanguageCodes);
+				if (!req.OLSKSharedRequestLanguage && preferredLanguage && e.OLSKRouteLanguageCodes && e.OLSKRouteLanguageCodes.includes(preferredLanguage) && (preferredLanguage !== req.OLSKSharedCurrentLanguage)) {
 					var pathSegments = req.url.split('/');
 					pathSegments.splice(1, 0, preferredLanguage);
 
@@ -474,7 +474,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 					req.OLSKSharedCurrentLanguage = preferredLanguage;
 				}
 
-				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguages;
+				res.locals.OLSKSharedPageLanguagesAvailable = e.OLSKRouteLanguageCodes;
 				res.locals.OLSKSharedPageCurrentLanguage = req.OLSKSharedCurrentLanguage;
 
 				return next();
