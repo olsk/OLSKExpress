@@ -360,7 +360,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				return Object.keys(OLSKStartInternationalizationTranslations[req.OLSKSharedCurrentLanguage]);
 			};
 
-			res.locals.OLSKFormatted = require('OLSKString').OLSKStringWithFormat;
+			res.locals.OLSKFormatted = require('OLSKString').OLSKStringFormatted;
 
 			return next();
 		});
