@@ -626,10 +626,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartLivereload
 
 	(function OLSKStartLivereload() {
-		if (process.env.OLSK_TESTING_BEHAVIOUR === 'true') {
-			return;
-		}
-
 		if (process.env.NODE_ENV !== 'development') {
 			return;
 		}
