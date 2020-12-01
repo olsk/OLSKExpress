@@ -372,7 +372,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		var expressRouter = require('express').Router();
 		const underscorePackage = require('underscore');
 
-		var routingLibrary = require('OLSKRouting');
+		const OLSKRouting = require('OLSKRouting');
 
 		var allRoutes = {};
 
@@ -408,7 +408,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			};
 
 			res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
-				return routingLibrary.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
+				return OLSKRouting.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
 			};
 
 			if (req.OLSKSharedCurrentLanguage) {
