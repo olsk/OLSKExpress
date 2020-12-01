@@ -408,7 +408,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			};
 
 			res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
-				return routingLibrary.OLSKRoutingCanonicalPathWithRoutePathAndOptionalParams(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
+				return routingLibrary.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
 			};
 
 			if (req.OLSKSharedCurrentLanguage) {
