@@ -83,7 +83,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			Object.assign(res, {
 
 				OLSKLayoutRender (view, locals = {}, callback) {
-					return res.render('layout', Object.assign({
+					return res.render('main.ejs', Object.assign({
 						OLSKLayoutPartial: view,
 					}, locals), callback);
 				},
