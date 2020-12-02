@@ -53,10 +53,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		OLSKLive.OLSKLiveAppDirectoryAbsolutePath = function() {
 			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), optionsObject.OLSKOptionCustomAppDirectory || require('OLSKDisk').OLSKDiskAppFolderName());
 		};
-
-		OLSKLive.OLSKLivePublicDirectoryAbsolutePath = function() {
-			return require('path').join(OLSKLive.OLSKLiveRootDirectoryAbsolutePath(), require('OLSKDisk').OLSKDiskPublicFolderName());
-		};
 	})();
 
 	//# OLSKStartBodyParsing
@@ -555,14 +551,6 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 
 		expressApp.use(expressPackage.static(pathPackage.join(OLSKLive.OLSKLiveAppDirectoryAbsolutePath()), {
-			redirect: false,
-		}));
-	})();
-
-	//# OLSKStartPublicDirectory
-
-	(function OLSKStartPublicDirectory() {
-		expressApp.use(expressPackage.static(OLSKLive.OLSKLivePublicDirectoryAbsolutePath(), {
 			redirect: false,
 		}));
 	})();
