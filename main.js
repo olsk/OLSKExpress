@@ -258,6 +258,18 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 		});
 	})();
 
+	//# OLSKStartSpec
+
+	(function OLSKStartSpec() {
+		expressApp.use(function(req, res, next) {
+			res.locals.OLSK_SPEC_UI = function() {
+				return process.env.NODE_ENV === 'development' && req.hostname === 'loc.tests';
+			};
+
+			return next();
+		});
+	})();
+
 	//# OLSKStartSharedMiddlewares
 
 	(function OLSKStartSharedMiddlewares() {
