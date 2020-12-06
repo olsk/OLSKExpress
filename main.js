@@ -290,6 +290,18 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			});
 	})();
 
+	//# OLSKStartGlobalMiddleware
+
+	(function OLSKStartGlobalMiddleware() {
+		OLSKStartControllersArray
+			.filter(function(e) {
+				return typeof e.OLSKControllerGlobalMiddleware === 'function';
+			})
+			.forEach(function(e) {
+				return expressApp.use(e.OLSKControllerGlobalMiddleware);
+			});
+	})();
+
 	//# OLSKStartInternationalization
 
 	var OLSKStartInternationalizationTranslations = {};
