@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const mainModule = require('./main.js');
+const mod = require('./main.js');
 
 const pathPackage = require('path');
 const OLSKDisk = require('OLSKDisk');
@@ -24,47 +24,47 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 
   it('throws if param1 not array', function () {
     assert.throws(function () {
-    	mainModule.OLSKAssetsCopyAssetsFromTo(null, 'alfa', 'bravo');
+    	mod.OLSKAssetsCopyAssetsFromTo(null, 'alfa', 'bravo');
     }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param2 not string', function () {
     assert.throws(function () {
-    	mainModule.OLSKAssetsCopyAssetsFromTo([], null, 'alfa');
+    	mod.OLSKAssetsCopyAssetsFromTo([], null, 'alfa');
     }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not string', function () {
     assert.throws(function () {
-    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', null);
+    	mod.OLSKAssetsCopyAssetsFromTo([], 'alfa', null);
     }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not real folder', function () {
     assert.throws(function () {
-    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
+    	mod.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputNotValid/);
   });
 
   it('throws if param3 not real folder', function () {
     assert.throws(function () {
-    	mainModule.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
+    	mod.OLSKAssetsCopyAssetsFromTo([], 'alfa', 'alfa');
     }, /OLSKErrorInputNotValid/);
   });
 
   it('returns undefined', function () {
-  	assert.strictEqual(mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
+  	assert.strictEqual(mod.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath()), undefined);
 	});
 	
   it('clears folder', function () {
-  	mainModule.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+  	mod.OLSKAssetsCopyAssetsFromTo([], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
   	assert.strictEqual(OLSKDisk.OLSKDiskIsRealFilePath(kTesting.StubDestinationPath('charlie/delta.js')), false);
 	});
 
 	context('if not declared', function () {
 
 		beforeEach(function () {
-			mainModule.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+			mod.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
 	  it('ignores', function () {
@@ -76,7 +76,7 @@ describe('OLSKAssetsCopyAssetsFromTo', function () {
 	context('if declared', function () {
 
 		beforeEach(function () {
-			mainModule.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
+			mod.OLSKAssetsCopyAssetsFromTo(['charlie'], kTesting.StubSourcePath(), kTesting.StubDestinationPath());
 		});
 	
 	  it('copies .js', function () {

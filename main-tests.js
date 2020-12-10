@@ -1,9 +1,9 @@
 const supertestPackage = require('supertest');
-const mainModule = require('./main.js');
+const mod = require('./main.js');
 
 const kTesting = {
   StubApp: function() {
-    return mainModule(__dirname, {
+    return mod(__dirname, {
       OLSKOptionSkipCookies: true,
       OLSKOptionSkipSessions: true,
       OLSKOptionSkipServer: true,
