@@ -427,13 +427,13 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 				return allRoutes[routeConstant];
 			};
 
-			res.locals.OLSKCanonicalFor = function(routeConstant, optionalParams) {
+			res.locals.OLSKCanonical = function(routeConstant, optionalParams) {
 				return OLSKRouting.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
 			};
 
 			if (req.OLSKSharedCurrentLanguage) {
 				res.locals.OLSKCanonicalLocalizedFor = function(routeConstant, optionalParams) {
-					return res.locals.OLSKCanonicalFor(routeConstant, Object.assign({
+					return res.locals.OLSKCanonical(routeConstant, Object.assign({
 						OLSKRoutingLanguage: req.OLSKSharedCurrentLanguage,
 					}, optionalParams));
 				};
