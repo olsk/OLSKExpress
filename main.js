@@ -432,7 +432,7 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 			};
 
 			if (req.OLSKSharedCurrentLanguage) {
-				res.locals.OLSKCanonicalLocalizedFor = function(routeConstant, optionalParams) {
+				res.locals.OLSKCanonicalLocalized = function(routeConstant, optionalParams) {
 					return res.locals.OLSKCanonical(routeConstant, Object.assign({
 						OLSKRoutingLanguage: req.OLSKSharedCurrentLanguage,
 					}, optionalParams));
