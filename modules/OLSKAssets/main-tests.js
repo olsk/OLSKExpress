@@ -14,7 +14,7 @@ const kTesting = {
 	},
 };
 
-describe('OLSKAssetsCopyAssetsFromTo', function () {
+describe.skip('OLSKAssetsCopyAssetsFromTo', function () {
 
 	afterEach(function() {
 		if (OLSKDisk.OLSKDiskIsRealFolderPath(kTesting.StubDestinationPath())) {
