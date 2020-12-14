@@ -4,7 +4,7 @@ const mod = require('./main.js');
 
 describe('OLSKStartStaticFiles', function () {
 
-  const item = mod(__dirname, {
+  const item = mod.OLSKExpressStart(__dirname, {
     OLSKOptionSkipServer: true,
     OLSKOptionSkipCleanup: true,
   });

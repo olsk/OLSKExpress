@@ -1,6 +1,6 @@
 require('OLSKEnv').OLSKEnvGuard();
 
-module.exports = function (rootDirectory, optionsObject = {}) {
+const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	const expressPackage = require('express');
 	const expressApp = expressPackage();
 
@@ -773,3 +773,11 @@ module.exports = function (rootDirectory, optionsObject = {}) {
 	return expressApp;
 
 };
+
+const mod = {
+
+	OLSKExpressStart,
+	
+};
+
+module.exports = mod;
