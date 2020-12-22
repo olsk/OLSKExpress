@@ -78,9 +78,9 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 		expressApp.use(function(req, res, next) {
 			Object.assign(res, {
 
-				OLSKLayoutRender (view, locals = {}, callback) {
+				OLSKExpressLayoutRender (view, locals = {}, callback) {
 					return res.render('main.ejs', Object.assign({
-						OLSKLayoutPartial: view,
+						OLSKExpressLayoutPartial: view,
 					}, locals), callback);
 				},
 
