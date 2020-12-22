@@ -19,7 +19,6 @@
     
     "// TEMPLATES": null,
     "ejs": "latest",
-    "OLSKLayout": "olsk/OLSKLayout",
     
     "// SYNTAX": null,
     "underscore": "latest",

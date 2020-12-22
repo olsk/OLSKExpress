@@ -72,14 +72,14 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 		expressApp.set('view engine', 'ejs');
 		expressApp.engine('html', require('ejs').renderFile);
 		expressApp.set('views', [
-			require('path').join(__dirname, '../OLSKLayout')
+			require('path').join(__dirname),
 		]);
 
 		expressApp.use(function(req, res, next) {
 			Object.assign(res, {
 
 				OLSKExpressLayoutRender (view, locals = {}, callback) {
-					return res.render('main.ejs', Object.assign({
+					return res.render('layout.ejs', Object.assign({
 						OLSKExpressLayoutPartial: view,
 					}, locals), callback);
 				},
