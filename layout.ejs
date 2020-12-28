@@ -61,6 +61,10 @@
 		outputData.push(`<link rel="apple-touch-icon" href="${ process.env.OLSK_LAYOUT_TOUCH_ICON_URL }">`);
 	}
 
+	if (locals.OLSKPageManifest) {
+		outputData.push(`<link rel="manifest" href="${ locals.OLSKPageManifest }">`);
+	}
+
 	let pathToTag = function (e) {
 		if (e.indexOf('http') === 0) {
 			return `<script src="${ e }"></script>`;
