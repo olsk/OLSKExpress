@@ -263,7 +263,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	(function OLSKStartSpec() {
 		expressApp.use(function(req, res, next) {
 			res.locals.OLSK_SPEC_UI = function() {
-				return process.env.NODE_ENV === 'development' && req.hostname === 'loc.tests';
+				return process.env.NODE_ENV !== 'production' && req.hostname === 'loc.tests';
 			};
 
 			return next();

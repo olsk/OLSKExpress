@@ -53,7 +53,7 @@
 
 	if (process.env.OLSK_LAYOUT_FAVICON_URL) {
 		outputData.push(`<link rel="icon" href="${ process.env.OLSK_LAYOUT_FAVICON_URL }">`);
-	} else if (locals.OLSKPageBlankFavicon || process.env.NODE_ENV === 'development') {
+	} else if (process.env.NODE_ENV !== 'production') {
 		outputData.push(`<link rel="icon" href="data:;base64,=">`); // https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests
 	}
 
