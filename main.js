@@ -642,7 +642,10 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			return;
 		}
 
+		OLSKLive.OLSKSharedLocals.OLSKLivereloadEnabled = true;
+		
 		require('livereload').createServer({
+			port: (OLSKLive.OLSKSharedLocals.OLSKLivereloadPort = parseInt(process.env.PORT) - 3000 + 6000),
 			extraExts: [
 				'md',
 				'ejs',
