@@ -638,21 +638,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartLivereload
 
 	(function OLSKStartLivereload() {
-		if (process.env.NODE_ENV !== 'development') {
-			return;
-		}
-
-		const livereloadDirectories = OLSKStartControllersArray.filter(function (e) {
-			if (typeof e.OLSKControllerUseLivereload !== 'function') {
-				return false;
-			};
-
-			return e.OLSKControllerUseLivereload();
-		}).map(function (e) {
-			return e.OLSKControllerFullPath()
-		})
-
-		if (!livereloadDirectories.length) {
+		if (process.env.NODE_ENV === 'production') {
 			return;
 		}
 
@@ -661,7 +647,10 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 				'md',
 				'ejs',
 			],
-		}).watch(livereloadDirectories);
+			exclusions: [
+				/controller\.js/i,
+			],
+		}).watch(OLSKLive.OLSKLiveAppDirectoryAbsolutePath());
 	})();
 
 	//# OLSKStartErrorHandling

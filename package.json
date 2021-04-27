@@ -43,7 +43,8 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "supertest": "latest"
+    "supertest": "latest",
+    "livereload": "latest"
   },
   "bin": {
     "olsk-express": "./package-bin.js"
