@@ -652,6 +652,8 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			],
 			exclusions: [
 				/controller\.js/i,
+				/-tests\.js/i,
+				/ui-test/i,
 			],
 		}).watch(OLSKLive.OLSKLiveAppDirectoryAbsolutePath());
 	})();
