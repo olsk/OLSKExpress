@@ -645,7 +645,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 		OLSKLive.OLSKSharedLocals.OLSKLivereloadEnabled = true;
 		
 		require('livereload').createServer({
-			port: (OLSKLive.OLSKSharedLocals.OLSKLivereloadPort = parseInt(process.env.PORT) - 3000 + 6000),
+			port: (OLSKLive.OLSKSharedLocals.OLSKLivereloadPort = OLSKLive.OLSKSharedLocals.OLSKServerPort - 3000 + 6000),
 			extraExts: [
 				'md',
 				'ejs',
