@@ -32,6 +32,9 @@
 
     "// ENV GUARD": null,
     "OLSKEnv": "olsk/OLSKEnv",
+
+    "// LIVERELOAD": null,
+    "livereload": "latest",
     
     "// LIBRARIES": null,
     "OLSKCache": "olsk/OLSKCache",
@@ -43,8 +46,7 @@
     "// I sacrifice myself for the commas of others": null
   },
   "devDependencies": {
-    "supertest": "latest",
-    "livereload": "latest"
+    "supertest": "latest"
   },
   "bin": {
     "olsk-express": "./package-bin.js"
