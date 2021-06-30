@@ -118,6 +118,10 @@
 
 	outputData.push(...(locals.OLSKPageHeadLines || []));
 
+	if (process.env.ROCO_STATS_DOMAIN) {
+		outputData.push(`<script defer data-domain="${ process.env.ROCO_STATS_DOMAIN }" src="https://stats.rosano.ca/js/script.js"></script>`);
+	}
+
 	return outputData.join('\n\t');
 })(); %>
 </head>
