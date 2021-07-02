@@ -118,7 +118,7 @@
 
 	outputData.push(...(locals.OLSKPageHeadLines || []));
 
-	if (process.env.ROCO_STATS_DOMAIN) {
+	if (process.env.ROCO_STATS_DOMAIN && process.env.NODE_ENV === 'production') {
 		outputData.push(`<script defer data-domain="${ process.env.ROCO_STATS_DOMAIN }" src="https://stats.rosano.ca/js/script.js"></script>`);
 	}
 
