@@ -224,7 +224,9 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			});
 
 		expressApp.use(function(req, res, next) {
-			res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals);
+			res.locals = Object.assign(res.locals, OLSKLive.OLSKSharedLocals, {
+				OLSKSharedHostname: req.hostname,
+			});
 
 			return next();
 		});
