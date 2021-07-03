@@ -430,7 +430,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			};
 
 			res.locals.OLSKCanonical = function(routeConstant, optionalParams) {
-				return OLSKRouting.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, Object.assign(Object.assign({}, req.params), optionalParams || {}));
+				return OLSKRouting.OLSKRoutingCanonicalPath(allRoutes[routeConstant].OLSKRoutePath, optionalParams || {});
 			};
 
 			if (req.OLSKSharedCurrentLanguage) {
@@ -462,6 +462,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
+				res.locals._OLSKSharedParams = Object.assign({}, req.params);
 				
 				// If the request language not available, pass
 
