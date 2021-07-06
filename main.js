@@ -275,7 +275,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartSharedMiddlewares
 
 	(function OLSKStartSharedMiddlewares() {
-		OLSKLive.OLSKSharedMiddlewares = {};
+		OLSKLive.OLSKSharedMiddlewares = require('./logic.js').OLSKCommonMiddlewares();
 
 		OLSKStartControllersArray
 			.filter(function(e) {
@@ -405,21 +405,25 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 				return;
 			}
 
-			allRoutes = Object.assign(allRoutes, underscorePackage.mapObject(((function(inputData) {
-				if (!Array.isArray(inputData)) {
-					return inputData;
-				};
-
-				return inputData.reduce(function (coll, item) {
-					coll[item.OLSKRouteSignature] = item;
-
-					return coll;
+			allRoutes = Object.assign(allRoutes, Object.fromEntries(Object.entries((function(inputData) {
+				return !Array.isArray(inputData) ? inputData : inputData.reduce(function (coll, item) {
+					return Object.assign(coll, {
+						[item.OLSKRouteSignature]: item,
+					}, item.OLSKRouteMiddlewares.includes('OLSKAllowAllOriginsMiddleware') ? {
+						[item.OLSKRouteSignature + '_OLSKPreflight']: Object.assign(Object.assign({}, item), {
+							OLSKRouteSignature: item.OLSKRouteSignature + '_OLSKPreflight',
+							OLSKRouteMethod: 'options',
+							OLSKRouteFunction: (function (req, res, next) { return next() }),
+						})
+					} : {});
 				}, {})
-			})(e.OLSKControllerRoutes())), function(value) {
-				return Object.assign(value, {
+			})(e.OLSKControllerRoutes())).map(function ([key, value]) {
+				return [key, Object.assign(value, {
 					_OLSKRouteControllerSlug: e.OLSKControllerSlug(),
-				});
-			}));
+				})];
+			})));
+
+			console.log(allRoutes);
 		});
 
 		// Create canonical link macros
