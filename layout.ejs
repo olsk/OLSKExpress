@@ -127,6 +127,10 @@
 		outputData.push(`<script defer data-domain="${ process.env.ROCO_STATS_DOMAIN }" src="https://stats.rosano.ca/js/script.js"></script>`);
 	}
 
+	if (process.env.ROCO_STATS_DOMAIN) {
+		outputData.push(`<script src="https://olsk.rosano.ca/OLSKBanner/master/main.js"></script>`);
+	}
+
 	return outputData.join('\n\t');
 })(); %>
 </head>
