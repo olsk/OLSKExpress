@@ -409,7 +409,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 				return !Array.isArray(inputData) ? inputData : inputData.reduce(function (coll, item) {
 					return Object.assign(coll, {
 						[item.OLSKRouteSignature]: item,
-					}, item.OLSKRouteMiddlewares.includes('OLSKAllowAllOriginsMiddleware') ? {
+					}, (item.OLSKRouteMiddlewares || []).includes('OLSKAllowAllOriginsMiddleware') ? {
 						[item.OLSKRouteSignature + '_OLSKPreflight']: Object.assign(Object.assign({}, item), {
 							OLSKRouteSignature: item.OLSKRouteSignature + '_OLSKPreflight',
 							OLSKRouteMethod: 'options',
@@ -422,8 +422,6 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 					_OLSKRouteControllerSlug: e.OLSKControllerSlug(),
 				})];
 			})));
-
-			console.log(allRoutes);
 		});
 
 		// Create canonical link macros
