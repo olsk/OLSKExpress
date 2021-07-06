@@ -59,7 +59,11 @@
 	}
 
 	if (process.env.OLSK_LAYOUT_TOUCH_ICON_URL) {
-		outputData.push(`<link rel="apple-touch-icon" href="${ process.env.OLSK_LAYOUT_TOUCH_ICON_URL }">`);
+		if (!Object.keys(locals.OLSKPageMetaTags || {}).includes('og:image')) {
+			outputData.push(`<meta property="og:image" content="${ process.env.OLSK_LAYOUT_TOUCH_ICON_URL }" />`);
+		}
+
+		outputData.push(`<link rel="apple-touch-icon" href="${ process.env.OLSK_LAYOUT_TOUCH_ICON_URL }" />`);
 	}
 
 	if (locals.OLSKPageManifest) {
