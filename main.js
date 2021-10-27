@@ -729,6 +729,10 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartTasks
 
 	(function OLSKStartTasks() {
+		if (process.env.OLSK_FLAG_CI) {
+			return;
+		}
+		
 		const underscorePackage = require('underscore');
 
 		const OLSKTasks = require('OLSKTasks');
