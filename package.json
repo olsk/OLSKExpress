@@ -41,9 +41,7 @@
     "OLSKDisk": "olsk/OLSKDisk",
     "OLSKInternational": "olsk/OLSKInternational",
     "OLSKRouting": "olsk/OLSKRouting",
-    "OLSKString": "olsk/OLSKString",
-    
-    "//": "I sacrifice myself for the commas of others"
+    "OLSKString": "olsk/OLSKString"
   },
   "devDependencies": {
     "supertest": "latest"
