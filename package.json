@@ -2,41 +2,41 @@
   "name": "OLSKExpress",
   "main": "main.js",
   "dependencies": {
-    "// EXPRESS": null,
+    "//": "EXPRESS",
     "express": "4.x",
 
-    "// SAFETY HEADERS": null,
+    "//": "SAFETY HEADERS",
     "helmet": "3.x",
 
-    "// SAFETY HTTPS": null,
+    "//": "SAFETY HTTPS",
     "express-sslify": "latest",
     
-    "// FILE MATCHING": null,
+    "//": "FILE MATCHING",
     "glob": "latest",
     
-    "// POST DATA": null,
+    "//": "POST DATA",
     "body-parser": "latest",
     
-    "// TEMPLATES": null,
+    "//": "TEMPLATES",
     "ejs": "latest",
     
-    "// SYNTAX": null,
+    "//": "SYNTAX",
     "underscore": "latest",
     
-    "// TASKS": null,
+    "//": "TASKS",
     "OLSKTasks": "olsk/OLSKTasks",
 
-    "// MARKDOWN CONTENT": null,
+    "//": "MARKDOWN CONTENT",
     "marked": "latest",
     "OLSKString": "olsk/OLSKString",
 
-    "// ENV GUARD": null,
+    "//": "ENV GUARD",
     "OLSKEnv": "olsk/OLSKEnv",
 
-    "// LIVERELOAD": null,
+    "//": "LIVERELOAD",
     "livereload": "latest",
     
-    "// LIBRARIES": null,
+    "//": "LIBRARIES",
     "OLSKCache": "olsk/OLSKCache",
     "OLSKDisk": "olsk/OLSKDisk",
     "OLSKInternational": "olsk/OLSKInternational",
