@@ -43,7 +43,7 @@
     "OLSKRouting": "olsk/OLSKRouting",
     "OLSKString": "olsk/OLSKString",
     
-    "// I sacrifice myself for the commas of others": null
+    "//": "I sacrifice myself for the commas of others"
   },
   "devDependencies": {
     "supertest": "latest"
