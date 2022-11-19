@@ -124,7 +124,7 @@
 	outputData.push(...(locals.OLSKPageHeadLines || []));
 
 	if (process.env.ROCO_STATS_DOMAIN && process.env.NODE_ENV === 'production') {
-		outputData.push(`<script defer data-domain="${ process.env.ROCO_STATS_DOMAIN }" src="https://stats.rosano.ca/js/script.js"></script>`);
+		outputData.push(`<script defer src="https://olsk.rosano.ca/OLSKFigures/master/main.js"></script>`);
 	}
 
 	if (process.env.ROCO_STATS_DOMAIN && !locals.OLSK_SPEC_UI()) {
