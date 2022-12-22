@@ -2,6 +2,37 @@ const { throws, deepEqual } = require('assert');
 
 const mod = require('./logic.js');
 
+describe('OLSKClientKeyHeaderGuard', function test_OLSKClientKeyHeaderGuard() {
+
+	const uHeaders = function (inputData) {
+		return {
+			'x-client-key': inputData,
+		};
+	};
+
+	it('throws if param1 not object', function() {
+		throws(function() {
+			mod.OLSKClientKeyHeaderGuard(null, '');
+		}, /RCSErrorInputNotValid/);
+	});
+
+	it('throws if param2 not string', function() {
+		throws(function() {
+			mod.OLSKClientKeyHeaderGuard({}, null);
+		}, /RCSErrorInputNotValid/);
+	});
+
+	it('returns error if x-client-key not param2', function () {
+		deepEqual(mod.OLSKClientKeyHeaderGuard(uHeaders(Math.random().toString()), Math.random().toString()), new Error('OLSKRoutingErrorNotFound'));
+	});
+
+	it('returns undefined', function () {
+		const item = Math.random().toString();
+		deepEqual(mod.OLSKClientKeyHeaderGuard(uHeaders(item), item), undefined);
+	});
+
+});
+
 describe('OLSKAllowAllOriginsMiddleware', function test_OLSKAllowAllOriginsMiddleware() {
 
 	const _OLSKAllowAllOriginsMiddleware = function (inputData) {

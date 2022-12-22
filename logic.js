@@ -1,5 +1,19 @@
 const mod = {
 
+	OLSKClientKeyHeaderGuard (param1, param2) {
+		if (typeof param1 !== 'object' || param1 === null) {
+			throw new Error('RCSErrorInputNotValid');
+		}
+
+		if (typeof param2 !== 'string') {
+			throw new Error('RCSErrorInputNotValid');
+		}
+
+		if (param1['x-client-key'] !== param2) {
+			return new Error('OLSKRoutingErrorNotFound');
+		}
+	},
+
 	OLSKAllowAllOriginsMiddleware (req, res, next) {
 		if (typeof res !== 'object' || res === null) {
 			throw new Error('OLSKErrorInputNotValid');
