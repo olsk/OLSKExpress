@@ -14,6 +14,12 @@ const mod = {
 		}
 	},
 
+	OLSKClientKeyHeaderGuardMiddlewareFunction (inputData) {
+		return function (req, res, next) {
+			return next(mod.OLSKClientKeyHeaderGuard(req.headers, inputData));
+		};
+	},
+
 	OLSKAllowAllOriginsMiddleware (req, res, next) {
 		if (typeof res !== 'object' || res === null) {
 			throw new Error('OLSKErrorInputNotValid');
