@@ -1,5 +1,7 @@
 require('OLSKEnv').OLSKEnvGuard();
 
+const OLSKExpressLogic = require('./logic.js');
+
 const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	const expressPackage = require('express');
 	const expressApp = expressPackage();
@@ -275,7 +277,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartSharedMiddlewares
 
 	(function OLSKStartSharedMiddlewares() {
-		OLSKLive.OLSKSharedMiddlewares = require('./logic.js').OLSKCommonMiddlewares();
+		OLSKLive.OLSKSharedMiddlewares = OLSKExpressLogic.OLSKCommonMiddlewares();
 
 		OLSKStartControllersArray
 			.filter(function(e) {
@@ -788,6 +790,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 const mod = {
 
 	OLSKExpressStart,
+	OLSKExpressLogic,
 	
 };
 
