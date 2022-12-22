@@ -587,6 +587,10 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartServer
 
 	(function OLSKStartServer() {
+		if (process.env.npm_lifecycle_script === 'olsk-spec') {
+			return;
+		}
+		
 		if (optionsObject.OLSKOptionSkipServer) {
 			return;
 		}
@@ -643,6 +647,10 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	//# OLSKStartLivereload
 
 	(function OLSKStartLivereload() {
+		if (process.env.npm_lifecycle_script === 'olsk-spec') {
+			return;
+		}
+		
 		if (process.env.NODE_ENV === 'production') {
 			return;
 		}
