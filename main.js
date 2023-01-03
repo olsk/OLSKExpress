@@ -466,7 +466,9 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 			expressRouter[e.OLSKRouteMethod](e.OLSKRoutePath, function(req, res, next) {
 				res.locals.OLSKSharedActiveRouteConstant = key;
 				res.locals.OLSKSharedPageControllerSlug = e._OLSKRouteControllerSlug;
-				res.locals._OLSKSharedParams = Object.assign({}, req.params);
+				res.locals._OLSKSharedParams = function (inputData = {}) {
+					return Object.assign(Object.assign({}, req.params), inputData);
+				};
 				
 				// If the request language not available, pass
 
