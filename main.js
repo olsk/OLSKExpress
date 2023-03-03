@@ -111,7 +111,7 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 		var globPackage = require('glob');
 		var pathPackage = require('path');
 
-		globPackage.sync('controller.js', {
+		globPackage.globSync('controller.js', {
 			matchBase: true,
 			cwd: OLSKLive.OLSKLiveAppDirectoryAbsolutePath(),
 		}).forEach(function(e) {
