@@ -132,6 +132,10 @@
 		outputData.push(`<script src="https://olsk.rosano.ca/OLSKBanner/master/main.js"></script>`);
 	}
 
+	if (process.env.ROCO_FEED_URL) {
+		outputData.push(`<link rel="alternate" type="application/rss+xml" href="${ process.env.ROCO_FEED_URL }" title="Feed">`);
+	}
+
 	return outputData.join('\n\t');
 })(); %>
 </head>
