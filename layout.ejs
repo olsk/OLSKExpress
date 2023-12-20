@@ -136,6 +136,12 @@
 		outputData.push(`<link rel="alternate" type="application/rss+xml" href="${ process.env.ROCO_FEED_URL }" title="Feed">`);
 	}
 
+	if (locals.OLSKPageFeedsMap) {
+		Object.entries(OLSKPageFeedsMap).forEach(function ([key, value]) {
+			outputData.push(`<link rel="alternate" type="application/rss+xml" href="${ value }" title="${ key }">`);
+		});
+	}
+
 	return outputData.join('\n\t');
 })(); %>
 </head>
