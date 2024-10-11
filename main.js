@@ -62,8 +62,11 @@ const OLSKExpressStart = function (rootDirectory, optionsObject = {}) {
 	(function OLSKStartBodyParsing() {
 		var bodyParserPackage = require('body-parser');
 
-		expressApp.use(bodyParserPackage.json());
+		expressApp.use(bodyParserPackage.json({
+			limit: '1mb',
+		}));
 		expressApp.use(bodyParserPackage.urlencoded({
+			limit: '1mb',
 			extended: true,
 		}));
 	})();
