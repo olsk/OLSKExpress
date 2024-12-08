@@ -28,7 +28,9 @@
 		return `<meta name="${ e }" content="${ locals.OLSKPageMetaTags[e] }">`;
 	}));
 
-	if (locals.OLSKSharedActiveRouteConstant) {
+	if (locals.OLSKPageCanonical) {
+		outputData.push(`<link rel="canonical" href="${ locals.OLSKPageCanonical }" />`);
+	} else if (locals.OLSKSharedActiveRouteConstant) {
 		outputData.push(`<link rel="canonical" href="${ OLSKCanonical(locals.OLSKSharedActiveRouteConstant, locals._OLSKSharedParams()) }" />`);
 	}
 
